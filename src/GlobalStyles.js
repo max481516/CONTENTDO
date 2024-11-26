@@ -159,10 +159,13 @@ form select {
 
 
 body {
-    background-color: hsla(0, 0%, 5%, 1);
+  
+  font-family: "Manrope", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  background-color: hsla(0, 0%, 5%, 1);
 }
-
-
 `;
 
 export default GlobalStyles;

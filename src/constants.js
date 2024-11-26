@@ -6,9 +6,9 @@ const BREAKPOINTS = {
 };
 
 const QUERIES = {
-  laptop: `(max-width: ${BREAKPOINTS.laptopMax / 16}rem)`,
-  largeTablet: `(max-width: ${BREAKPOINTS.largeTabletMax / 16}rem)`,
-  tablet: `(max-width: ${BREAKPOINTS.tabletMax / 16}rem)`,
+  laptopAndDown: `(max-width: ${BREAKPOINTS.laptopMax / 16}rem)`,
+  largeTabletAndDown: `(max-width: ${BREAKPOINTS.largeTabletMax / 16}rem)`,
+  tabletAndDown: `(max-width: ${BREAKPOINTS.tabletMax / 16}rem)`,
   mobile: `(max-width: ${BREAKPOINTS.mobileMax / 16}rem)`,
 };
 
