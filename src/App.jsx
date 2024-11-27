@@ -6,22 +6,27 @@ import Hero from "./components/Hero";
 import Info from "./components/Info";
 import Portfolio from "./components/Portfolio";
 import Price from "./components/Price";
+import styled from "styled-components";
 
 function App() {
   return (
     <>
       <Header />
-      <main>
+      <Main>
         <Hero />
         <Portfolio />
         <AboutUs />
         <Price />
         <Info />
         <ContactUs />
-      </main>
+      </Main>
       <Footer />
     </>
   );
 }
+
+const Main = styled.main`
+  padding: 0 3rem;
+`;
 
 export default App;

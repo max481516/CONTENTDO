@@ -159,7 +159,8 @@ form select {
 
 
 body {
-  
+  color: var(--color-details-secondary);
+  font-size: calc(19rem/16);
   font-family: "Manrope", serif;
   font-optical-sizing: auto;
   font-weight: 500;

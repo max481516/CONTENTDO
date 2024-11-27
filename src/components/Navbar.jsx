@@ -81,7 +81,6 @@ const MenuToggle = styled.button`
 `;
 
 const NavLinks = styled.ul`
-  font-family: Mon;
   display: flex;
   list-style: none;
   gap: 1.5rem;

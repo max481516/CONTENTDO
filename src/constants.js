@@ -1,3 +1,5 @@
+import { css } from "styled-components";
+
 const BREAKPOINTS = {
   laptopMax: 1499,
   largeTabletMax: 1099,
@@ -12,4 +14,26 @@ const QUERIES = {
   mobile: `(max-width: ${BREAKPOINTS.mobileMax / 16}rem)`,
 };
 
-export { BREAKPOINTS, QUERIES };
+const buttonStyles = css`
+  padding: 1rem 2rem;
+  border: 2px solid var(--color-details-primary);
+  background-color: transparent;
+  color: var(--color-details-primary);
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--color-details-primary);
+    color: var(--color-details-secondary);
+  }
+
+  &:focus,
+  &:active {
+    border-color: var(--color-details-secondary);
+    background-color: var(--color-details-primary);
+    color: var(--color-details-secondary);
+  }
+`;
+
+export { BREAKPOINTS, QUERIES, buttonStyles };

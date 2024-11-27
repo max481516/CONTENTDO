@@ -1,13 +1,14 @@
 import Navbar from "./Navbar";
 import styled from "styled-components";
-import BackgroundVideo from "../assets/BackgroundVideo.mp4";
+/* import BackgroundVideo from "../assets/BackgroundVideo.mp4"; */
 
 export default function Header() {
   return (
     <HeaderContainer>
+      <Title>CONTENT DO</Title>
       <VideoContainer>
         <BackgroundVideoElement autoPlay muted loop>
-          <source src={BackgroundVideo} type="video/mp4" />
+          {/* <source src={BackgroundVideo} type="video/mp4" /> */}
           Your browser does not support the video tag.
         </BackgroundVideoElement>
       </VideoContainer>
@@ -18,8 +19,16 @@ export default function Header() {
 
 const HeaderContainer = styled.header`
   position: relative;
-  height: 100vh;
+  height: 65dvh;
   overflow: hidden;
+`;
+
+const Title = styled.h2`
+  font-size: calc(140rem / 16);
+  position: absolute;
+  bottom: 0;
+  left: 3rem;
+  line-height: 1;
 `;
 
 const VideoContainer = styled.div`
