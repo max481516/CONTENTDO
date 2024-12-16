@@ -28,7 +28,7 @@ const HeroContainer = styled.section`
   margin-left: auto;
   display: grid;
   grid-template-columns: 1fr 1fr; /* Two equal columns */
-  grid-template-rows: auto 1fr auto; /* Explicit row heights */
+  grid-template-rows: auto auto auto; /* Explicit row heights */
   grid-gap: 1rem; /* Space between rows/columns */
   align-items: stretch; /* Ensures all rows stretch to the same height */
   padding: 0 2rem 0;

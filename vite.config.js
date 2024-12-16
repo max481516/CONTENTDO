@@ -20,5 +20,5 @@ export default defineConfig({
     }),
     svgr(),
   ],
-  assetsInclude: ["**/*.JPG"],
+  assetsInclude: ["**/*.JPG", "**/*.MOV", "**/*.MP4"],
 });
