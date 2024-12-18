@@ -1,15 +1,24 @@
 import Navbar from "./Navbar";
 import styled from "styled-components";
-/* import BackgroundVideo from "../assets/BackgroundVideo.mp4"; */
 
 export default function Header() {
   return (
     <HeaderContainer>
       <Title>CONTENT DO</Title>
       <VideoContainer>
-        <BackgroundVideoElement autoPlay muted loop>
-          {/* <source src={BackgroundVideo} type="video/mp4" /> */}
-          Your browser does not support the video tag.
+        <BackgroundVideoElement
+          id="background-video"
+          autoPlay
+          muted
+          playsInline
+          webkit-playsinline
+          loop
+        >
+          <source
+            src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1734452482/BackgroundVideo_nucfzh.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support HTML5 video.
         </BackgroundVideoElement>
       </VideoContainer>
       <Navbar />
@@ -19,7 +28,7 @@ export default function Header() {
 
 const HeaderContainer = styled.header`
   position: relative;
-  height: 65dvh;
+  height: 70dvh;
   overflow: hidden;
 `;
 
@@ -47,5 +56,5 @@ const BackgroundVideoElement = styled.video`
   position: absolute;
   top: 0;
   left: 0;
-  transform: scale(1.1);
+  transform: scale(1.35);
 `;
