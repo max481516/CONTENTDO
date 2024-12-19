@@ -1,10 +1,13 @@
 import Navbar from "./Navbar";
 import styled from "styled-components";
+import HeaderLogo from "../assets/HeaderLogo.svg?react";
 
 export default function Header() {
   return (
     <HeaderContainer>
-      <Title>CONTENT DO</Title>
+      <HeaderLogoContainer>
+        <StyledHeaderLogo src={HeaderLogo} />
+      </HeaderLogoContainer>
       <VideoContainer>
         <BackgroundVideoElement
           id="background-video"
@@ -15,7 +18,7 @@ export default function Header() {
           loop
         >
           <source
-            src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1734452482/BackgroundVideo_nucfzh.mp4"
+            src="https://res.cloudinary.com/dqs3mkxnr/video/upload/f_auto/v1734452482/BackgroundVideo_nucfzh.mp4"
             type="video/mp4"
           />
           Your browser does not support HTML5 video.
@@ -32,12 +35,15 @@ const HeaderContainer = styled.header`
   overflow: hidden;
 `;
 
-const Title = styled.h2`
-  font-size: calc(140rem / 16);
+const HeaderLogoContainer = styled.div`
   position: absolute;
   bottom: 0;
   left: 3rem;
   line-height: 1;
+`;
+
+const StyledHeaderLogo = styled(HeaderLogo)`
+  color: var(--color-body-primary);
 `;
 
 const VideoContainer = styled.div`

@@ -36,6 +36,7 @@ const HeroContainer = styled.section`
 
 const Title = styled.h1`
   font-size: calc(90rem / 16);
+  color: var(--color-body-primary);
   text-align: end;
   line-height: 1;
   margin-bottom: 1rem;
@@ -68,5 +69,5 @@ const Button = styled.button`
   grid-column: 2 / 3;
   grid-row: 3 / 4;
   align-self: stretch; /* Matches height with left column */
-  ${buttonStyles};
+  ${buttonStyles}
 `;

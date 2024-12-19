@@ -54,7 +54,7 @@ const NavbarContainer = styled.nav`
 
 const LogoContainer = styled.a`
   height: auto;
-  width: 125px;
+  width: 198px;
   font-size: 1.5rem;
   font-weight: bold;
   color: white;
@@ -103,7 +103,7 @@ const NavLink = styled.li`
   a {
     color: white;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.4rem;
     transition: color 0.3s ease;
 
     &:hover {
