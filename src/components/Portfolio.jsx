@@ -4,6 +4,7 @@ import { EffectCoverflow, Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import styled from "styled-components";
 import { IoMdPlay } from "react-icons/io";
+import { titleStyles } from "../mixins";
 
 export default function Portfolio() {
   return (
@@ -215,9 +216,7 @@ const PortfolioWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  text-align: center;
-  font-size: calc(50rem / 16);
-  padding: 0 0 2rem;
+  ${titleStyles}
 `;
 
 const RelativeWrapper = styled.div`

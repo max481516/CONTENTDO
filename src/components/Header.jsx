@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <HeaderContainer>
       <HeaderLogoContainer>
-        <StyledHeaderLogo src={HeaderLogo} />
+        <StyledHeaderLogo />
       </HeaderLogoContainer>
       <VideoContainer>
         <BackgroundVideoElement
