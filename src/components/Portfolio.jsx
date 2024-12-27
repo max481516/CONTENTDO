@@ -4,7 +4,7 @@ import { EffectCoverflow, Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import styled from "styled-components";
 import { IoMdPlay } from "react-icons/io";
-import { titleStyles } from "../mixins";
+import { titleStyles } from "../constants";
 
 export default function Portfolio() {
   return (

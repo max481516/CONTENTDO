@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { titleStyles } from "../mixins";
+import { titleStyles } from "../constants.js";
+import AboutUsText from "../assets/AboutUsText.svg?react";
+import Smoke from "../assets/Smoke.svg?react";
 
 export default function AboutUs() {
   return (
@@ -18,8 +20,14 @@ export default function AboutUs() {
         системы мультимедиа для любого жанра, будь то корпоративное событие,
         свадьба, театральный спектакль, выставка или концерт.
       </Paragraph>
-      <DecorativeText></DecorativeText>
-      <DecorativeImage></DecorativeImage>
+      <DcorationContainer>
+        <DecorativeText>
+          <AboutUsText />
+        </DecorativeText>
+        <DecorativeImage>
+          <Smoke />
+        </DecorativeImage>
+      </DcorationContainer>
       <Paragraph>
         {" "}
         <Space></Space>Мы предлагаем
@@ -59,12 +67,13 @@ const Paragraph = styled.p`
   font-weight: 600;
   text-transform: uppercase;
   color: var(--color-body-primary);
-  margin-bottom: calc(135rem / 16);
+  margin-bottom: calc(86rem / 16);
 `;
 
 const FirstWords = styled.span`
   font-size: calc(35rem / 16);
-  font-weight: bold;
+  text-transform: capitalize;
+  font-weight: 800;
   color: var(--color-details-secondary);
   margin-left: 14rem;
 `;
@@ -81,9 +90,20 @@ const ColoredWords2 = styled.span`
   color: var(--color-details-secondary);
 `;
 
-const DecorativeText = styled.p``;
+const DcorationContainer = styled.div`
+  position: relative;
+`;
 
-const DecorativeImage = styled.img``;
+const DecorativeText = styled.div`
+  width: fit-content;
+  margin: 0 auto calc(98rem / 16);
+`;
+
+const DecorativeImage = styled.div`
+  position: absolute;
+  top: -60vh;
+  margin-right: -48px;
+`;
 
 const Conclusion = styled.p`
   text-align: center;
