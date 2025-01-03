@@ -60,6 +60,7 @@ export default function AboutUs() {
 
 const Title = styled.h2`
   ${titleStyles}
+  margin-top: 6rem;
 `;
 
 const Paragraph = styled.p`

@@ -9,14 +9,14 @@ export default function Hero() {
       </Title>
 
       <Description>
-        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-        fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem
-        sequi nesciunt. Neque porro quisquam est.Nemo enim ipsam voluptatem quia
-        voluptas sit aspernatur aut odit aut fugit,
+        Мы предлагаем широкий спектр услуг, начиная от разработки концепции
+        видео и написания сценария по вашим требованиям и пожеланиям, до
+        создания полноценной кинематографической работы, клипа, рекламы.
       </Description>
       <SubDescription>
-        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-        fugit, sed quia voluptas sit aspernatur aut odit aut fugit{" "}
+        Команда состоит из действующих - режиссеров, экшн операторов,
+        звукорежиссеров, монтажеров, дизайнеров и других профессионалов,
+        обладающих богатым опытом работы в сфере видеопроизводства.{" "}
       </SubDescription>
       <Button>ЗАКАЗАТЬ ПРОЕКТ</Button>
     </HeroContainer>
@@ -58,6 +58,7 @@ const Description = styled.p`
 `;
 
 const SubDescription = styled.p`
+  font-size: calc(16rem / 16);
   color: var(--color-body-secondary);
   grid-column: 2 / 3;
   grid-row: 2 / 3;
