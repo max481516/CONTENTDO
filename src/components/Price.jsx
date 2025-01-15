@@ -49,7 +49,7 @@ function AnimatedPrice() {
   function startAnimation() {
     let currentValue = 0;
     const maxValue = 99999;
-    const step = 1111; // change step size to control speed
+    const step = 2222; // change step size to control speed
     const intervalMs = 50; // update interval
 
     const interval = setInterval(() => {
@@ -61,7 +61,7 @@ function AnimatedPrice() {
         setTimeout(() => {
           setDisplayNumber("?????");
           setFinished(true);
-        }, 600);
+        }, 200);
       } else {
         setDisplayNumber(zeroPad(currentValue, 5));
       }
@@ -89,12 +89,9 @@ const AnimatedPriceStyled = styled.h2`
   justify-content: center;
   align-items: center;
   font-size: calc(100rem / 16);
-
-  /* Outline text */
   color: transparent;
   -webkit-text-stroke: 1px var(--color-details-primary);
 
-  /* Adjust spacing or alignment as needed */
   span {
     margin: 0 0.5rem;
   }

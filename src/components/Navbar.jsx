@@ -12,7 +12,7 @@ function Navbar() {
   };
 
   return (
-    <NavbarContainer>
+    <NavbarContainer aria-label="navigation">
       <LogoContainer href="/">
         <StyledLogo />
       </LogoContainer>

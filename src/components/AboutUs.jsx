@@ -24,9 +24,9 @@ export default function AboutUs() {
         <DecorativeText>
           <AboutUsText />
         </DecorativeText>
-        <DecorativeImage>
-          <Smoke />
-        </DecorativeImage>
+        <DecorativeImageContainer>
+          <StyledSmoke />
+        </DecorativeImageContainer>
       </DcorationContainer>
       <Paragraph>
         {" "}
@@ -100,10 +100,17 @@ const DecorativeText = styled.div`
   margin: 0 auto calc(98rem / 16);
 `;
 
-const DecorativeImage = styled.div`
+const DecorativeImageContainer = styled.div`
   position: absolute;
-  top: -60vh;
-  margin-right: -48px;
+  top: -500px;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+const StyledSmoke = styled(Smoke)`
+  width: 100%;
+  height: auto;
 `;
 
 const Conclusion = styled.p`

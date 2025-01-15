@@ -27,10 +27,10 @@ const HeroContainer = styled.section`
   width: 65%;
   margin-left: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
-  grid-template-rows: auto auto auto; /* Explicit row heights */
-  grid-gap: 1rem; /* Space between rows/columns */
-  align-items: stretch; /* Ensures all rows stretch to the same height */
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  grid-gap: 1rem;
+  align-items: stretch;
   padding: 0 2rem 0;
 `;
 
