@@ -6,7 +6,7 @@ import Smoke from "../assets/Smoke.svg?react";
 export default function AboutUs() {
   return (
     <>
-      <Title>О НАС</Title>
+      <Title id="AboutUs">О НАС</Title>
       <Paragraph>
         {" "}
         <FirstWords>Наша компания </FirstWords>это профессиональный{" "}

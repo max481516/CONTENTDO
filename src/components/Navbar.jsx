@@ -21,19 +21,13 @@ function Navbar() {
       </MenuToggle>
       <NavLinks isMobileMenuOpen={isMobileMenuOpen}>
         <NavLink>
-          <a href="#hero">Home</a>
+          <a href="#AboutUs">О нас</a>
         </NavLink>
         <NavLink>
-          <a href="#portfolio">Portfolio</a>
+          <a href="#Pricing">Стоимость</a>
         </NavLink>
         <NavLink>
-          <a href="#about">About</a>
-        </NavLink>
-        <NavLink>
-          <a href="#price">Pricing</a>
-        </NavLink>
-        <NavLink>
-          <a href="#contact">Contact</a>
+          <a href="#Contacts">Контакты</a>
         </NavLink>
       </NavLinks>
     </NavbarContainer>

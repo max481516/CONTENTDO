@@ -4,7 +4,7 @@ import HeaderLogo from "../assets/HeaderLogo.svg?react";
 
 export default function Header() {
   return (
-    <HeaderContainer>
+    <HeaderContainer id="Header">
       <HeaderLogoContainer>
         <StyledHeaderLogo />
       </HeaderLogoContainer>

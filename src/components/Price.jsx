@@ -5,7 +5,7 @@ import { titleStyles } from "../constants";
 export default function Price() {
   return (
     <>
-      <Title>СТОИМОСТЬ</Title>
+      <Title id="Pricing">СТОИМОСТЬ</Title>
       <AnimatedPrice />
     </>
   );

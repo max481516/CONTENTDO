@@ -10,38 +10,58 @@ export default function Footer() {
       <FooterNav aria-label="Footer navigation">
         <FooterLinks>
           <FooterLinkItem>
-            <FooterLink href="#">Проекты</FooterLink>
+            <FooterLink href="#Portfolio">Проекты</FooterLink>
           </FooterLinkItem>
           <FooterLinkItem>
-            <FooterLink href="#">О нас</FooterLink>
+            <FooterLink href="#AboutUs">О нас</FooterLink>
           </FooterLinkItem>
           <FooterLinkItem>
-            <FooterLink href="#">Стоимость</FooterLink>
+            <FooterLink href="#Pricing">Стоимость</FooterLink>
           </FooterLinkItem>
           <FooterLinkItem>
-            <FooterLink href="#">Контакты</FooterLink>
+            <FooterLink href="#Header">В начало</FooterLink>
           </FooterLinkItem>
         </FooterLinks>
       </FooterNav>
 
       <Socials>
         <SocialItem>
-          <SocialLink href="#" aria-label="ВКонтакте">
+          <SocialLink
+            href="https://m.vk.com/contentdo"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="ВКонтакте"
+          >
             <VK />
           </SocialLink>
         </SocialItem>
         <SocialItem>
-          <SocialLink href="#" aria-label="Instagram">
+          <SocialLink
+            href="https://www.instagram.com/content_do"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
             <Insta />
           </SocialLink>
         </SocialItem>
         <SocialItem>
-          <SocialLink href="#" aria-label="YouTube">
+          <SocialLink
+            href="https://www.youtube.com/@SkillQuant"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+          >
             <YT />
           </SocialLink>
         </SocialItem>
         <SocialItem>
-          <SocialLink href="#" aria-label="TikTok">
+          <SocialLink
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="TikTok"
+          >
             <TikTok />
           </SocialLink>
         </SocialItem>
@@ -104,5 +124,5 @@ const FooterCopyright = styled.small`
   display: block;
   width: fit-content;
   margin: 4rem auto 0;
-  padding-bottom: 8rem;
+  padding-bottom: 6rem;
 `;

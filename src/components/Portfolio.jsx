@@ -9,7 +9,7 @@ import { titleStyles } from "../constants";
 export default function Portfolio() {
   return (
     <PortfolioWrapper>
-      <Title>НАШИ ПРОЕКТЫ</Title>
+      <Title id="Portfolio">НАШИ ПРОЕКТЫ</Title>
       <RelativeWrapper>
         <button className="swiper-button-prev" />
         <button className="swiper-button-next" />
