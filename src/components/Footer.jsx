@@ -3,6 +3,7 @@ import VK from "../assets/VK.svg?react";
 import Insta from "../assets/Insta.svg?react";
 import YT from "../assets/YT.svg?react";
 import TikTok from "../assets/TikTok.svg?react";
+import { QUERIES } from "../constants";
 
 export default function Footer() {
   return (
@@ -85,6 +86,10 @@ const FooterLinks = styled.ul`
   justify-content: space-between;
   gap: 6rem;
   list-style: none;
+
+  @media ${QUERIES.mobile} {
+    gap: 1rem;
+  }
 `;
 
 const FooterLinkItem = styled.li``;

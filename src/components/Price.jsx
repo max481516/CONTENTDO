@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { titleStyles } from "../constants";
+import { titleStyles, QUERIES } from "../constants";
 
 export default function Price() {
   return (
@@ -94,5 +94,9 @@ const AnimatedPriceStyled = styled.h2`
 
   span {
     margin: 0 0.5rem;
+  }
+
+  @media ${QUERIES.mobile} {
+    font-size: calc(20rem / 16);
   }
 `;

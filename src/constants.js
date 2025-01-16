@@ -41,6 +41,10 @@ const titleStyles = css`
   font-size: calc(50rem / 16);
   padding: 0 0 2rem;
   text-transform: uppercase;
+
+  @media ${QUERIES.mobile} {
+    font-size: calc(30rem / 16);
+  }
 `;
 
 export { BREAKPOINTS, QUERIES, buttonStyles, titleStyles };

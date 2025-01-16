@@ -10,21 +10,35 @@ const GlobalStyles = createGlobalStyle`
   --color-details-tertiary: hsla(0, 0%, 12%, 1);
 }
 
-//FONTS
-
-
-@font-face {
-  font-family: 'TitleFont';
-  src: url('/fonts/adventure.woff2') format('woff2'),
-       url('/fonts/adventure.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 //KEYFRAMES
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+// class to disable scrolling on mobile menu
+.lock-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 //CSS RESET
@@ -157,7 +171,6 @@ form select {
 }
 
 //Global Styles
-
 
 body {
   color: var(--color-details-secondary);

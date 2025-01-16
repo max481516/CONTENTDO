@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import styled from "styled-components";
 import HeaderLogo from "../assets/HeaderLogo.svg?react";
+import { QUERIES } from "../constants";
 
 export default function Header() {
   return (
@@ -40,6 +41,12 @@ const HeaderLogoContainer = styled.div`
   bottom: 0;
   left: 3rem;
   line-height: 1;
+
+  @media ${QUERIES.mobile} {
+    left: 0;
+    bottom: -2.5rem;
+    padding: 0 1rem;
+  }
 `;
 
 const StyledHeaderLogo = styled(HeaderLogo)`

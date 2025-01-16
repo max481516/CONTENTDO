@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Union from "../assets/Union.svg?react";
+import { QUERIES } from "../constants";
 
 export default function Info() {
   return (
@@ -48,8 +49,12 @@ const Wrapper = styled.div`
   width: 90%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 200px 200px;
+  grid-template-rows: 200px 200px 200px;
   grid-gap: 1rem;
+
+  @media ${QUERIES.mobile} {
+    display: none;
+  }
 `;
 
 const Card = styled.div`
@@ -62,20 +67,33 @@ const Card = styled.div`
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     background-color: var(--color-details-tertiary);
+
+    @media ${QUERIES.mobile} {
+      grid-column: 1 / 3;
+    }
   }
 
   &:nth-child(2) {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
 
+    @media ${QUERIES.mobile} {
+      grid-column: 2 / 3;
+    }
+
     > :first-child {
-      width: 296px;
+      max-width: 296px;
     }
   }
 
   &:nth-child(3) {
     grid-column: 3 / 4;
     grid-row: 1 / 2;
+
+    @media ${QUERIES.mobile} {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
 
     > :first-child {
       width: 328px;
@@ -85,6 +103,11 @@ const Card = styled.div`
   &:nth-child(4) {
     grid-column: 1 / 3;
     grid-row: 2 / 3;
+
+    @media ${QUERIES.mobile} {
+      grid-column: 2 / 3;
+      grid-row: 2 / 4;
+    }
 
     > :first-child {
       width: 820px;
@@ -100,6 +123,11 @@ const Card = styled.div`
     text-align: center;
     border: none;
     background-color: hsl(0, 2.4390243902439024%, 8.03921568627451%);
+
+    @media ${QUERIES.mobile} {
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+    }
   }
 `;
 

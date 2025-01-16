@@ -7,6 +7,7 @@ import Info from "./components/Info";
 import Portfolio from "./components/Portfolio";
 import Price from "./components/Price";
 import styled from "styled-components";
+import { QUERIES } from "./constants";
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
 
 const Main = styled.main`
   padding: 0 3rem;
+
+  @media ${QUERIES.mobile} {
+    padding: 0 1rem;
+  }
 `;
 
 export default App;

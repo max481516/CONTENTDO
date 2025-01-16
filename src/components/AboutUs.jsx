@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { titleStyles } from "../constants.js";
+import { titleStyles, QUERIES } from "../constants.js";
 import AboutUsText from "../assets/AboutUsText.svg?react";
 import Smoke from "../assets/Smoke.svg?react";
 
@@ -81,6 +81,10 @@ const FirstWords = styled.span`
 
 const Space = styled.span`
   margin-left: 34rem;
+
+  @media ${QUERIES.mobile} {
+    margin-left: 0;
+  }
 `;
 
 const ColoredWords = styled.span`

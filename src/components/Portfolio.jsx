@@ -4,7 +4,7 @@ import { EffectCoverflow, Navigation } from "swiper/modules";
 import "swiper/css/bundle";
 import styled from "styled-components";
 import { IoMdPlay } from "react-icons/io";
-import { titleStyles } from "../constants";
+import { titleStyles, QUERIES } from "../constants";
 
 export default function Portfolio() {
   return (
@@ -35,6 +35,9 @@ export default function Portfolio() {
               prevEl: ".swiper-button-prev",
             }}
             modules={[Navigation, EffectCoverflow]}
+            threshold={80} // Prevent accidental swipes
+            touchRatio={1} // Reduce touch sensitivity
+            resistanceRatio={0.5}
           >
             <SwiperSlide>
               <VideoSlide
@@ -200,19 +203,31 @@ const ButtonCircle = styled.div`
   height: 80px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.6);
+
+  @media ${QUERIES.mobile} {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 const PlayButton = styled.button`
   font-size: 2.5rem;
-
   background: none;
   border: none;
   color: #fff;
   cursor: pointer;
+
+  @media ${QUERIES.mobile} {
+    font-size: 1.5rem;
+  }
 `;
 
 const PortfolioWrapper = styled.div`
   margin-top: calc(96rem / 16);
+
+  @media ${QUERIES.mobile} {
+    margin-top: calc(48rem / 16);
+  }
 `;
 
 const Title = styled.h2`
@@ -225,7 +240,6 @@ const RelativeWrapper = styled.div`
   .swiper-button-prev,
   .swiper-button-next {
     position: absolute;
-
     top: 50%;
     transform: translateY(-50%);
     width: 40px;
@@ -234,6 +248,10 @@ const RelativeWrapper = styled.div`
     background: rgba(0, 0, 0, 0.5);
     cursor: pointer;
     z-index: 10;
+
+    @media ${QUERIES.mobile} {
+      display: none;
+    }
   }
 
   .swiper-button-prev {
@@ -249,6 +267,10 @@ const RelativeWrapper = styled.div`
 
 const CarouselContainer = styled.div`
   padding: 2rem 54px;
+
+  @media ${QUERIES.mobile} {
+    padding: 2rem 0;
+  }
 
   .swiper-slide:not(.swiper-slide-active) ${SlideInner} {
     transform: scale(0.8);
@@ -266,21 +288,38 @@ const Video = styled.video`
   display: block;
   width: 100%;
   height: auto;
+  object-fit: cover;
+
+  @media ${QUERIES.mobile} {
+    height: 300px;
+  }
 `;
 
 const Description = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media ${QUERIES.mobile} {
+    flex-direction: column;
+  }
 `;
 
 const VideoTitle = styled.h3`
   font-size: 1rem;
   text-transform: uppercase;
   margin: 0;
+
+  @media ${QUERIES.mobile} {
+    font-size: 0.8rem;
+  }
 `;
 
 const VideoDescription = styled.p`
   font-size: calc(12rem / 16);
   text-transform: capitalize;
   color: var(--color-body-secondary);
+
+  @media ${QUERIES.mobile} {
+    font-size: calc(10rem / 16);
+  }
 `;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { buttonStyles } from "../constants";
+import { buttonStyles, QUERIES } from "../constants";
 
 export default function Hero() {
   return (
@@ -7,7 +7,6 @@ export default function Hero() {
       <Title>
         <FirstWord>делаем </FirstWord>контент!
       </Title>
-
       <Description>
         Мы предлагаем широкий спектр услуг, начиная от разработки концепции
         видео и написания сценария по вашим требованиям и пожеланиям, до
@@ -28,20 +27,31 @@ const HeroContainer = styled.section`
   margin-left: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto auto auto;
   grid-gap: 1rem;
   align-items: stretch;
   padding: 0 2rem 0;
+
+  @media ${QUERIES.mobile} {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
 `;
 
 const Title = styled.h1`
   font-size: calc(90rem / 16);
-  color: var(--color-body-primary);
+  color: var(--color-details-secondary);
   text-align: end;
   line-height: 1;
   margin-bottom: 1rem;
   grid-column: 1 / 3;
   grid-row: 1 / 2;
+
+  @media ${QUERIES.mobile} {
+    font-size: calc(39rem / 16);
+    text-align: center;
+  }
 `;
 
 const FirstWord = styled.span`
@@ -55,6 +65,12 @@ const Description = styled.p`
   grid-column: 1 / 2;
   grid-row: 2 / 4;
   align-self: stretch; /* Stretches content to fill height */
+
+  @media ${QUERIES.mobile} {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    text-align: start;
+  }
 `;
 
 const SubDescription = styled.p`
@@ -64,6 +80,11 @@ const SubDescription = styled.p`
   grid-row: 2 / 3;
   align-self: stretch; /* Matches height with left column */
   margin: 0; /* Removes default spacing */
+
+  @media ${QUERIES.mobile} {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+  }
 `;
 
 const Button = styled.button`
@@ -71,4 +92,9 @@ const Button = styled.button`
   grid-row: 3 / 4;
   align-self: stretch; /* Matches height with left column */
   ${buttonStyles}
+
+  @media ${QUERIES.mobile} {
+    grid-column: 1 / 3;
+    grid-row: 4 / 5;
+  }
 `;
