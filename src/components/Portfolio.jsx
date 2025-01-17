@@ -35,9 +35,9 @@ export default function Portfolio() {
               prevEl: ".swiper-button-prev",
             }}
             modules={[Navigation, EffectCoverflow]}
-            threshold={80} // Prevent accidental swipes
+            threshold={60} // Prevent accidental swipes
             touchRatio={1} // Reduce touch sensitivity
-            resistanceRatio={0.5}
+            resistanceRatio={0.2}
           >
             <SwiperSlide>
               <VideoSlide
@@ -156,7 +156,7 @@ const SlideInner = styled.div`
     z-index: 2;
   }
 
-  &::before {
+  /* &::before {
     left: -80px;
     background: linear-gradient(
       to right,
@@ -176,7 +176,7 @@ const SlideInner = styled.div`
       hsla(0, 0%, 5%, 0.9) 70%,
       hsla(0, 0%, 5%, 1) 100%
     );
-  }
+  } */
 `;
 
 const VideoWrapper = styled.div`
@@ -269,7 +269,7 @@ const CarouselContainer = styled.div`
   padding: 2rem 54px;
 
   @media ${QUERIES.mobile} {
-    padding: 2rem 0;
+    padding: 0;
   }
 
   .swiper-slide:not(.swiper-slide-active) ${SlideInner} {
@@ -279,7 +279,7 @@ const CarouselContainer = styled.div`
   }
 
   .swiper-slide-active ${SlideInner} {
-    transform: scale(1.1);
+    ßtransform: scale(1.1);
     transition: transform 0.3s ease;
   }
 `;

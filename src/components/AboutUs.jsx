@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { titleStyles, QUERIES } from "../constants.js";
 import AboutUsText from "../assets/AboutUsText.svg?react";
 import Smoke from "../assets/Smoke.svg?react";
+import smoke from "../assets/SmokePNG2.png";
 
 export default function AboutUs() {
   return (
@@ -13,21 +14,20 @@ export default function AboutUs() {
         <ColoredWords>видеопроизводственный продакшн</ColoredWords>, который
         предоставляет полный цикл услуг в создании качественных видео-контента.
         Мы создаем и производим мультимедийные проекты
-        <ColoredWords>любой сложности</ColoredWords> для наших клиентов. Мы
+        <ColoredWords> любой сложности</ColoredWords> для наших клиентов. Мы
         также предоставляем услуги в области аудио-визуального оборудования и
         технической поддержки на мероприятиях. Мы можем обеспечить
         профессиональное <ColoredWords>освещение, аудиозапись</ColoredWords> и
         системы мультимедиа для любого жанра, будь то корпоративное событие,
         свадьба, театральный спектакль, выставка или концерт.
       </Paragraph>
-      <DcorationContainer>
+      <DecorationContainer>
         <DecorativeText>
           <AboutUsText />
         </DecorativeText>
-        <DecorativeImageContainer>
-          <StyledSmoke />
-        </DecorativeImageContainer>
-      </DcorationContainer>
+        {/* <StyledSmoke src={smoke} /> */}
+        <StyledSmoke />
+      </DecorationContainer>
       <Paragraph>
         {" "}
         <Space></Space>Мы предлагаем
@@ -61,6 +61,10 @@ export default function AboutUs() {
 const Title = styled.h2`
   ${titleStyles}
   margin-top: 6rem;
+
+  @media ${QUERIES.mobile} {
+    margin-top: 1rem;
+  }
 `;
 
 const Paragraph = styled.p`
@@ -69,6 +73,25 @@ const Paragraph = styled.p`
   text-transform: uppercase;
   color: var(--color-body-primary);
   margin-bottom: calc(86rem / 16);
+
+  @media ${QUERIES.mobile} {
+    font-size: calc(14rem / 16);
+    margin-bottom: 1rem;
+  }
+
+  &:nth-of-type(1) {
+    margin-bottom: -32rem;
+    @media ${QUERIES.mobile} {
+      margin-bottom: -2rem;
+    }
+  }
+
+  &:nth-of-type(2) {
+    margin-top: -24rem;
+    @media ${QUERIES.mobile} {
+      margin-top: -2rem;
+    }
+  }
 `;
 
 const FirstWords = styled.span`
@@ -77,6 +100,11 @@ const FirstWords = styled.span`
   font-weight: 800;
   color: var(--color-details-secondary);
   margin-left: 14rem;
+
+  @media ${QUERIES.mobile} {
+    font-size: calc(25rem / 16);
+    margin-left: 0;
+  }
 `;
 
 const Space = styled.span`
@@ -95,30 +123,39 @@ const ColoredWords2 = styled.span`
   color: var(--color-details-secondary);
 `;
 
-const DcorationContainer = styled.div`
+const DecorationContainer = styled.div`
+  margin: 0 -3rem;
+  display: block;
+  width: 100vw;
+  height: auto;
+  object-fit: cover;
   position: relative;
+
+  @media ${QUERIES.mobile} {
+    margin: 0 -1rem;
+  }
 `;
 
 const DecorativeText = styled.div`
-  width: fit-content;
-  margin: 0 auto calc(98rem / 16);
-`;
-
-const DecorativeImageContainer = styled.div`
   position: absolute;
-  top: -500px;
-  width: 100vw;
+  top: 55%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
+  z-index: 2;
 `;
 
 const StyledSmoke = styled(Smoke)`
   width: 100%;
   height: auto;
+  object-fit: cover;
 `;
 
 const Conclusion = styled.p`
   text-align: center;
   color: var(--color-body-secondary);
   font-size: calc(20rem / 16);
+
+  @media ${QUERIES.mobile} {
+    font-size: calc(12rem / 16);
+  }
 `;
