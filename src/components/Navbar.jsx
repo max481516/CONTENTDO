@@ -74,9 +74,11 @@ const NavbarContainer = styled.nav`
   padding: 1rem 2rem;
   background: transparent;
   color: white;
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 10;
+  //ios height fix
+  height: calc(64px + env(safe-area-inset-top));
 
   @media ${QUERIES.mobile} {
     padding: 1rem 1rem;
@@ -134,15 +136,17 @@ const NavLinks = styled.ul`
     justify-content: center;
     align-items: center;
     position: fixed;
+    margin-top: -64px;
     gap: 3rem;
     top: 0;
     right: 0;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 1rem;
     width: 100%;
-    height: 100dvh;
+    height: ${({ dynamicHeight }) => dynamicHeight || "100vh"};
+
     animation: ${({ isClosing }) =>
       isClosing ? "fadeOut 0.4s forwards ease" : "fadeIn 0.4s forwards ease"};
   }
@@ -159,7 +163,7 @@ const NavLink = styled.li`
       color: var(--color-details-primary);
     }
 
-    @media ${QUERIES.mobile} {
+    @media ${QUERIES.tabletAndDown} {
       font-size: 2rem;
       text-transform: uppercase;
     }

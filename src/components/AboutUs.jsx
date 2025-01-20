@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { titleStyles, QUERIES } from "../constants.js";
 import AboutUsText from "../assets/AboutUsText.svg?react";
 import Smoke from "../assets/Smoke.svg?react";
-import smoke from "../assets/SmokePNG2.png";
 
 export default function AboutUs() {
   return (
@@ -80,14 +79,14 @@ const Paragraph = styled.p`
   }
 
   &:nth-of-type(1) {
-    margin-bottom: -32rem;
+    margin-bottom: -24rem;
     @media ${QUERIES.mobile} {
       margin-bottom: -2rem;
     }
   }
 
   &:nth-of-type(2) {
-    margin-top: -24rem;
+    margin-top: -20rem;
     @media ${QUERIES.mobile} {
       margin-top: -2rem;
     }
@@ -138,10 +137,14 @@ const DecorationContainer = styled.div`
 
 const DecorativeText = styled.div`
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1.5);
   z-index: 2;
+
+  @media ${QUERIES.mobile} {
+    transform: translate(-50%, -50%) scale(1);
+  }
 `;
 
 const StyledSmoke = styled(Smoke)`

@@ -33,7 +33,6 @@ export default function Header() {
 const HeaderContainer = styled.header`
   position: relative;
   height: 70dvh;
-  overflow: hidden;
 `;
 
 const HeaderLogoContainer = styled.div`
@@ -55,6 +54,7 @@ const StyledHeaderLogo = styled(HeaderLogo)`
 
 const VideoContainer = styled.div`
   position: absolute;
+  overflow: hidden;
   top: 0;
   left: 0;
   width: 100%;
