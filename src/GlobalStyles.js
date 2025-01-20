@@ -181,6 +181,8 @@ body {
   font-style: normal;
   background-color: hsla(0, 0%, 5%, 1);
 }
+
+
 `;
 
 export default GlobalStyles;

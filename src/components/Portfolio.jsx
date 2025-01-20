@@ -25,19 +25,19 @@ export default function Portfolio() {
             spaceBetween={-200}
             coverflowEffect={{
               rotate: 0,
-              stretch: 0,
-              depth: 100,
+              stretch: -200, // or slightly less negative than -200 spaceBetween
+              depth: 30,
               modifier: 1,
-              slideShadows: true,
+              slideShadows: false,
             }}
             navigation={{
               nextEl: ".swiper-button-next",
               prevEl: ".swiper-button-prev",
             }}
             modules={[Navigation, EffectCoverflow]}
-            threshold={60} // Prevent accidental swipes
-            touchRatio={1} // Reduce touch sensitivity
-            resistanceRatio={0.2}
+            threshold={60}
+            touchRatio={1.5}
+            resistance={false}
           >
             <SwiperSlide>
               <VideoSlide
@@ -141,8 +141,7 @@ function VideoSlide({ src, title, description }) {
 const SlideInner = styled.div`
   position: relative;
   transition: transform 0.3s ease;
-  padding-bottom: 3rem;
-  background-color: hsla(0, 0%, 5%, 1);
+  background: transparent;
 
   //SHADOWS
   &::before,
@@ -156,7 +155,7 @@ const SlideInner = styled.div`
     z-index: 2;
   }
 
-  /* &::before {
+  &::before {
     left: -80px;
     background: linear-gradient(
       to right,
@@ -165,6 +164,11 @@ const SlideInner = styled.div`
       hsla(0, 0%, 5%, 0.9) 70%,
       hsla(0, 0%, 5%, 1) 100%
     );
+
+    @media ${QUERIES.mobile} {
+      left: 0;
+      background: none;
+    }
   }
 
   &::after {
@@ -176,7 +180,11 @@ const SlideInner = styled.div`
       hsla(0, 0%, 5%, 0.9) 70%,
       hsla(0, 0%, 5%, 1) 100%
     );
-  } */
+    @media ${QUERIES.mobile} {
+      left: 0;
+      background: none;
+    }
+  }
 `;
 
 const VideoWrapper = styled.div`
@@ -276,10 +284,11 @@ const CarouselContainer = styled.div`
     transform: scale(0.8);
     transition: transform 0.3s ease;
     filter: brightness(0.5);
+    background: transparent;
   }
 
   .swiper-slide-active ${SlideInner} {
-    ßtransform: scale(1.1);
+    /* transform: scale(1.1); */
     transition: transform 0.3s ease;
   }
 `;
@@ -289,6 +298,7 @@ const Video = styled.video`
   width: 100%;
   height: auto;
   object-fit: cover;
+  border-radius: 10px;
 
   @media ${QUERIES.mobile} {
     height: 300px;
