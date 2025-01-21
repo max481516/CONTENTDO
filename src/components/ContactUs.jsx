@@ -21,16 +21,17 @@ const Wrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const Title = styled.h2`
-  ${titleStyles}
-  margin-top: calc(150rem / 16);
-  padding: 0;
+  margin-top: calc(75rem / 16);
 
   @media ${QUERIES.mobile} {
     margin-top: calc(46rem / 16);
   }
+`;
+
+const Title = styled.h2`
+  ${titleStyles}
+
+  padding: 0;
 `;
 
 const InfoText = styled.p`
