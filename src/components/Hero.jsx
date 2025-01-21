@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { buttonStyles, QUERIES } from "../constants";
+import { useModal } from "../hooks/useModal";
+import Modal from "./Modal";
 
 export default function Hero() {
+  const { isOpen, modalType, openModal, closeModal } = useModal();
   return (
     <HeroContainer>
       <Title>
@@ -17,7 +20,8 @@ export default function Hero() {
         звукорежиссеров, монтажеров, дизайнеров и других профессионалов,
         обладающих богатым опытом работы в сфере видеопроизводства.{" "}
       </SubDescription>
-      <Button>ЗАКАЗАТЬ ПРОЕКТ</Button>
+      <Button onClick={() => openModal("order")}>ЗАКАЗАТЬ ПРОЕКТ</Button>
+      <Modal isOpen={isOpen} modalType={modalType} onClose={closeModal} />
     </HeroContainer>
   );
 }

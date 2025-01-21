@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { titleStyles, buttonStyles, QUERIES } from "../constants";
+import { useModal } from "../hooks/useModal";
+import Modal from "./Modal";
 
 export default function ContactUs() {
+  const { isOpen, modalType, openModal, closeModal } = useModal();
+
   return (
     <Wrapper>
       <Title id="Contacts">Связаться с нами</Title>
@@ -11,7 +15,8 @@ export default function ContactUs() {
         Мы будем рады на все ответить и предоставить вам самый лучший сервис,
         сервис который достоин вас и вашего времени!
       </InfoText>
-      <Button>Связаться!</Button>
+      <Button onClick={() => openModal("contact")}>Связаться!</Button>
+      <Modal isOpen={isOpen} modalType={modalType} onClose={closeModal} />
     </Wrapper>
   );
 }
