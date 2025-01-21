@@ -2,8 +2,36 @@ import styled from "styled-components";
 import ReactDOM from "react-dom";
 import ContactForm from "./ContactForm";
 import OrderForm from "./OrderForm";
+import { useEffect, useRef } from "react";
 
 export default function Modal({ isOpen, modalType, onClose }) {
+  // Ref to store the scroll position
+  const scrollRef = useRef(0);
+  // To lock scrolling when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      // Capture the scroll position
+      scrollRef.current = window.scrollY;
+
+      // Lock body scroll
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollRef.current}px`;
+      document.body.style.width = "100%";
+    } else {
+      // If modal is closing, remove the fixed position and restore scroll
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+
+      // Return user to where they were scrolled
+      window.scrollTo({
+        top: scrollRef.current,
+        left: 0,
+        behavior: "instant",
+      });
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const renderContent = () => {
@@ -34,7 +62,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
