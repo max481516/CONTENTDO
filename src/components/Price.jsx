@@ -14,6 +14,11 @@ export default function Price() {
 const Title = styled.h2`
   ${titleStyles}
   margin-top: 8rem;
+  padding: 0;
+
+  @media ${QUERIES.mobile} {
+    margin: calc(46rem / 16) 0 calc(36rem / 16);
+  }
 `;
 
 // Helper to zero-pad the number to at least 5 digits
@@ -91,12 +96,13 @@ const AnimatedPriceStyled = styled.h2`
   font-size: calc(100rem / 16);
   color: transparent;
   -webkit-text-stroke: 1px var(--color-details-primary);
+  white-space: nowrap;
 
   span {
     margin: 0 0.5rem;
   }
 
   @media ${QUERIES.mobile} {
-    font-size: calc(20rem / 16);
+    font-size: calc(28rem / 16);
   }
 `;

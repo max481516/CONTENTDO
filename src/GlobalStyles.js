@@ -50,6 +50,7 @@ const GlobalStyles = createGlobalStyle`
 
 * {
   margin: 0;
+  //add padding in future
 }
 
 html,
