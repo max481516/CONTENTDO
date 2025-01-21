@@ -105,4 +105,8 @@ const AnimatedPriceStyled = styled.h2`
   @media ${QUERIES.mobile} {
     font-size: calc(28rem / 16);
   }
+
+  @media (max-width: 358px) {
+    font-size: calc(26rem / 16);
+  }
 `;

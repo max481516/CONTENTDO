@@ -52,6 +52,10 @@ const Title = styled.h1`
     font-size: calc(39rem / 16);
     text-align: center;
   }
+
+  @media (max-width: 358px) {
+    font-size: calc(34rem / 16);
+  }
 `;
 
 const FirstWord = styled.span`

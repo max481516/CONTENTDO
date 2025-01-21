@@ -62,7 +62,7 @@ const Title = styled.h2`
   margin-top: 6rem;
 
   @media ${QUERIES.mobile} {
-    margin-top: 1rem;
+    margin-top: calc(46rem / 16);
   }
 `;
 
@@ -75,7 +75,7 @@ const Paragraph = styled.p`
 
   @media ${QUERIES.mobile} {
     font-size: calc(14rem / 16);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   &:nth-of-type(1) {
@@ -159,6 +159,7 @@ const Conclusion = styled.p`
   font-size: calc(20rem / 16);
 
   @media ${QUERIES.mobile} {
-    font-size: calc(12rem / 16);
+    font-size: calc(13rem / 16);
+    padding: 0 1rem;
   }
 `;
