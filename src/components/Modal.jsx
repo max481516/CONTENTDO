@@ -51,7 +51,7 @@ export default function Modal({ isOpen, modalType, onClose }) {
     <Overlay onClick={onClose}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={onClose}>
-          <IoCloseOutline size={35} />
+          <IoCloseOutline />
         </CloseButton>
         {renderContent()}
       </ModalContainer>
@@ -92,6 +92,12 @@ const CloseButton = styled.button`
   background: none;
   border: none;
   color: white;
-  font-size: 1.5rem;
+  font-size: 35px;
   cursor: pointer;
+
+  @media (max-width: 358px) {
+    font-size: 1.5rem;
+    top: -28px;
+    right: -4px;
+  }
 `;

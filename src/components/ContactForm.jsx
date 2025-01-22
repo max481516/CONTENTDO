@@ -64,6 +64,10 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  @media (max-width: 358px) {
+    gap: 0.8rem;
+  }
 `;
 
 const Title = styled.h2`
@@ -75,6 +79,10 @@ const Title = styled.h2`
   @media ${QUERIES.mobile} {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 358px) {
+    font-size: 1rem;
   }
 `;
 
@@ -94,6 +102,11 @@ const Input = styled.input`
     padding: 0.5rem;
     font-size: 1rem;
   }
+
+  @media (max-width: 358px) {
+    padding: 0.3rem;
+    font-size: 0.8rem;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -103,6 +116,11 @@ const SubmitButton = styled.button`
   @media ${QUERIES.mobile} {
     font-size: 1rem;
     padding: 0.7rem 1rem;
+  }
+
+  @media (max-width: 358px) {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem;
   }
 `;
 
@@ -121,6 +139,11 @@ const ContactMessage = styled.p`
   @media ${QUERIES.mobile} {
     font-size: 0.8rem;
   }
+
+  @media (max-width: 358px) {
+    font-size: 0.6rem;
+    margin-top: 0.5rem;
+  }
 `;
 
 const ContactIconsContainer = styled.div`
@@ -133,6 +156,10 @@ const ContactIconsContainer = styled.div`
     gap: 3rem;
   }
 
+  @media (max-width: 358px) {
+    gap: 2rem;
+  }
+
   svg {
     width: 55px;
     height: 55px;
@@ -140,6 +167,11 @@ const ContactIconsContainer = styled.div`
     @media ${QUERIES.mobile} {
       width: 35px;
       height: 35px;
+    }
+
+    @media (max-width: 358px) {
+      width: 30px;
+      height: 30px;
     }
   }
 `;
@@ -155,5 +187,9 @@ const Contact = styled.a`
 const IconLegend = styled.p`
   @media ${QUERIES.mobile} {
     font-size: 0.8rem;
+  }
+
+  @media (max-width: 358px) {
+    font-size: 0.6rem;
   }
 `;
