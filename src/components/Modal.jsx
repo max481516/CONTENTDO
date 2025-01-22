@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import ContactForm from "./ContactForm";
 import OrderForm from "./OrderForm";
 import { useEffect, useRef } from "react";
+import { IoCloseOutline } from "react-icons/io5";
+import { QUERIES } from "../constants";
 
 export default function Modal({ isOpen, modalType, onClose }) {
   // Ref to store the scroll position
@@ -48,7 +50,9 @@ export default function Modal({ isOpen, modalType, onClose }) {
   return ReactDOM.createPortal(
     <Overlay onClick={onClose}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
-        <CloseButton onClick={onClose}>&times;</CloseButton>
+        <CloseButton onClick={onClose}>
+          <IoCloseOutline size={35} />
+        </CloseButton>
         {renderContent()}
       </ModalContainer>
     </Overlay>,
@@ -60,8 +64,8 @@ const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
   background: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
@@ -70,17 +74,21 @@ const Overlay = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background: #181818;
-  padding: 2rem;
+  position: relative;
+  background: var(--color-details-tertiary);
+  padding: 62px 96px;
   border-radius: 8px;
-  max-width: 500px;
-  width: 100%;
+  width: min(90vw, 700px);
+
+  @media ${QUERIES.mobile} {
+    padding: 24px 32px;
+  }
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: -42px;
+  right: -8px;
   background: none;
   border: none;
   color: white;

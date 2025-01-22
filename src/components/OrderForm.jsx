@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useForm, ValidationError } from "@formspree/react";
+import { QUERIES } from "../constants";
 
 export default function OrderForm() {
   const [state, handleSubmit] = useForm("mqaezked"); // Replace YOUR_FORM_ID with your Formspree form ID

@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle`
   --color-details-primary: hsla(206, 77%, 47%, 1);
   --color-details-secondary: hsla(0, 0%, 95%, 1);
   --color-details-tertiary: hsla(0, 0%, 12%, 1);
+  --color-background: hsla(0, 0%, 5%, 1);
 }
 
 //KEYFRAMES
@@ -180,7 +181,7 @@ body {
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
-  background-color: hsla(0, 0%, 5%, 1);
+  background-color: var(--color-background);
 }
 
 
