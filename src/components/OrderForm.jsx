@@ -1,14 +1,45 @@
 import styled from "styled-components";
 import { useForm, ValidationError } from "@formspree/react";
+import { useState } from "react";
 import { buttonStyles, QUERIES } from "../constants";
 import AttachFileIcon from "../assets/AttachFileIcon.svg?react";
 import ErrorMessage from "./ErrorMessage";
+import SuccessMessage from "./SuccessMessage";
 
 export default function OrderForm() {
-  const [state, handleSubmit] = useForm("mqaezked"); // Replace YOUR_FORM_ID with your Formspree form ID
+  const [state, handleSubmit] = useForm("mqaezked");
+  const [files, setFiles] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState({});
+
+  const handleFileChange = (event) => {
+    const selectedFiles = Array.from(event.target.files);
+    setFiles(selectedFiles);
+
+    // Initialize progress for each file
+    const newProgress = {};
+    selectedFiles.forEach((file) => {
+      newProgress[file.name] = 0;
+      simulateUpload(file);
+    });
+    setUploadProgress(newProgress);
+  };
+
+  // Simulate Upload Progress
+  const simulateUpload = (file) => {
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += 10;
+      setUploadProgress((prev) => ({
+        ...prev,
+        [file.name]: progress,
+      }));
+
+      if (progress >= 100) clearInterval(interval);
+    }, 300); // Adjust the interval as needed
+  };
 
   if (state.succeeded) {
-    return <SuccessMessage>Спасибо! Мы скоро вам ответим.</SuccessMessage>;
+    return <SuccessMessage />;
   }
   if (state.errors) {
     return <ErrorMessage />;
@@ -58,8 +89,26 @@ export default function OrderForm() {
         <Label htmlFor="file">
           <StyledAttachFileIcon /> Прикрепить файл
         </Label>
-        <HiddenFileInput id="file" type="file" name="file" />
+        <HiddenFileInput
+          id="file"
+          type="file"
+          name="file"
+          multiple
+          onChange={handleFileChange}
+        />
       </FileInputContainer>
+
+      <FileList>
+        {files.map((file) => (
+          <FileItem key={file.name}>
+            <FileName>{file.name}</FileName>
+            <ProgressBarContainer>
+              <ProgressBar progress={uploadProgress[file.name]} />
+              <ProgressText>{uploadProgress[file.name] || 0}%</ProgressText>
+            </ProgressBarContainer>
+          </FileItem>
+        ))}
+      </FileList>
 
       <SubmitButton type="submit" disabled={state.submitting}>
         ОТПРАВИТЬ
@@ -191,6 +240,50 @@ const HiddenFileInput = styled.input`
   display: none;
 `;
 
+const FileList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const FileItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #333;
+  padding: 0.5rem;
+  border-radius: 4px;
+`;
+
+const FileName = styled.span`
+  color: white;
+  font-size: 0.9rem;
+  flex-grow: 1;
+`;
+
+const ProgressBarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const ProgressBar = styled.div`
+  background: var(--color-details-primary);
+  height: 8px;
+  width: ${(props) => props.progress}%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+`;
+
+const ProgressText = styled.span`
+  color: white;
+  font-size: 0.8rem;
+`;
+
 const SubmitButton = styled.button`
   ${buttonStyles}
   border-radius: 5px;
@@ -203,16 +296,5 @@ const SubmitButton = styled.button`
   @media (max-width: 358px) {
     font-size: 0.8rem;
     padding: 0.5rem 0.8rem;
-  }
-`;
-
-const SuccessMessage = styled.p`
-  color: var(--color-details-secondary);
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 800;
-
-  @media ${QUERIES.mobile} {
-    font-size: 1.5rem;
   }
 `;

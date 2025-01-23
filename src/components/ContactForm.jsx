@@ -3,12 +3,13 @@ import { useForm, ValidationError } from "@formspree/react";
 import { buttonStyles, QUERIES } from "../constants";
 import ContactIcons from "./ContactIcons";
 import ErrorMessage from "./ErrorMessage";
+import SuccessMessage from "./SuccessMessage";
 
 export default function ContactForm() {
   const [state, handleSubmit] = useForm("xanqwyqb");
 
   if (state.succeeded) {
-    return <SuccessMessage>Спасибо! Мы свяжемся с вами.</SuccessMessage>;
+    return <SuccessMessage />;
   }
   if (state.errors) {
     return <ErrorMessage />;
@@ -130,16 +131,5 @@ const ContactMessage = styled.p`
   @media (max-width: 358px) {
     font-size: 0.6rem;
     margin-top: 0.5rem;
-  }
-`;
-
-const SuccessMessage = styled.p`
-  color: var(--color-details-secondary);
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 800;
-
-  @media ${QUERIES.mobile} {
-    font-size: 1.5rem;
   }
 `;
