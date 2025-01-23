@@ -1,15 +1,17 @@
 import styled from "styled-components";
 import { useForm, ValidationError } from "@formspree/react";
 import { buttonStyles, QUERIES } from "../constants";
-import EmailIcon from "../assets/Email.svg?react";
-import WhatsappIcon from "../assets/Whatsapp.svg?react";
-import TelegramIcon from "../assets/Telegram.svg?react";
+import ContactIcons from "./ContactIcons";
+import ErrorMessage from "./ErrorMessage";
 
 export default function ContactForm() {
   const [state, handleSubmit] = useForm("xanqwyqb");
 
   if (state.succeeded) {
     return <SuccessMessage>Спасибо! Мы свяжемся с вами.</SuccessMessage>;
+  }
+  if (state.errors) {
+    return <ErrorMessage />;
   }
 
   return (
@@ -41,20 +43,7 @@ export default function ContactForm() {
         удобное для вас время!
       </ContactMessage>
 
-      <ContactIconsContainer>
-        <Contact>
-          <EmailIcon />
-          <IconLegend>Почта</IconLegend>
-        </Contact>
-        <Contact>
-          <WhatsappIcon />
-          <IconLegend>WhatsApp</IconLegend>
-        </Contact>
-        <Contact>
-          <TelegramIcon />
-          <IconLegend>Telegram</IconLegend>
-        </Contact>
-      </ContactIconsContainer>
+      <ContactIcons />
     </Form>
   );
 }
@@ -98,6 +87,10 @@ const Input = styled.input`
   color: white;
   margin: 0;
 
+  &:focus {
+    background-color: #333;
+  }
+
   @media ${QUERIES.mobile} {
     padding: 0.5rem;
     font-size: 1rem;
@@ -124,12 +117,6 @@ const SubmitButton = styled.button`
   }
 `;
 
-const SuccessMessage = styled.p`
-  color: #4caf50;
-  text-align: center;
-  font-size: 1.2rem;
-`;
-
 const ContactMessage = styled.p`
   color: white;
   text-align: center;
@@ -146,50 +133,13 @@ const ContactMessage = styled.p`
   }
 `;
 
-const ContactIconsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 6rem;
-  margin-top: 1rem;
+const SuccessMessage = styled.p`
+  color: var(--color-details-secondary);
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
 
   @media ${QUERIES.mobile} {
-    gap: 3rem;
-  }
-
-  @media (max-width: 358px) {
-    gap: 2rem;
-  }
-
-  svg {
-    width: 55px;
-    height: 55px;
-
-    @media ${QUERIES.mobile} {
-      width: 35px;
-      height: 35px;
-    }
-
-    @media (max-width: 358px) {
-      width: 30px;
-      height: 30px;
-    }
-  }
-`;
-
-const Contact = styled.a`
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-const IconLegend = styled.p`
-  @media ${QUERIES.mobile} {
-    font-size: 0.8rem;
-  }
-
-  @media (max-width: 358px) {
-    font-size: 0.6rem;
+    font-size: 1.5rem;
   }
 `;
