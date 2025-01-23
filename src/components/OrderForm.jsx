@@ -5,37 +5,84 @@ import { buttonStyles, QUERIES } from "../constants";
 import AttachFileIcon from "../assets/AttachFileIcon.svg?react";
 import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
+import { storage } from "../firebase/firebaseConfig"; // Make sure Firebase is configured
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export default function OrderForm() {
   const [state, handleSubmit] = useForm("mqaezked");
   const [files, setFiles] = useState([]);
   const [uploadProgress, setUploadProgress] = useState({});
+  const [uploadedFileURLs, setUploadedFileURLs] = useState([]);
 
-  const handleFileChange = (event) => {
+  const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024; // 10GB in bytes
+
+  const handleFileChange = async (event) => {
     const selectedFiles = Array.from(event.target.files);
-    setFiles(selectedFiles);
 
-    // Initialize progress for each file
-    const newProgress = {};
-    selectedFiles.forEach((file) => {
-      newProgress[file.name] = 0;
-      simulateUpload(file);
+    // Filter out files exceeding the size limit
+    const validFiles = selectedFiles.filter((file) => {
+      if (file.size > MAX_FILE_SIZE) {
+        alert(
+          `${file.name} exceeds the maximum size of 10GB and will be skipped.`
+        );
+        return false;
+      }
+      return true;
     });
-    setUploadProgress(newProgress);
+
+    setFiles(validFiles);
+
+    // Upload files to Firebase
+    const fileUploadPromises = validFiles.map((file) =>
+      uploadFileToFirebase(file)
+    );
+    const fileURLs = await Promise.all(fileUploadPromises);
+
+    // Store the uploaded file URLs
+    setUploadedFileURLs(fileURLs);
   };
 
-  // Simulate Upload Progress
-  const simulateUpload = (file) => {
-    let progress = 0;
-    const interval = setInterval(() => {
-      progress += 10;
-      setUploadProgress((prev) => ({
-        ...prev,
-        [file.name]: progress,
-      }));
+  const uploadFileToFirebase = (file) => {
+    return new Promise((resolve, reject) => {
+      const storageRef = ref(storage, `uploads/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-      if (progress >= 100) clearInterval(interval);
-    }, 300); // Adjust the interval as needed
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setUploadProgress((prev) => ({
+            ...prev,
+            [file.name]: progress,
+          }));
+        },
+        (error) => {
+          console.error("Error uploading file:", error);
+          reject(error);
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve(downloadURL);
+        }
+      );
+    });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    // Prepare form data for Formspree submission
+    const formData = new FormData(event.target);
+
+    // Append file URLs to form data
+    uploadedFileURLs.forEach((url, index) => {
+      formData.append(`file_${index + 1}`, url);
+    });
+
+    // Submit the form to Formspree
+    handleSubmit(event); // This sends the form data to Formspree
   };
 
   if (state.succeeded) {
@@ -46,7 +93,7 @@ export default function OrderForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleFormSubmit}>
       <Title>Заказать проект</Title>
 
       <Label htmlFor="name"></Label>
@@ -92,7 +139,6 @@ export default function OrderForm() {
         <HiddenFileInput
           id="file"
           type="file"
-          name="file"
           multiple
           onChange={handleFileChange}
         />
@@ -102,22 +148,24 @@ export default function OrderForm() {
         {files.map((file) => (
           <FileItem key={file.name}>
             <FileName>{file.name}</FileName>
-            <ProgressBarContainer>
-              <ProgressBar progress={uploadProgress[file.name]} />
-              <ProgressText>{uploadProgress[file.name] || 0}%</ProgressText>
-            </ProgressBarContainer>
+            <ProgressText>{uploadProgress[file.name] || 0}%</ProgressText>
           </FileItem>
         ))}
       </FileList>
 
-      <SubmitButton type="submit" disabled={state.submitting}>
+      <SubmitButton
+        type="submit"
+        disabled={
+          state.submitting ||
+          files.some((file) => uploadProgress[file.name] < 100)
+        }
+      >
         ОТПРАВИТЬ
       </SubmitButton>
     </Form>
   );
 }
 
-// Styled Components
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -263,20 +311,6 @@ const FileName = styled.span`
   color: white;
   font-size: 0.9rem;
   flex-grow: 1;
-`;
-
-const ProgressBarContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-const ProgressBar = styled.div`
-  background: var(--color-details-primary);
-  height: 8px;
-  width: ${(props) => props.progress}%;
-  border-radius: 4px;
-  transition: width 0.3s ease;
 `;
 
 const ProgressText = styled.span`
