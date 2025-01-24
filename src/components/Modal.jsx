@@ -53,10 +53,10 @@ export default function Modal({ isOpen, modalType, onClose }) {
         <CloseButton onClick={onClose}>
           <IoCloseOutline />
         </CloseButton>
-        {renderContent()}
+        <ScrollableFormContainer>{renderContent()}</ScrollableFormContainer>
       </ModalContainer>
     </Overlay>,
-    document.getElementById("modal-root") // Make sure to add a div with id='modal-root' in your HTML
+    document.getElementById("modal-root")
   );
 }
 
@@ -100,4 +100,9 @@ const CloseButton = styled.button`
     top: -28px;
     right: -4px;
   }
+`;
+
+const ScrollableFormContainer = styled.div`
+  max-height: 72vh;
+  overflow-y: auto;
 `;

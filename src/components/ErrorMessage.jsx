@@ -39,6 +39,6 @@ const FailMessage = styled.p`
   }
 
   @media (max-width: 358px) {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 `;

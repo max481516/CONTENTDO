@@ -16,4 +16,8 @@ const SuccessMessageText = styled.p`
   @media ${QUERIES.mobile} {
     font-size: 1.5rem;
   }
+
+  @media (max-width: 358px) {
+    font-size: 1rem;
+  }
 `;
