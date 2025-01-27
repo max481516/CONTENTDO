@@ -36,7 +36,7 @@ export default function OrderForm() {
     // Filter out files exceeding the size limit
     const validFiles = selectedFiles.filter((file) => {
       if (file.size > MAX_FILE_SIZE) {
-        alert(`File ${file.name} is bigger than 10GB, skipping.`);
+        alert(`File ${file.name} больше 10ГБ и не будет загружен.`);
         return false;
       }
       return true;
