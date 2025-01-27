@@ -8,8 +8,9 @@ import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
 import { storage } from "../firebase/firebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { app } from "../firebase/firebaseConfig"; // Ensure your Firebase config is set up
 
-// The max size check is optional. For instance, 10GB = 10 * 1024 * 1024 * 1024.
 const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024;
 
 export default function OrderForm() {
@@ -21,6 +22,10 @@ export default function OrderForm() {
   const [uploadProgress, setUploadProgress] = useState({});
   const [uploadedFileURLs, setUploadedFileURLs] = useState([]);
 
+  //firebase functions initialization
+  const functions = getFunctions(app, "europe-central2");
+  const validateFile = httpsCallable(functions, "validateFile");
+
   // If formspree succeeded or errors
   if (state.succeeded) {
     return <SuccessMessage />;
@@ -29,14 +34,27 @@ export default function OrderForm() {
     return <ErrorMessage />;
   }
 
-  // Called when user picks new files
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const selectedFiles = Array.from(e.target.files);
 
+    // Filter out invalid files
+    const validatedFiles = [];
+    for (const file of selectedFiles) {
+      try {
+        // Call the validateFile Firebase function
+        console.log("Sending fileName to validateFile:", file.name);
+        await validateFile({ fileName: file.name });
+        validatedFiles.push(file);
+      } catch (error) {
+        console.error(`${file.name} is invalid:`, error.message);
+        alert(`File ${file.name} is not allowed: ${error.message}`);
+      }
+    }
+
     // Filter out files exceeding the size limit
-    const validFiles = selectedFiles.filter((file) => {
+    const validFiles = validatedFiles.filter((file) => {
       if (file.size > MAX_FILE_SIZE) {
-        alert(`File ${file.name} больше 10ГБ и не будет загружен.`);
+        alert(`File ${file.name} is bigger than 10GB and will be skipped.`);
         return false;
       }
       return true;

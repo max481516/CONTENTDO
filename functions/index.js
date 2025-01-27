@@ -1,19 +1,65 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+const { onCall, HttpsError } = require("firebase-functions/v2/https");
+const { initializeApp } = require("firebase-admin/app");
+initializeApp();
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+exports.validateFile = onCall(
+  {
+    region: "europe-central2",
+    cors: {
+      origin: ["http://localhost:5173"], // or '*' for dev
+      methods: ["POST", "OPTIONS"],
+      // credentials: true, // if needed
+    },
+  },
+  (request) => {
+    const { fileName } = request.data;
+    console.log("Received fileName:", fileName);
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+    if (!fileName) {
+      throw new HttpsError("invalid-argument", "File name is missing.");
+    }
+
+    const extension = fileName.split(".").pop().toLowerCase();
+    const VALID_FORMATS = [
+      "jpg",
+      "jpeg",
+      "png",
+      "gif",
+      "bmp",
+      "webp",
+      "tiff",
+      "mp4",
+      "mov",
+      "avi",
+      "mkv",
+      "webm",
+      "wmv",
+      "pdf",
+      "doc",
+      "docx",
+      "xls",
+      "xlsx",
+      "ppt",
+      "pptx",
+      "txt",
+      "csv",
+      "rtf",
+      "odt",
+      "ods",
+      "odp",
+    ];
+
+    if (!VALID_FORMATS.includes(extension)) {
+      throw new HttpsError(
+        "invalid-argument",
+        `Unsupported file format: ${extension}`
+      );
+    }
+
+    console.log(`File "${fileName}" is valid.`);
+    return { success: true };
+  }
+);
