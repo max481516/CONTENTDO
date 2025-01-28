@@ -4,9 +4,17 @@ import { buttonStyles, inputStyles, QUERIES } from "../constants";
 import ContactIcons from "./ContactIcons";
 import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
+import DOMPurify from "dompurify";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import { useState } from "react";
 
 export default function ContactForm() {
   const [state, handleSubmit] = useForm("xanqwyqb");
+  const [phone, setPhone] = useState("");
+
+  // Sanitization Function
+  const sanitizeInput = (input) => DOMPurify.sanitize(input);
 
   if (state.succeeded) {
     return <SuccessMessage />;
@@ -16,7 +24,20 @@ export default function ContactForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form
+      onSubmit={(e) => {
+        // Preprocess form data before sending
+        e.preventDefault();
+        e.target.name.value = sanitizeInput(e.target.name.value);
+
+        console.log("Sanitized Form Data:", {
+          name: e.target.name.value,
+          phone,
+        });
+
+        handleSubmit(e); // Send sanitized data to Formspree
+      }}
+    >
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
 
       <Label htmlFor="name"></Label>
@@ -25,11 +46,11 @@ export default function ContactForm() {
       <ValidationError prefix="Name" field="name" errors={state.errors} />
 
       <Label htmlFor="phone"></Label>
-      <Input
-        id="phone"
-        type="tel"
-        name="phone"
+      <StyledPhoneInput
         placeholder="Телефон"
+        defaultCountry="RU"
+        value={phone}
+        onChange={setPhone}
         required
       />
 
@@ -82,6 +103,45 @@ const Label = styled.label`
 
 const Input = styled.input`
   ${inputStyles}
+`;
+
+const StyledPhoneInput = styled(PhoneInput)`
+  ${inputStyles}
+  display: inline-flex;
+  align-items: baseline;
+
+  /* This targets the country <select> element */
+  .PhoneInputCountry {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+
+    /* remove default border, background, etc., if needed: */
+  }
+
+  .PhoneInputCountrySelect {
+    &:focus {
+      border: none;
+      background: transparent;
+      outline: none;
+    }
+  }
+
+  /* The flag icon is an <img> inside .PhoneInputCountryIcon */
+  .PhoneInputCountryIcon {
+    width: 1.2em;
+    height: auto;
+  }
+
+  /* The actual phone number <input> */
+  .PhoneInputInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+  }
 `;
 
 const SubmitButton = styled.button`
