@@ -43,9 +43,9 @@ const GlobalStyles = createGlobalStyle`
 }
 
 //HIDE RECAPTCHA BADGE
-.grecaptcha-badge {
+/* .grecaptcha-badge {
   visibility: hidden;
-}
+} */
 
 //CSS RESET
   *,
