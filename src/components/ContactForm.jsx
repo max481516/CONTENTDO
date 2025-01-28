@@ -16,9 +16,10 @@ export default function ContactForm() {
 
   // Ref for reCAPTCHA
   const recaptchaRef = useRef();
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
 
   // Sanitization Function
-  const sanitizeInput = (input) => DOMPurify.sanitize(input);
+  /*  const sanitizeInput = (input) => DOMPurify.sanitize(input); */
 
   if (state.succeeded) {
     return <SuccessMessage />;
@@ -27,41 +28,29 @@ export default function ContactForm() {
     return <ErrorMessage />;
   }
 
-  const onReCAPTCHAChange = (token) => {
-    if (token) {
-      console.log("reCAPTCHA token:", token);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    e.target.name.value = DOMPurify.sanitize(e.target.name.value);
 
-      // Attach token as hidden input
-      const recaptchaInput = document.createElement("input");
-      recaptchaInput.type = "hidden";
-      recaptchaInput.name = "g-recaptcha-response";
-      recaptchaInput.value = token;
+    // Only submit if reCAPTCHA is verified
+    if (recaptchaToken) {
+      const formData = new FormData(e.target); // Use FormData for easier handling.
+      formData.append("g-recaptcha-response", recaptchaToken); // Append token here.
+      handleSubmit({ ...e, formData }); // Pass FormData to your handleSubmit function.
 
-      const form = document.getElementById("contact-form");
-      form.appendChild(recaptchaInput);
-
-      form.submit(); // Submit form programmatically
+      console.log("Form Data (with reCAPTCHA):", formData);
     } else {
-      console.error("reCAPTCHA verification failed");
+      console.error("reCAPTCHA verification required.");
+      // Handle error (e.g., display an error message).
     }
   };
 
+  const onReCAPTCHAChange = (token) => {
+    setRecaptchaToken(token);
+  };
+
   return (
-    <Form
-      id="contact-form"
-      onSubmit={(e) => {
-        // Preprocess form data before sending
-        e.preventDefault();
-        e.target.name.value = sanitizeInput(e.target.name.value);
-
-        console.log("Sanitized Form Data:", {
-          name: e.target.name.value,
-          phone,
-        });
-
-        handleSubmit(e); // Send sanitized data to Formspree
-      }}
-    >
+    <Form id="contact-form" onSubmit={onSubmit}>
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
 
       <Label htmlFor="name"></Label>
