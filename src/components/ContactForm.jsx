@@ -1,61 +1,103 @@
 import styled from "styled-components";
 import { useForm, ValidationError } from "@formspree/react";
-import { buttonStyles, inputStyles, QUERIES } from "../constants";
-import ContactIcons from "./ContactIcons";
-import ErrorMessage from "./ErrorMessage";
-import SuccessMessage from "./SuccessMessage";
-import DOMPurify from "dompurify";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import ContactIcons from "./ContactIcons";
+import SuccessMessage from "./SuccessMessage";
+import ErrorMessage from "./ErrorMessage";
+import DOMPurify from "dompurify";
 
 export default function ContactForm() {
   const [state, handleSubmit] = useForm("xanqwyqb");
-  const [phone, setPhone] = useState("");
-
-  // Ref for reCAPTCHA
   const recaptchaRef = useRef();
   const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const [apiError, setApiError] = useState(null);
+  const [phone, setPhone] = useState("");
 
-  // Sanitization Function
-  /*  const sanitizeInput = (input) => DOMPurify.sanitize(input); */
+  const GOOGLE_API_KEY = "YAIzaSyBvxaxCvly9PDR655azwFaUx4NhX-RmRd0"; // Replace with your API key
+  const PROJECT_ID = "contentdo-ef5d1"; // Replace with your project ID
+  const SITE_KEY = "6LcU2sUqAAAAAAcM7zmFEOzfbNjL1lsKZR7zDuTO"; // Replace with your site key
 
-  if (state.succeeded) {
-    return <SuccessMessage />;
-  }
-  if (state.errors) {
-    return <ErrorMessage />;
-  }
+  const verifyRecaptcha = async (token) => {
+    const requestBody = {
+      event: {
+        token: token,
+        expectedAction: "submit_form", // Adjust based on your use case
+        siteKey: SITE_KEY,
+      },
+    };
 
-  const onSubmit = (e) => {
+    try {
+      const response = await fetch(
+        `https://recaptchaenterprise.googleapis.com/v1/projects/${PROJECT_ID}/assessments?key=${GOOGLE_API_KEY}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to verify reCAPTCHA: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.tokenProperties && data.tokenProperties.valid) {
+        console.log("reCAPTCHA verification passed:", data);
+        return true;
+      } else {
+        console.error("Invalid reCAPTCHA token:", data.tokenProperties);
+        return false;
+      }
+    } catch (error) {
+      console.error("reCAPTCHA verification error:", error);
+      setApiError("Failed to verify reCAPTCHA. Please try again.");
+      return false;
+    }
+  };
+
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
+
+    // Sanitize inputs
     e.target.name.value = DOMPurify.sanitize(e.target.name.value);
 
-    // Only submit if reCAPTCHA is verified
-    if (recaptchaToken) {
-      const formData = new FormData(e.target); // Use FormData for easier handling.
-      formData.append("g-recaptcha-response", recaptchaToken); // Append token here.
-      handleSubmit({ ...e, formData }); // Pass FormData to your handleSubmit function.
+    if (!recaptchaToken) {
+      setApiError("Please complete the reCAPTCHA verification.");
+      return;
+    }
 
-      console.log("Form Data (with reCAPTCHA):", formData);
+    // Verify reCAPTCHA token with Google API
+    const isVerified = await verifyRecaptcha(recaptchaToken);
+
+    if (isVerified) {
+      console.log("Submitting form...");
+      handleSubmit(e); // Pass the event to Formspree after verification
     } else {
-      console.error("reCAPTCHA verification required.");
-      // Handle error (e.g., display an error message).
+      setApiError("reCAPTCHA verification failed. Please try again.");
     }
   };
 
   const onReCAPTCHAChange = (token) => {
-    setRecaptchaToken(token);
+    setRecaptchaToken(token); // Set the reCAPTCHA token for verification
   };
 
+  if (state.succeeded) {
+    return <SuccessMessage />;
+  }
+  if (state.errors || apiError) {
+    return <ErrorMessage message={apiError || "An error occurred"} />;
+  }
+
   return (
-    <Form id="contact-form" onSubmit={onSubmit}>
+    <Form id="contact-form" onSubmit={handleSubmitForm}>
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
 
       <Label htmlFor="name"></Label>
       <Input id="name" type="text" name="name" placeholder="Имя" required />
-
       <ValidationError prefix="Name" field="name" errors={state.errors} />
 
       <Label htmlFor="phone"></Label>
@@ -66,14 +108,12 @@ export default function ContactForm() {
         onChange={setPhone}
         required
       />
-
       <ValidationError prefix="Phone" field="phone" errors={state.errors} />
 
       <ReCAPTCHA
-        class="g-recaptcha"
         ref={recaptchaRef}
+        sitekey={SITE_KEY}
         size="invisible"
-        sitekey="6LcU2sUqAAAAAAcM7zmFEOzfbNjL1lsKZR7zDuTO"
         onChange={onReCAPTCHAChange}
       />
 
@@ -99,10 +139,6 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-
-  @media (max-width: 358px) {
-    gap: 0.8rem;
-  }
 `;
 
 const Title = styled.h2`
@@ -110,15 +146,6 @@ const Title = styled.h2`
   text-align: center;
   font-size: 2rem;
   margin-bottom: 1rem;
-
-  @media ${QUERIES.mobile} {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  @media (max-width: 358px) {
-    font-size: 1rem;
-  }
 `;
 
 const Label = styled.label`
@@ -126,75 +153,23 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  ${inputStyles}
+  padding: 1rem;
 `;
 
-const StyledPhoneInput = styled(PhoneInput)`
-  ${inputStyles}
-  display: inline-flex;
-  align-items: baseline;
-
-  /* This targets the country <select> element */
-  .PhoneInputCountry {
-    display: flex;
-    align-items: center;
-    margin-right: 0.5rem;
-
-    /* remove default border, background, etc., if needed: */
-  }
-
-  .PhoneInputCountrySelect {
-    &:focus {
-      border: none;
-      background: transparent;
-      outline: none;
-    }
-  }
-
-  /* The flag icon is an <img> inside .PhoneInputCountryIcon */
-  .PhoneInputCountryIcon {
-    width: 1.2em;
-    height: auto;
-  }
-
-  /* The actual phone number <input> */
-  .PhoneInputInput {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    margin: 0;
-  }
+const StyledPhoneInput = styled.input`
+  padding: 1rem;
 `;
 
 const SubmitButton = styled.button`
-  ${buttonStyles}
-  border-radius: 5px;
-
-  @media ${QUERIES.mobile} {
-    font-size: 1rem;
-    padding: 0.7rem 1rem;
-  }
-
-  @media (max-width: 358px) {
-    font-size: 0.8rem;
-    padding: 0.5rem 0.8rem;
-  }
+  padding: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
 `;
 
 const ContactMessage = styled.p`
   color: white;
   text-align: center;
   font-size: 1rem;
-  margin-top: 1rem;
-
-  @media ${QUERIES.mobile} {
-    font-size: 0.8rem;
-  }
-
-  @media (max-width: 358px) {
-    font-size: 0.6rem;
-    margin-top: 0.5rem;
-  }
 `;
