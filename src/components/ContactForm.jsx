@@ -63,7 +63,7 @@ export default function ContactForm() {
       <ReCAPTCHA
         ref={recaptchaRef}
         size="invisible"
-        sitekey={import.meta.env.VITE_RECAPTCHA_CONTACTFORM_KEY}
+        sitekey="6LcU2sUqAAAAAAcM7zmFEOzfbNjL1lsKZR7zDuTO"
         onChange={(token) => console.log("reCAPTCHA token:", token)}
       />
 

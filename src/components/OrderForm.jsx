@@ -221,7 +221,7 @@ export default function OrderForm() {
       <ReCAPTCHA
         ref={recaptchaRef}
         size="invisible"
-        sitekey={import.meta.env.VITE_RECAPTCHA_ORDERFORM_KEY}
+        sitekey="6Lff0sUqAAAAAFbQrFSiUxQEWIbNbGywY9gzUWM9"
         onChange={(token) => console.log("reCAPTCHA token:", token)}
       />
       <SubmitButton
