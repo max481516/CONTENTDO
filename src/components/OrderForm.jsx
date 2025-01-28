@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useForm, ValidationError } from "@formspree/react";
 import { useState } from "react";
-import { buttonStyles, QUERIES } from "../constants";
+import { buttonStyles, inputStyles, QUERIES } from "../constants";
 import { IoCloseOutline } from "react-icons/io5";
 import AttachFileIcon from "../assets/AttachFileIcon.svg?react";
 import ErrorMessage from "./ErrorMessage";
@@ -9,7 +9,10 @@ import SuccessMessage from "./SuccessMessage";
 import { storage } from "../firebase/firebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { app } from "../firebase/firebaseConfig"; // Ensure your Firebase config is set up
+import { app } from "../firebase/firebaseConfig";
+import DOMPurify from "dompurify";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024;
 
@@ -21,6 +24,10 @@ export default function OrderForm() {
   const [files, setFiles] = useState([]);
   const [uploadProgress, setUploadProgress] = useState({});
   const [uploadedFileURLs, setUploadedFileURLs] = useState([]);
+  const [phone, setPhone] = useState("");
+
+  // Sanitization Function
+  const sanitizeInput = (input) => DOMPurify.sanitize(input);
 
   //firebase functions initialization
   const functions = getFunctions(app, "europe-central2");
@@ -114,7 +121,24 @@ export default function OrderForm() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form
+      onSubmit={(e) => {
+        // Preprocess form data before sending
+        e.preventDefault();
+        e.target.name.value = sanitizeInput(e.target.name.value);
+        e.target.email.value = sanitizeInput(e.target.email.value);
+        e.target.description.value = sanitizeInput(e.target.description.value);
+
+        console.log("Sanitized Form Data:", {
+          name: e.target.name.value,
+          email: e.target.email.value,
+          phone,
+          description: e.target.description.value,
+        });
+
+        handleSubmit(e); // Send sanitized data to Formspree
+      }}
+    >
       <Title>Заказать проект</Title>
 
       <Label htmlFor="name" />
@@ -132,11 +156,11 @@ export default function OrderForm() {
       <ValidationError prefix="Email" field="email" errors={state.errors} />
 
       <Label htmlFor="phone" />
-      <Input
-        id="phone"
-        type="tel"
-        name="phone"
+      <StyledPhoneInput
         placeholder="Телефон"
+        defaultCountry="RU"
+        value={phone}
+        onChange={setPhone}
         required
       />
       <ValidationError prefix="Phone" field="phone" errors={state.errors} />
@@ -236,26 +260,45 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  padding: 0.8rem;
-  border: 1px solid #444;
-  border-radius: 4px;
-  background: #222;
-  color: white;
-  margin-bottom: 0.5rem;
+  ${inputStyles}
+`;
 
-  &:focus {
-    background-color: #333;
+const StyledPhoneInput = styled(PhoneInput)`
+  ${inputStyles}
+  display: inline-flex;
+  align-items: baseline;
+
+  /* This targets the country <select> element */
+  .PhoneInputCountry {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+
+    /* remove default border, background, etc., if needed: */
   }
 
-  @media ${QUERIES.mobile} {
-    padding: 0.5rem;
-    font-size: 1rem;
-    margin-bottom: 0;
+  .PhoneInputCountrySelect {
+    &:focus {
+      border: none;
+      background: transparent;
+      outline: none;
+    }
   }
 
-  @media (max-width: 358px) {
-    padding: 0.2rem;
-    font-size: 0.7rem;
+  /* The flag icon is an <img> inside .PhoneInputCountryIcon */
+  .PhoneInputCountryIcon {
+    width: 1.2em;
+    height: auto;
+  }
+
+  /* The actual phone number <input> */
+  .PhoneInputInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
   }
 `;
 
@@ -369,7 +412,9 @@ const HiddenInput = styled.input`
   display: none;
 `;
 
-const RemoveButton = styled.button``;
+const RemoveButton = styled.button`
+  cursor: pointer;
+`;
 
 const SubmitButton = styled.button`
   ${buttonStyles}

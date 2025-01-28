@@ -21,4 +21,5 @@ export default defineConfig({
     svgr(),
   ],
   assetsInclude: ["**/*.JPG", "**/*.MOV", "**/*.MP4"],
+  server: { allowedHosts: ["daily-rare-halibut.ngrok-free.app"] },
 });

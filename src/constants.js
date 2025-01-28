@@ -47,4 +47,28 @@ const titleStyles = css`
   }
 `;
 
-export { BREAKPOINTS, QUERIES, buttonStyles, titleStyles };
+const inputStyles = css`
+  padding: 0.8rem;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background: #222;
+  color: white;
+  margin-bottom: 0.5rem;
+
+  &:focus {
+    background-color: #333;
+  }
+
+  @media ${QUERIES.mobile} {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 358px) {
+    padding: 0.2rem;
+    font-size: 0.7rem;
+  }
+`;
+
+export { BREAKPOINTS, QUERIES, buttonStyles, titleStyles, inputStyles };

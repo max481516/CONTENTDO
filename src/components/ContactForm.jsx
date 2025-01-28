@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useForm, ValidationError } from "@formspree/react";
-import { buttonStyles, QUERIES } from "../constants";
+import { buttonStyles, inputStyles, QUERIES } from "../constants";
 import ContactIcons from "./ContactIcons";
 import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
@@ -81,26 +81,7 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  padding: 0.8rem;
-  border: 1px solid #444;
-  border-radius: 4px;
-  background: #222;
-  color: white;
-  margin: 0;
-
-  &:focus {
-    background-color: #333;
-  }
-
-  @media ${QUERIES.mobile} {
-    padding: 0.5rem;
-    font-size: 1rem;
-  }
-
-  @media (max-width: 358px) {
-    padding: 0.3rem;
-    font-size: 0.8rem;
-  }
+  ${inputStyles}
 `;
 
 const SubmitButton = styled.button`
