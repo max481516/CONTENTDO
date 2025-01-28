@@ -220,6 +220,7 @@ export default function OrderForm() {
 
       <ReCAPTCHA
         ref={recaptchaRef}
+        className="g-recaptcha"
         size="invisible"
         sitekey="6Lff0sUqAAAAAFbQrFSiUxQEWIbNbGywY9gzUWM9"
         onChange={(token) => console.log("reCAPTCHA token:", token)}
