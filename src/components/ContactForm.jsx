@@ -7,11 +7,15 @@ import SuccessMessage from "./SuccessMessage";
 import DOMPurify from "dompurify";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useRef, useState } from "react";
 
 export default function ContactForm() {
   const [state, handleSubmit] = useForm("xanqwyqb");
   const [phone, setPhone] = useState("");
+
+  // Ref for reCAPTCHA
+  const recaptchaRef = useRef();
 
   // Sanitization Function
   const sanitizeInput = (input) => DOMPurify.sanitize(input);
@@ -55,6 +59,13 @@ export default function ContactForm() {
       />
 
       <ValidationError prefix="Phone" field="phone" errors={state.errors} />
+
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        size="invisible"
+        sitekey={import.meta.env.VITE_RECAPTCHA_CONTACTFORM_KEY}
+        onChange={(token) => console.log("reCAPTCHA token:", token)}
+      />
 
       <SubmitButton type="submit" disabled={state.submitting}>
         ОТПРАВИТЬ

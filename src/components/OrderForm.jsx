@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useForm, ValidationError } from "@formspree/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { buttonStyles, inputStyles, QUERIES } from "../constants";
 import { IoCloseOutline } from "react-icons/io5";
 import AttachFileIcon from "../assets/AttachFileIcon.svg?react";
@@ -13,6 +13,7 @@ import { app } from "../firebase/firebaseConfig";
 import DOMPurify from "dompurify";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024;
 
@@ -32,6 +33,9 @@ export default function OrderForm() {
   //firebase functions initialization
   const functions = getFunctions(app, "europe-central2");
   const validateFile = httpsCallable(functions, "validateFile");
+
+  // RecaptchaRef
+  const recaptchaRef = useRef();
 
   // If formspree succeeded or errors
   if (state.succeeded) {
@@ -214,6 +218,12 @@ export default function OrderForm() {
         />
       ))}
 
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        size="invisible"
+        sitekey={import.meta.env.VITE_RECAPTCHA_ORDERFORM_KEY}
+        onChange={(token) => console.log("reCAPTCHA token:", token)}
+      />
       <SubmitButton
         type="submit"
         disabled={
