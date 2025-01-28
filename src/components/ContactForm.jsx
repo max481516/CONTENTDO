@@ -77,7 +77,10 @@ export default function ContactForm() {
         onChange={onReCAPTCHAChange}
       />
 
-      <SubmitButton type="submit" disabled={state.submitting}>
+      <SubmitButton
+        type="submit"
+        disabled={state.submitting || !recaptchaToken}
+      >
         ОТПРАВИТЬ
       </SubmitButton>
 
