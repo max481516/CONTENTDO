@@ -54,17 +54,6 @@ export default function Modal({ isOpen, modalType, onClose }) {
           <IoCloseOutline />
         </CloseButton>
         <ScrollableFormContainer>{renderContent()}</ScrollableFormContainer>
-        <GoogleLegal>
-          This site is protected by reCAPTCHA and the Google{" "}
-          <GoogleLink href="https://policies.google.com/privacy">
-            Privacy Policy
-          </GoogleLink>{" "}
-          and{" "}
-          <GoogleLink href="https://policies.google.com/terms">
-            Terms of Service
-          </GoogleLink>{" "}
-          apply.
-        </GoogleLegal>
       </ModalContainer>
     </Overlay>,
     document.getElementById("modal-root")
@@ -116,27 +105,4 @@ const CloseButton = styled.button`
 const ScrollableFormContainer = styled.div`
   max-height: 72vh;
   overflow-y: auto;
-`;
-
-const GoogleLegal = styled.small`
-  position: absolute;
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -10px;
-  padding: 1rem;
-  text-align: center;
-  font-size: calc(8rem / 16);
-
-  @media ${QUERIES.mobile} {
-    font-size: calc(6rem / 16);
-  }
-
-  @media (max-width: 358px) {
-    font-size: calc(4rem / 16);
-  }
-`;
-
-const GoogleLink = styled.a`
-  color: inherit;
 `;
