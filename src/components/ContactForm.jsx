@@ -11,49 +11,60 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useRef, useState } from "react";
 
 export default function ContactForm() {
-  const [state, handleSubmit] = useForm("xanqwyqb");
+  const [state, handleSubmit] = useForm("xanqwyqb"); // Your Formspree ID
   const [phone, setPhone] = useState("");
+  const [recaptchaValue, setRecaptchaValue] = useState(null);
+  const [recaptchaError, setRecaptchaError] = useState(false);
+  const recaptchaRef = useRef(); // Ref for reCAPTCHA
 
-  // Ref for reCAPTCHA
-  const recaptchaRef = useRef();
-
-  // Sanitization Function
+  // Function to sanitize inputs
   const sanitizeInput = (input) => DOMPurify.sanitize(input);
+
+  // reCAPTCHA Handler (Trigger Form Submission Only if Solved)
+  const onReCAPTCHAChange = (token) => {
+    if (token) {
+      setRecaptchaValue(token);
+      setRecaptchaError(false); // Clear errors
+      handleSubmit(new Event("submit", { bubbles: true, cancelable: true })); // Submit form
+    }
+  };
+
+  // Form Submission Handler (Executes reCAPTCHA First)
+  const handleCustomSubmit = (event) => {
+    event.preventDefault();
+
+    // Check if reCAPTCHA is completed
+    if (!recaptchaValue) {
+      setRecaptchaError(true);
+      recaptchaRef.current.execute(); // Trigger reCAPTCHA
+      return;
+    }
+
+    // Sanitize inputs before sending
+    event.target.name.value = sanitizeInput(event.target.name.value);
+    event.target.email.value = sanitizeInput(event.target.email.value);
+
+    console.log("Sanitized Form Data:", {
+      name: event.target.name.value,
+      phone,
+    });
+
+    handleSubmit(event); // Send sanitized data to Formspree
+  };
 
   if (state.succeeded) {
     return <SuccessMessage />;
   }
-  if (state.errors) {
+  if (state.errors || recaptchaError) {
     return <ErrorMessage />;
   }
 
-  const onReCAPTCHAChange = (token) => {
-    if (token) {
-      document.getElementById("contact-form").submit();
-    }
-  };
-
   return (
-    <Form
-      id="contact-form"
-      onSubmit={(e) => {
-        // Preprocess form data before sending
-        e.preventDefault();
-        e.target.name.value = sanitizeInput(e.target.name.value);
-
-        console.log("Sanitized Form Data:", {
-          name: e.target.name.value,
-          phone,
-        });
-
-        handleSubmit(e); // Send sanitized data to Formspree
-      }}
-    >
+    <Form id="contact-form" onSubmit={handleCustomSubmit}>
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
 
       <Label htmlFor="name"></Label>
       <Input id="name" type="text" name="name" placeholder="Имя" required />
-
       <ValidationError prefix="Name" field="name" errors={state.errors} />
 
       <Label htmlFor="phone"></Label>
@@ -64,13 +75,13 @@ export default function ContactForm() {
         onChange={setPhone}
         required
       />
-
       <ValidationError prefix="Phone" field="phone" errors={state.errors} />
 
+      {/* ✅ Invisible reCAPTCHA (Executes on Submit) */}
       <ReCAPTCHA
         ref={recaptchaRef}
         size="invisible"
-        sitekey="6LcU2sUqAAAAAAcM7zmFEOzfbNjL1lsKZR7zDuTO"
+        sitekey="YOUR_SITE_KEY" // Replace with your reCAPTCHA Site Key
         onChange={onReCAPTCHAChange}
       />
 
@@ -127,39 +138,6 @@ const StyledPhoneInput = styled(PhoneInput)`
   ${inputStyles}
   display: inline-flex;
   align-items: baseline;
-
-  /* This targets the country <select> element */
-  .PhoneInputCountry {
-    display: flex;
-    align-items: center;
-    margin-right: 0.5rem;
-
-    /* remove default border, background, etc., if needed: */
-  }
-
-  .PhoneInputCountrySelect {
-    &:focus {
-      border: none;
-      background: transparent;
-      outline: none;
-    }
-  }
-
-  /* The flag icon is an <img> inside .PhoneInputCountryIcon */
-  .PhoneInputCountryIcon {
-    width: 1.2em;
-    height: auto;
-  }
-
-  /* The actual phone number <input> */
-  .PhoneInputInput {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    margin: 0;
-  }
 `;
 
 const SubmitButton = styled.button`
