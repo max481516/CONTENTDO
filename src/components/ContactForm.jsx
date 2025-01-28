@@ -68,6 +68,7 @@ export default function ContactForm() {
       <ValidationError prefix="Phone" field="phone" errors={state.errors} />
 
       <ReCAPTCHA
+        class="g-recaptcha"
         ref={recaptchaRef}
         size="invisible"
         sitekey="6LcU2sUqAAAAAAcM7zmFEOzfbNjL1lsKZR7zDuTO"
