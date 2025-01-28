@@ -27,11 +27,14 @@ export default function ContactForm() {
     return <ErrorMessage />;
   }
 
-  const onReCAPTCHAChange = (token) => {
+  /*   const onReCAPTCHAChange = (token) => {
     if (token) {
+      console.log("reCAPTCHA Token:", token);
       document.getElementById("contact-form").submit();
+    } else {
+      console.error("reCAPTCHA verification failed or token not received.");
     }
-  };
+  }; */
 
   return (
     <Form
@@ -72,7 +75,21 @@ export default function ContactForm() {
         ref={recaptchaRef}
         size="invisible"
         sitekey="6LcU2sUqAAAAAAcM7zmFEOzfbNjL1lsKZR7zDuTO"
-        onChange={onReCAPTCHAChange}
+        onChange={(token) => {
+          if (token) {
+            console.log("reCAPTCHA token received:", token);
+            const form = document.getElementById("contact-form");
+            const recaptchaInput = document.createElement("input");
+            recaptchaInput.type = "hidden";
+            recaptchaInput.name = "g-recaptcha-response";
+            recaptchaInput.value = token;
+            form.appendChild(recaptchaInput);
+
+            form.submit();
+          } else {
+            console.error("reCAPTCHA verification failed.");
+          }
+        }}
       />
 
       <SubmitButton type="submit" disabled={state.submitting}>
