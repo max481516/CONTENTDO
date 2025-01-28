@@ -42,6 +42,11 @@ const GlobalStyles = createGlobalStyle`
   width: 100%;
 }
 
+//HIDE RECAPTCHA BADGE
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
 //CSS RESET
   *,
 *::before,

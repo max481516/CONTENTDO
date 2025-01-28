@@ -429,6 +429,7 @@ const RemoveButton = styled.button`
 const SubmitButton = styled.button`
   ${buttonStyles}
   border-radius: 5px;
+  margin-top: -3rem;
 
   @media ${QUERIES.mobile} {
     font-size: 1rem;
