@@ -27,8 +27,15 @@ export default function ContactForm() {
     return <ErrorMessage />;
   }
 
+  const onReCAPTCHAChange = (token) => {
+    if (token) {
+      document.getElementById("contact-form").submit();
+    }
+  };
+
   return (
     <Form
+      id="contact-form"
       onSubmit={(e) => {
         // Preprocess form data before sending
         e.preventDefault();
@@ -64,7 +71,7 @@ export default function ContactForm() {
         ref={recaptchaRef}
         size="invisible"
         sitekey="6LcU2sUqAAAAAAcM7zmFEOzfbNjL1lsKZR7zDuTO"
-        onChange={(token) => console.log("reCAPTCHA token:", token)}
+        onChange={onReCAPTCHAChange}
       />
 
       <SubmitButton type="submit" disabled={state.submitting}>
