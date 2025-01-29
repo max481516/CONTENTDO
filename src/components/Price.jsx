@@ -16,6 +16,10 @@ const Title = styled.h2`
   margin-top: 8rem;
   padding: 0;
 
+  @media ${QUERIES.largeTabletAndDown} {
+    margin-top: 6rem;
+  }
+
   @media ${QUERIES.mobile} {
     margin: calc(46rem / 16) 0 calc(36rem / 16);
   }
@@ -91,6 +95,7 @@ const AnimatedPriceStyled = styled.h2`
   font-family: "Inter", sans-serif;
   text-align: center;
   display: flex;
+  margin-top: 1.5rem;
   justify-content: center;
   align-items: center;
   font-size: calc(100rem / 16);
@@ -100,6 +105,18 @@ const AnimatedPriceStyled = styled.h2`
 
   span {
     margin: 0 0.5rem;
+  }
+
+  @media ${QUERIES.laptopAndDown} {
+    font-size: calc(78rem / 16);
+  }
+
+  @media ${QUERIES.largeTabletAndDown} {
+    font-size: calc(68rem / 16);
+  }
+
+  @media ${QUERIES.tabletAndDown} {
+    font-size: calc(62rem / 16);
   }
 
   @media ${QUERIES.mobile} {

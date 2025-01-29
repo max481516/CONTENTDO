@@ -42,11 +42,6 @@ const GlobalStyles = createGlobalStyle`
   width: 100%;
 }
 
-//HIDE RECAPTCHA BADGE
-/* .grecaptcha-badge {
-  visibility: hidden;
-} */
-
 //CSS RESET
   *,
 *::before,
@@ -185,9 +180,12 @@ body {
   font-family: "Manrope", serif;
   font-optical-sizing: auto;
   font-weight: 500;
+  letter-spacing: -2%;
   font-style: normal;
   background-color: var(--color-background);
 }
+
+
 
 
 `;

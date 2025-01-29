@@ -15,8 +15,8 @@ export default function Info() {
       </Card>
       <Card>
         <Text>
-          Все просто, мы подходим к каждому клиенту <br /> и заданию
-          индивидуально, <br /> мы не делаем все по шаблонам.
+          Все просто, мы подходим к каждому клиенту и заданию индивидуально, мы
+          не делаем все по шаблонам.
         </Text>
         <Number>01</Number>
       </Card>
@@ -51,14 +51,18 @@ const Cards = styled.div`
   display: grid;
   justify-content: center;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: minmax(175px, auto);
+  grid-auto-rows: minmax(190px, auto);
   grid-gap: 1rem;
   overflow-wrap: break-word;
+
+  @media ${QUERIES.largeTabletAndDown} {
+    margin: 3rem 1rem 0;
+  }
 
   @media ${QUERIES.mobile} {
     margin: calc(24rem / 16);
     grid-template-columns: 45vw 45vw;
-    grid-auto-rows: 200px 200px 100px;
+    grid-auto-rows: 150px 150px 100px;
   }
 `;
 
@@ -137,6 +141,10 @@ const Text = styled.p`
   overflow-wrap: break-word;
   word-wrap: break-word;
   white-space: normal;
+
+  @media ${QUERIES.largeTabletAndDown} {
+    font-size: calc(16rem / 16);
+  }
 
   @media ${QUERIES.mobile} {
     font-size: calc(12rem / 16);

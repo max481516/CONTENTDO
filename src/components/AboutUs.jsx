@@ -20,13 +20,15 @@ export default function AboutUs() {
         системы мультимедиа для любого жанра, будь то корпоративное событие,
         свадьба, театральный спектакль, выставка или концерт.
       </Paragraph>
-      <DecorationContainer>
-        <DecorativeText>
-          <AboutUsText />
-        </DecorativeText>
-        {/* <StyledSmoke src={smoke} /> */}
-        <StyledSmoke />
-      </DecorationContainer>
+      <DecorativeContainer>
+        <RelativeContainer>
+          <DecorativeText>
+            <AboutUsText />
+          </DecorativeText>
+          {/* <StyledSmoke src={smoke} /> */}
+          <StyledSmoke />
+        </RelativeContainer>
+      </DecorativeContainer>
       <Paragraph>
         {" "}
         <Space></Space>Мы предлагаем
@@ -73,23 +75,14 @@ const Paragraph = styled.p`
   color: var(--color-body-primary);
   margin-bottom: calc(86rem / 16);
 
+  @media ${QUERIES.tabletAndDown} {
+    font-size: calc(17rem / 16);
+    margin-bottom: calc(66rem / 16);
+  }
+
   @media ${QUERIES.mobile} {
     font-size: calc(14rem / 16);
     margin-bottom: 1.5rem;
-  }
-
-  &:nth-of-type(1) {
-    margin-bottom: -24rem;
-    @media ${QUERIES.mobile} {
-      margin-bottom: -2rem;
-    }
-  }
-
-  &:nth-of-type(2) {
-    margin-top: -20rem;
-    @media ${QUERIES.mobile} {
-      margin-top: -2rem;
-    }
   }
 `;
 
@@ -109,7 +102,7 @@ const FirstWords = styled.span`
 const Space = styled.span`
   margin-left: 34rem;
 
-  @media ${QUERIES.mobile} {
+  @media ${QUERIES.tabletAndDown} {
     margin-left: 0;
   }
 `;
@@ -122,13 +115,37 @@ const ColoredWords2 = styled.span`
   color: var(--color-details-secondary);
 `;
 
-const DecorationContainer = styled.div`
+const DecorativeContainer = styled.div`
+  margin-top: -34rem;
+  margin-bottom: -24rem;
+
+  @media ${QUERIES.laptopAndDown} {
+    margin-top: -22rem;
+    margin-bottom: -16rem;
+  }
+
+  @media ${QUERIES.largeTabletAndDown} {
+    margin-top: -8rem;
+    margin-bottom: -4rem;
+  }
+
+  @media ${QUERIES.mobile} {
+    margin-top: -4rem;
+    margin-bottom: -2rem;
+  }
+`;
+
+const RelativeContainer = styled.div`
   margin: 0 -3rem;
   display: block;
   width: 100vw;
   height: auto;
   object-fit: cover;
   position: relative;
+
+  @media ${QUERIES.tabletAndDown} {
+    margin: 0 -2rem;
+  }
 
   @media ${QUERIES.mobile} {
     margin: 0 -1rem;
@@ -142,8 +159,8 @@ const DecorativeText = styled.div`
   transform: translate(-50%, -50%) scale(1.5);
   z-index: 2;
 
-  @media ${QUERIES.mobile} {
-    transform: translate(-50%, -50%) scale(1);
+  @media ${QUERIES.tabletAndDown} {
+    transform: translate(-50%, -50%) scale(1.3);
   }
 `;
 

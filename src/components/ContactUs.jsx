@@ -44,6 +44,10 @@ const InfoText = styled.p`
   margin-top: calc(42rem / 16);
   text-align: center;
 
+  @media ${QUERIES.largeTabletAndDown} {
+    max-width: 80%;
+  }
+
   @media ${QUERIES.mobile} {
     max-width: 100%;
     font-size: calc(12rem / 16);

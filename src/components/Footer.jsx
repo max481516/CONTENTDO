@@ -83,7 +83,7 @@ const FooterContainer = styled.footer`
   flex-direction: column;
   justify-content: center;
   margin-top: 4rem;
-  padding-bottom: 4rem;
+  padding-bottom: 3rem;
 
   @media ${QUERIES.mobile} {
     flex-direction: row;
@@ -149,6 +149,7 @@ const Socials = styled.div`
   @media ${QUERIES.mobile} {
     margin-left: 2rem;
     margin-top: 0;
+    gap: 3rem;
   }
 `;
 

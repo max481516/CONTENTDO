@@ -36,7 +36,7 @@ const HeroContainer = styled.section`
   align-items: stretch;
   padding: 0 2rem 0;
 
-  @media ${QUERIES.mobile} {
+  @media ${QUERIES.largeTabletAndDown} {
     margin: 0;
     width: 100%;
     padding: 0;
@@ -51,6 +51,10 @@ const Title = styled.h1`
   margin-bottom: 1rem;
   grid-column: 1 / 3;
   grid-row: 1 / 2;
+
+  @media ${QUERIES.laptopAndDown} {
+    font-size: calc(76rem / 16);
+  }
 
   @media ${QUERIES.mobile} {
     font-size: calc(39rem / 16);

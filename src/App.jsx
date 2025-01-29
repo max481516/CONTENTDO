@@ -29,6 +29,14 @@ function App() {
 const Main = styled.main`
   padding: 0 3rem;
 
+  @media ${QUERIES.largeTabletAndDown} {
+    padding: 0 2.5rem;
+  }
+
+  @media ${QUERIES.tabletAndDown} {
+    padding: 0 2rem;
+  }
+
   @media ${QUERIES.mobile} {
     padding: 0 1rem;
   }
