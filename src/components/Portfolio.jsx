@@ -35,9 +35,10 @@ export default function Portfolio() {
               prevEl: ".swiper-button-prev",
             }}
             modules={[Navigation, EffectCoverflow]}
-            threshold={60}
-            touchRatio={1.5}
+            threshold={30}
+            touchRatio={1}
             resistance={false}
+            freeMode={true}
           >
             <SwiperSlide>
               <VideoSlide
@@ -298,9 +299,9 @@ const Video = styled.video`
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 10px;
 
   @media ${QUERIES.mobile} {
+    border-radius: 10px;
     height: 300px;
   }
 `;
