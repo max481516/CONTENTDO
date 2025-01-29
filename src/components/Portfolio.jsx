@@ -25,7 +25,7 @@ export default function Portfolio() {
             spaceBetween={-200}
             coverflowEffect={{
               rotate: 0,
-              stretch: -200, // or slightly less negative than -200 spaceBetween
+              stretch: -200,
               depth: 30,
               modifier: 1,
               slideShadows: false,
@@ -43,6 +43,7 @@ export default function Portfolio() {
             <SwiperSlide>
               <VideoSlide
                 src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1734536816/video2_c8fe03.mp4"
+                poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_0,w_1920,h_1080,c_thumb,g_auto/v1734536816/video2_c8fe03.jpg"
                 title="Nemo enim ipsam"
                 description="Nemo enim ipsam voluptatem quia voluptas sit"
               />
@@ -51,6 +52,7 @@ export default function Portfolio() {
             <SwiperSlide>
               <VideoSlide
                 src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1734536756/video1_niv0lb.mp4"
+                poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_0,w_1920,h_1072,c_thumb/v1734536756/video1_niv0lb.jpg"
                 title="Nemo enim ipsam"
                 description="Nemo enim ipsam voluptatem quia voluptas sit"
               />
@@ -59,6 +61,7 @@ export default function Portfolio() {
             <SwiperSlide>
               <VideoSlide
                 src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1734536756/video3_sbde3r.mov"
+                poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_0,w_1920,h_1072,c_thumb,g_auto/v1734536756/video3_sbde3r.jpg"
                 title="Nemo enim ipsam"
                 description="Nemo enim ipsam voluptatem quia voluptas sit"
               />
@@ -67,6 +70,7 @@ export default function Portfolio() {
             <SwiperSlide>
               <VideoSlide
                 src="https://res.cloudinary.com/dqs3mkxnr/video/upload/f_auto,q_auto/v1734536763/video4_j2hftg.mp4"
+                poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_0,w_1920,h_1072,c_thumb,g_auto/v1734536763/video4_j2hftg.jpg"
                 title="Nemo enim ipsam"
                 description="Nemo enim ipsam voluptatem quia voluptas sit"
               />
@@ -78,7 +82,7 @@ export default function Portfolio() {
   );
 }
 
-function VideoSlide({ src, title, description }) {
+function VideoSlide({ src, poster, title, description }) {
   const [showOverlay, setShowOverlay] = useState(true);
   const videoRef = useRef(null);
 
@@ -115,6 +119,7 @@ function VideoSlide({ src, title, description }) {
           playsInline
           muted
           preload="metadata"
+          poster={poster}
           onEnded={handleVideoEnded}
           onPause={handleVideoPaused}
         >

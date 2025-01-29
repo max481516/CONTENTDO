@@ -42,6 +42,7 @@ const HeaderLogoContainer = styled.div`
   line-height: 1;
 
   @media ${QUERIES.mobile} {
+    left: 0;
     bottom: -2.5rem;
     padding: 0 1rem;
   }
