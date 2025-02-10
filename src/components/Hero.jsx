@@ -36,7 +36,7 @@ const HeroContainer = styled.section`
   align-items: stretch;
   padding: 0 2rem 0;
 
-  @media ${QUERIES.largeTabltAndDown} {
+  @media ${QUERIES.largeTabletAndDown} {
     margin: 0;
     width: 100%;
     padding: 0;
