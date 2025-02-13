@@ -61,7 +61,7 @@ export default function AboutUs() {
 
 const Title = styled.h2`
   ${titleStyles}
-  margin-top: 6rem;
+  margin-top: 4rem;
 
   @media ${QUERIES.mobile} {
     margin-top: calc(46rem / 16);

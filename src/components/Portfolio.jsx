@@ -329,6 +329,10 @@ const Description = styled.div`
   display: flex;
   justify-content: space-between;
 
+  .swiper-slide:not(.swiper-slide-active) & {
+    display: none;
+  }
+
   @media ${QUERIES.mobile} {
     flex-direction: column;
   }
