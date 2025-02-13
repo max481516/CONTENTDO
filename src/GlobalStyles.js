@@ -42,6 +42,9 @@ const GlobalStyles = createGlobalStyle`
   width: 100%;
 }
 
+
+
+
 //CSS RESET
   *,
 *::before,
@@ -173,8 +176,6 @@ form select {
 }
 
 //Global Styles
-
-
 body {
   color: var(--color-details-secondary);
   font-size: calc(19rem/16);

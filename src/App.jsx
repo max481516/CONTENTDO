@@ -8,20 +8,24 @@ import Portfolio from "./components/Portfolio";
 import Price from "./components/Price";
 import styled from "styled-components";
 import { QUERIES } from "./constants";
+import "overlayscrollbars/overlayscrollbars.css";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
 function App() {
   return (
     <>
-      <Header />
-      <Main>
-        <Hero />
-        <Portfolio />
-        <AboutUs />
-        <Price />
-        <Info />
-        <ContactUs />
-      </Main>
-      <Footer />
+      <OverlayScrollbarsComponent defer>
+        <Header />
+        <Main>
+          <Hero />
+          <Portfolio />
+          <AboutUs />
+          <Price />
+          <Info />
+          <ContactUs />
+        </Main>
+        <Footer />
+      </OverlayScrollbarsComponent>
     </>
   );
 }
