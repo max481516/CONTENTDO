@@ -7,6 +7,8 @@ import { IoMdPlay } from "react-icons/io";
 import { titleStyles, QUERIES } from "../constants";
 
 export default function Portfolio() {
+  const isMobile = window.innerWidth <= 550;
+
   return (
     <PortfolioWrapper>
       <Title id="Portfolio">НАШИ ПРОЕКТЫ</Title>
@@ -16,20 +18,24 @@ export default function Portfolio() {
 
         <CarouselContainer>
           <Swiper
-            effect="coverflow"
+            effect={isMobile ? "slide" : "coverflow"}
             centeredSlides={true}
             initialSlide={0}
-            slidesPerView={2}
+            slidesPerView={isMobile ? 1.35 : 2}
             loopedSlides={4}
             loop={true}
-            spaceBetween={-200}
-            coverflowEffect={{
-              rotate: 0,
-              stretch: -200,
-              depth: 30,
-              modifier: 1,
-              slideShadows: false,
-            }}
+            spaceBetween={isMobile ? -15 : -200}
+            coverflowEffect={
+              isMobile
+                ? undefined
+                : {
+                    rotate: 0,
+                    stretch: -200,
+                    depth: 30,
+                    modifier: 1,
+                    slideShadows: false,
+                  }
+            }
             navigation={{
               nextEl: ".swiper-button-next",
               prevEl: ".swiper-button-prev",
@@ -146,7 +152,6 @@ function VideoSlide({ src, poster, title, description }) {
 
 const SlideInner = styled.div`
   position: relative;
-  transition: transform 0.3s ease;
   background: transparent;
 
   //SHADOWS
@@ -251,6 +256,10 @@ const Title = styled.h2`
 const RelativeWrapper = styled.div`
   position: relative;
 
+  @media ${QUERIES.mobile} {
+    margin: 0 -16px;
+  }
+
   .swiper-button-prev,
   .swiper-button-next {
     position: absolute;
@@ -291,10 +300,15 @@ const CarouselContainer = styled.div`
     transition: transform 0.3s ease;
     filter: brightness(0.5);
     background: transparent;
+
+    @media ${QUERIES.mobile} {
+      filter: brightness(0.4);
+    }
   }
 
   .swiper-slide-active ${SlideInner} {
     /* transform: scale(1.1); */
+
     transition: transform 0.3s ease;
   }
 `;
