@@ -25,7 +25,11 @@ function App() {
 
   return (
     <>
-      <OverlayScrollbarsComponent options={options} defer>
+      <OverlayScrollbarsComponent
+        options={options}
+        className="os-theme-dark"
+        defer
+      >
         <Header />
         <Main>
           <Hero />
