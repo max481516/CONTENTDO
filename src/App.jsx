@@ -8,13 +8,24 @@ import Portfolio from "./components/Portfolio";
 import Price from "./components/Price";
 import styled from "styled-components";
 import { QUERIES } from "./constants";
-import "overlayscrollbars/overlayscrollbars.css";
+
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
 function App() {
+  const options = {
+    scrollbars: {
+      visibility: "auto",
+      autoHide: "leave",
+      autoHideDelay: 500,
+      dragScroll: true,
+      clickScroll: true,
+      touchSupport: true,
+    },
+  };
+
   return (
     <>
-      <OverlayScrollbarsComponent defer>
+      <OverlayScrollbarsComponent options={options} defer>
         <Header />
         <Main>
           <Hero />

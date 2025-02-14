@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import "overlayscrollbars/overlayscrollbars.css";
 
 const GlobalStyles = createGlobalStyle`
 //COLOR VARIABLES
