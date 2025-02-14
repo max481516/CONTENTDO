@@ -1,3 +1,9 @@
+import { useEffect } from "react";
+import {
+  OverlayScrollbarsComponent,
+  useOverlayScrollbars,
+} from "overlayscrollbars-react";
+import "overlayscrollbars/styles/overlayscrollbars.css"; // Use this path if needed
 import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import Footer from "./components/Footer";
@@ -9,25 +15,39 @@ import Price from "./components/Price";
 import styled from "styled-components";
 import { QUERIES } from "./constants";
 
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-
 function App() {
-  const options = {
-    scrollbars: {
-      visibility: "auto",
-      autoHide: "leave",
-      autoHideDelay: 500,
-      dragScroll: true,
-      clickScroll: true,
-      touchSupport: true,
+  // Initialize OS on the body element
+  const [initBodyOS] = useOverlayScrollbars({
+    options: {
+      scrollbars: {
+        autoHide: "scroll",
+        clickScroll: true,
+        theme: "os-theme-light", // Choose your theme here
+      },
     },
-  };
+    defer: true,
+    events: {
+      initialized: () => console.log("OverlayScrollbars initialized on body"),
+    },
+  });
+
+  useEffect(() => {
+    // Pass the body element as the target for OS initialization
+    initBodyOS(document.body);
+  }, [initBodyOS]);
 
   return (
     <>
+      {/* Optionally, you can also wrap your main content in an OS component */}
       <OverlayScrollbarsComponent
-        options={options}
-        className="os-theme-dark"
+        options={{
+          scrollbars: {
+            autoHide: "scroll",
+            clickScroll: true,
+            theme: "os-theme-light",
+          },
+        }}
+        className="os-theme-light"
         defer
       >
         <Header />
@@ -47,15 +67,12 @@ function App() {
 
 const Main = styled.main`
   padding: 0 3rem;
-
   @media ${QUERIES.largeTabletAndDown} {
     padding: 0 2.5rem;
   }
-
   @media ${QUERIES.tabletAndDown} {
     padding: 0 2rem;
   }
-
   @media ${QUERIES.mobile} {
     padding: 0 1rem;
   }

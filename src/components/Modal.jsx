@@ -56,6 +56,7 @@ export default function Modal({ isOpen, modalType, onClose }) {
         <ScrollableFormContainer>{renderContent()}</ScrollableFormContainer>
       </ModalContainer>
     </Overlay>,
+
     document.getElementById("modal-root")
   );
 }
