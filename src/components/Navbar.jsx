@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa6";
 import { IoCloseOutline } from "react-icons/io5";
-import Logo from "../assets/logo.svg?react";
+import Logo from "../assets/LogoSmall.svg?react";
 import { QUERIES } from "../constants.js";
 
 function Navbar() {
@@ -87,14 +87,16 @@ const NavbarContainer = styled.nav`
 
 const LogoContainer = styled.a`
   height: auto;
-  width: 198px;
+  width: 100px;
   font-size: 1.5rem;
   font-weight: bold;
   color: white;
   text-decoration: none;
+  padding-top: 16px;
 
   @media ${QUERIES.mobile} {
-    width: 150px;
+    width: 80px;
+    padding-top: 8px;
   }
 `;
 

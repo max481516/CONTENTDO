@@ -5,11 +5,29 @@ import OrderForm from "./OrderForm";
 import { useEffect, useRef } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { QUERIES } from "../constants";
+import { useOverlayScrollbars } from "overlayscrollbars-react";
+import "overlayscrollbars/styles/overlayscrollbars.css";
 
 export default function Modal({ isOpen, modalType, onClose }) {
   // Ref to store the scroll position
   const scrollRef = useRef(0);
-  // To lock scrolling when modal is open
+
+  // Initialize OverlayScrollbars for the scrollable container
+  const [initFormOS] = useOverlayScrollbars({
+    options: {
+      scrollbars: {
+        autoHide: "scroll",
+        clickScroll: true,
+        theme: "os-theme-light",
+      },
+    },
+    defer: true,
+    events: {
+      initialized: () =>
+        console.log("OverlayScrollbars initialized on form container"),
+    },
+  });
+
   useEffect(() => {
     if (isOpen) {
       // Capture the scroll position
@@ -19,6 +37,11 @@ export default function Modal({ isOpen, modalType, onClose }) {
       document.body.style.position = "fixed";
       document.body.style.top = `-${scrollRef.current}px`;
       document.body.style.width = "100%";
+
+      const formContainer = document.querySelector("#modal-form-container");
+      if (formContainer) {
+        initFormOS(formContainer);
+      }
     } else {
       // If modal is closing, remove the fixed position and restore scroll
       document.body.style.position = "";
@@ -32,7 +55,7 @@ export default function Modal({ isOpen, modalType, onClose }) {
         behavior: "instant",
       });
     }
-  }, [isOpen]);
+  }, [isOpen, initFormOS]);
 
   if (!isOpen) return null;
 
@@ -53,10 +76,11 @@ export default function Modal({ isOpen, modalType, onClose }) {
         <CloseButton onClick={onClose}>
           <IoCloseOutline />
         </CloseButton>
-        <ScrollableFormContainer>{renderContent()}</ScrollableFormContainer>
+        <ScrollableFormContainer id="modal-form-container">
+          {renderContent()}
+        </ScrollableFormContainer>
       </ModalContainer>
     </Overlay>,
-
     document.getElementById("modal-root")
   );
 }

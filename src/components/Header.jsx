@@ -1,6 +1,6 @@
 import Navbar from "./Navbar";
 import styled from "styled-components";
-import HeaderLogo from "../assets/HeaderLogo.svg?react";
+import HeaderLogo from "../assets/logo.svg?react";
 import { QUERIES } from "../constants";
 
 export default function Header() {
@@ -32,12 +32,14 @@ export default function Header() {
 
 const HeaderContainer = styled.header`
   position: relative;
-  height: 70dvh;
+  height: 65dvh;
 `;
 
 const HeaderLogoContainer = styled.div`
   position: absolute;
+  padding-bottom: 8px;
   bottom: 0;
+  width: 75%;
   left: 3rem;
   line-height: 1;
 
@@ -49,7 +51,7 @@ const HeaderLogoContainer = styled.div`
 `;
 
 const StyledHeaderLogo = styled(HeaderLogo)`
-  color: var(--color-body-primary);
+  color: var(--color-details-secondary);
 `;
 
 const VideoContainer = styled.div`
