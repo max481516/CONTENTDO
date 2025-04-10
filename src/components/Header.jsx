@@ -35,7 +35,7 @@ const HeaderContainer = styled.header`
   height: 65dvh;
 
   @media ${QUERIES.mobile} {
-    height: 30dvh;
+    height: 35dvh;
   }
 
   @media (max-width: 358px) {
