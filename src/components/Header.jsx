@@ -43,12 +43,12 @@ const HeaderLogoContainer = styled.div`
   position: absolute;
   padding-bottom: 8px;
   bottom: 0;
-  width: 65%;
+  width: 55%;
   left: 3rem;
   line-height: 1;
 
   @media ${QUERIES.mobile} {
-    width: 90%;
+    width: 82%;
     left: 50%;
     transform: translateX(-50%);
   }
@@ -72,7 +72,7 @@ const VideoContainer = styled.div`
 const BackgroundVideoElement = styled.video`
   width: 100%;
   height: 100%;
-  /* object-fit: cover; */
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
