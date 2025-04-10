@@ -4,6 +4,10 @@ import { FaBars } from "react-icons/fa6";
 import { IoCloseOutline } from "react-icons/io5";
 import Logo from "../assets/LogoSmall.svg?react";
 import { QUERIES } from "../constants.js";
+import VK from "../assets/VK.svg?react";
+import Insta from "../assets/Insta.svg?react";
+import YT from "../assets/YT.svg?react";
+import TikTok from "../assets/TikTok.svg?react";
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -47,21 +51,65 @@ function Navbar() {
         {isMobileMenuOpen ? <StyledIoCloseOutline size={45} /> : <FaBars />}
       </MenuToggle>
       <NavLinks isMobileMenuOpen={isMobileMenuOpen} isClosing={isClosing}>
-        <NavLink>
-          <a href="#AboutUs" onClick={handleLinkClick}>
-            О нас
-          </a>
-        </NavLink>
-        <NavLink>
-          <a href="#Pricing" onClick={handleLinkClick}>
-            Стоимость
-          </a>
-        </NavLink>
-        <NavLink>
-          <a href="#Contacts" onClick={handleLinkClick}>
-            Контакты
-          </a>
-        </NavLink>
+        <NavLinksCenterWrapper>
+          <NavLink>
+            <a href="#AboutUs" onClick={handleLinkClick}>
+              О нас
+            </a>
+          </NavLink>
+          <NavLink>
+            <a href="#Pricing" onClick={handleLinkClick}>
+              Стоимость
+            </a>
+          </NavLink>
+          <NavLink>
+            <a href="#Contacts" onClick={handleLinkClick}>
+              Контакты
+            </a>
+          </NavLink>
+        </NavLinksCenterWrapper>
+        <SocialLinksContainer>
+          <SocialItem>
+            <SocialLink
+              href="https://m.vk.com/contentdo"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="ВКонтакте"
+            >
+              <VK />
+            </SocialLink>
+          </SocialItem>
+          <SocialItem>
+            <SocialLink
+              href="https://www.instagram.com/content_do"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <Insta />
+            </SocialLink>
+          </SocialItem>
+          <SocialItem>
+            <SocialLink
+              href="https://www.youtube.com/@SkillQuant"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+            >
+              <YT />
+            </SocialLink>
+          </SocialItem>
+          <SocialItem>
+            <SocialLink
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok"
+            >
+              <TikTok />
+            </SocialLink>
+          </SocialItem>
+        </SocialLinksContainer>
       </NavLinks>
     </NavbarContainer>
   );
@@ -124,10 +172,22 @@ const StyledIoCloseOutline = styled(IoCloseOutline)`
   margin: -4px -4px 0 0;
 `;
 
-const NavLinks = styled.ul`
+const NavLinksCenterWrapper = styled.div`
   display: flex;
-  list-style: none;
   gap: 1.5rem;
+  @media ${QUERIES.tabletAndDown} {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Takes up available space */
+    gap: 3rem;
+    margin-top: 64px; /* Compensates for navbar height */
+  }
+`;
+
+const NavLinks = styled.ul`
+  list-style: none;
+
   margin: 0;
   padding: 0;
 
@@ -135,10 +195,9 @@ const NavLinks = styled.ul`
     display: ${({ isMobileMenuOpen, isClosing }) =>
       isMobileMenuOpen || isClosing ? "flex" : "none"};
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
-    margin-top: -64px;
     gap: 3rem;
     top: 0;
     left: 0;
@@ -173,6 +232,24 @@ const NavLink = styled.li`
       text-transform: uppercase;
     }
   }
+`;
+
+const SocialLinksContainer = styled.div`
+  display: none;
+  @media ${QUERIES.tabletAndDown} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 6rem;
+    margin-top: auto;
+  }
+`;
+
+const SocialItem = styled.div``;
+
+const SocialLink = styled.a`
+  color: var(--color-details-secondary);
 `;
 
 export default Navbar;
