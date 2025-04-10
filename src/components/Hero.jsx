@@ -56,6 +56,10 @@ const Title = styled.h1`
     font-size: calc(76rem / 16);
   }
 
+  @media ${QUERIES.largeTabletAndDown} {
+    font-size: calc(60rem / 16);
+  }
+
   @media ${QUERIES.tabletAndDown} {
     font-size: calc(48rem / 16);
   }
