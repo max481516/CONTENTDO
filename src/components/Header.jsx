@@ -33,25 +33,30 @@ export default function Header() {
 const HeaderContainer = styled.header`
   position: relative;
   height: 65dvh;
+
+  @media ${QUERIES.mobile} {
+    height: 30dvh;
+  }
 `;
 
 const HeaderLogoContainer = styled.div`
   position: absolute;
   padding-bottom: 8px;
   bottom: 0;
-  width: 75%;
+  width: 65%;
   left: 3rem;
   line-height: 1;
 
   @media ${QUERIES.mobile} {
-    left: 0;
-    bottom: -2.5rem;
-    padding: 0 1rem;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `;
 
 const StyledHeaderLogo = styled(HeaderLogo)`
   color: var(--color-details-secondary);
+  height: 100%;
 `;
 
 const VideoContainer = styled.div`
@@ -67,9 +72,13 @@ const VideoContainer = styled.div`
 const BackgroundVideoElement = styled.video`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* object-fit: cover; */
   position: absolute;
   top: 0;
   left: 0;
   transform: scale(1.35);
+
+  @media ${QUERIES.mobile} {
+    transform: scale(1);
+  }
 `;
