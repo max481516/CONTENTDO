@@ -70,7 +70,7 @@ export default function Footer() {
             </SocialItem>
           </SocialItems>
           <FooterCopyright>
-            © 2023 – ContentDo – все права защищены
+            © 2025 – ContentDo – все права защищены
           </FooterCopyright>
         </Socials>
       </MobileVersionContainer>

@@ -37,6 +37,10 @@ const HeaderContainer = styled.header`
   @media ${QUERIES.mobile} {
     height: 30dvh;
   }
+
+  @media (max-width: 358px) {
+    height: 45dvh;
+  }
 `;
 
 const HeaderLogoContainer = styled.div`
