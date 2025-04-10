@@ -65,8 +65,7 @@ const Title = styled.h1`
   }
 
   @media ${QUERIES.mobile} {
-    font-size: calc(39rem / 16);
-    text-align: start;
+    font-size: calc(36rem / 16);
   }
 
   @media (max-width: 358px) {
