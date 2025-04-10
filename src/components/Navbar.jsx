@@ -141,16 +141,19 @@ const NavLinks = styled.ul`
     margin-top: -64px;
     gap: 3rem;
     top: 0;
-    right: 0;
+    left: 0;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(20px);
     padding: 1rem;
-    width: 100%;
-    height: ${({ dynamicHeight }) => dynamicHeight || "100dvh"};
-
+    width: 100dvw;
+    height: 100vh;
+    min-height: -webkit-fill-available;
+    transform-origin: top right;
     animation: ${({ isClosing }) =>
-      isClosing ? "fadeOut 0.4s forwards ease" : "fadeIn 0.4s forwards ease"};
+      isClosing
+        ? "fadeOut 0.3s forwards ease-out"
+        : "fadeIn 0.3s forwards ease-out"};
   }
 `;
 

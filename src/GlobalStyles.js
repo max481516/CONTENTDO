@@ -17,23 +17,26 @@ const GlobalStyles = createGlobalStyle`
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translate(20px, -20px) scale(0.95);
+    transform-origin: top right;
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(0, 0) scale(1);
+    transform-origin: top right;
   }
 }
-
 
 @keyframes fadeOut {
   from {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(0, 0) scale(1);
+    transform-origin: top right;
   }
   to {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translate(20px, -20px) scale(0.95);
+    transform-origin: top right;
   }
 }
 
