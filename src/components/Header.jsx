@@ -44,19 +44,27 @@ const HeaderLogoContainer = styled.div`
   padding-bottom: 8px;
   bottom: 0;
   width: 55%;
-  left: 3rem;
+  left: calc(3px * 16);
   line-height: 1;
 
   @media ${QUERIES.mobile} {
-    width: 82%;
-    left: 50%;
-    transform: translateX(-50%);
+    width: auto; /* Remove percentage-based width */
+    left: 16px; /* Align to the right */
   }
 `;
 
 const StyledHeaderLogo = styled(HeaderLogo)`
   color: var(--color-details-secondary);
   height: 100%;
+
+  @media ${QUERIES.mobile} {
+    height: 39px; /* Exact match for 39px (39rem/16) */
+    width: fit-content;
+  }
+
+  @media (max-width: 358px) {
+    height: calc(34rem / 16);
+  }
 `;
 
 const VideoContainer = styled.div`
@@ -77,8 +85,4 @@ const BackgroundVideoElement = styled.video`
   top: 0;
   left: 0;
   transform: scale(1.35);
-
-  @media ${QUERIES.mobile} {
-    transform: scale(1);
-  }
 `;
