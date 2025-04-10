@@ -147,7 +147,7 @@ const NavLinks = styled.ul`
     -webkit-backdrop-filter: blur(20px);
     padding: 1rem;
     width: 100%;
-    height: ${({ dynamicHeight }) => dynamicHeight || "100vh"};
+    height: ${({ dynamicHeight }) => dynamicHeight || "100dvh"};
 
     animation: ${({ isClosing }) =>
       isClosing ? "fadeOut 0.4s forwards ease" : "fadeIn 0.4s forwards ease"};
