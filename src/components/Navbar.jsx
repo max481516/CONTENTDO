@@ -4,10 +4,7 @@ import { FaBars } from "react-icons/fa6";
 import { IoCloseOutline } from "react-icons/io5";
 import Logo from "../assets/LogoSmall.svg?react";
 import { QUERIES } from "../constants.js";
-import VK from "../assets/VK.svg?react";
-import Insta from "../assets/Insta.svg?react";
-import YT from "../assets/YT.svg?react";
-import TikTok from "../assets/TikTok.svg?react";
+import SocialIcons from "./SocialIcons.jsx";
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -68,48 +65,7 @@ function Navbar() {
             </a>
           </NavLink>
         </NavLinksCenterWrapper>
-        <SocialLinksContainer>
-          <SocialItem>
-            <SocialLink
-              href="https://m.vk.com/contentdo"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="ВКонтакте"
-            >
-              <VK />
-            </SocialLink>
-          </SocialItem>
-          <SocialItem>
-            <SocialLink
-              href="https://www.instagram.com/content_do"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
-              <Insta />
-            </SocialLink>
-          </SocialItem>
-          <SocialItem>
-            <SocialLink
-              href="https://www.youtube.com/@SkillQuant"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-            >
-              <YT />
-            </SocialLink>
-          </SocialItem>
-          <SocialItem>
-            <SocialLink
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="TikTok"
-            >
-              <TikTok />
-            </SocialLink>
-          </SocialItem>
-        </SocialLinksContainer>
+        <NavSocialIcons />
       </NavLinks>
     </NavbarContainer>
   );
@@ -234,22 +190,19 @@ const NavLink = styled.li`
   }
 `;
 
-const SocialLinksContainer = styled.div`
-  display: none;
-  @media ${QUERIES.tabletAndDown} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    padding-bottom: 6rem;
-    margin-top: auto;
+const NavSocialIcons = styled(SocialIcons)`
+  div {
+    display: none;
+    @media ${QUERIES.tabletAndDown} {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 7rem;
+    }
+
+    @media ${QUERIES.mobile} {
+      padding-bottom: 5rem;
+    }
   }
-`;
-
-const SocialItem = styled.div``;
-
-const SocialLink = styled.a`
-  color: var(--color-details-secondary);
 `;
 
 export default Navbar;

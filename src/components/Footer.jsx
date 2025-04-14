@@ -1,9 +1,6 @@
 import styled from "styled-components";
-import VK from "../assets/VK.svg?react";
-import Insta from "../assets/Insta.svg?react";
-import YT from "../assets/YT.svg?react";
-import TikTok from "../assets/TikTok.svg?react";
 import { QUERIES } from "../constants";
+import SocialIcons from "./SocialIcons";
 
 export default function Footer() {
   return (
@@ -27,48 +24,7 @@ export default function Footer() {
 
       <MobileVersionContainer>
         <Socials>
-          <SocialItems>
-            <SocialItem>
-              <SocialLink
-                href="https://m.vk.com/contentdo"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="ВКонтакте"
-              >
-                <VK />
-              </SocialLink>
-            </SocialItem>
-            <SocialItem>
-              <SocialLink
-                href="https://www.instagram.com/content_do"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                <Insta />
-              </SocialLink>
-            </SocialItem>
-            <SocialItem>
-              <SocialLink
-                href="https://www.youtube.com/@SkillQuant"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-              >
-                <YT />
-              </SocialLink>
-            </SocialItem>
-            <SocialItem>
-              <SocialLink
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TikTok"
-              >
-                <TikTok />
-              </SocialLink>
-            </SocialItem>
-          </SocialItems>
+          <SocialIcons />
           <FooterCopyright>
             © 2025 – ContentDo – все права защищены
           </FooterCopyright>
@@ -150,30 +106,6 @@ const Socials = styled.div`
     margin-left: 2rem;
     margin-top: 0;
     gap: 3rem;
-  }
-`;
-
-const SocialItems = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4rem;
-  flex-wrap: wrap;
-
-  @media ${QUERIES.mobile} {
-    gap: 1rem;
-    width: 80%;
-  }
-`;
-
-const SocialItem = styled.div``;
-
-const SocialLink = styled.a`
-  color: var(--color-body-primary);
-
-  &:hover {
-    color: var(--color-details-primary);
-    transition: color 0.3s ease;
   }
 `;
 

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { titleStyles, QUERIES } from "../constants.js";
 import AboutUsText from "../assets/AboutUsText.svg?react";
 import Smoke from "../assets/Smoke.svg?react";
+import YT from "../assets/logo.svg?react";
 
 export default function AboutUs() {
   return (
