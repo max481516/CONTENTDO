@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { buttonStyles, QUERIES } from "../constants";
 import { useModal } from "../hooks/useModal";
 import Modal from "./Modal";
+import arrow from "../assets/arrow.svg";
 
 export default function Hero() {
   const { isOpen, modalType, openModal, closeModal } = useModal();
@@ -11,14 +12,21 @@ export default function Hero() {
         <FirstWord>делаем </FirstWord>контент!
       </Title>
       <Description>
-        Мы предлагаем широкий спектр услуг, начиная от разработки концепции
-        видео и написания сценария по вашим требованиям и пожеланиям, до
-        создания полноценной кинематографической работы, клипа, рекламы.
+        <List>
+          <li>
+            {""}
+            {""}Рекламные ролики для брендов{" "}
+          </li>
+          <li>Музыкальные клипы и трейлеры </li>
+          <li>Разработка и постановка экшн сцен</li>
+          <li>Постпродакшн: монтаж, графика, звук</li>
+          <li>Съёмка событий (концерты, танцы, спортивные мероприятия)</li>
+        </List>
       </Description>
       <SubDescription>
-        Команда состоит из действующих - режиссеров, экшн операторов,
+        Наша команда состоит из действующих - режиссеров, экшн операторов,
         звукорежиссеров, монтажеров, дизайнеров и других профессионалов,
-        обладающих богатым опытом работы в сфере видеопроизводства.{" "}
+        обладающих богатым опытом работы в сфере видеопроизводства.
       </SubDescription>
       <Button onClick={() => openModal("order")}>ЗАКАЗАТЬ ПРОЕКТ</Button>
       <Modal isOpen={isOpen} modalType={modalType} onClose={closeModal} />
@@ -92,8 +100,13 @@ const Description = styled.p`
   }
 `;
 
+const List = styled.ul`
+  list-style: url(${arrow}) inside;
+  padding: 0;
+`;
+
 const SubDescription = styled.p`
-  font-size: calc(16rem / 16);
+  font-size: calc(18rem / 16);
   color: var(--color-body-secondary);
   grid-column: 2 / 3;
   grid-row: 2 / 3;

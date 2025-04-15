@@ -2,24 +2,20 @@ import styled from "styled-components";
 import { titleStyles, QUERIES } from "../constants.js";
 import AboutUsText from "../assets/AboutUsText.svg?react";
 import Smoke from "../assets/Smoke.svg?react";
-import YT from "../assets/logo.svg?react";
 
 export default function AboutUs() {
   return (
-    <>
+    <Wrapper>
       <Title id="AboutUs">О НАС</Title>
       <Paragraph>
         {" "}
-        <FirstWords>Наша компания </FirstWords>это профессиональный{" "}
-        <ColoredWords>видеопроизводственный продакшн</ColoredWords>, который
-        предоставляет полный цикл услуг в создании качественных видео-контента.
-        Мы создаем и производим мультимедийные проекты
-        <ColoredWords> любой сложности</ColoredWords> для наших клиентов. Мы
-        также предоставляем услуги в области аудио-визуального оборудования и
-        технической поддержки на мероприятиях. Мы можем обеспечить
-        профессиональное <ColoredWords>освещение, аудиозапись</ColoredWords> и
-        системы мультимедиа для любого жанра, будь то корпоративное событие,
-        свадьба, театральный спектакль, выставка или концерт.
+        <FirstWords>Наша компания </FirstWords>это сообщество людей , которые{" "}
+        <ColoredWords>по-настоящему</ColoredWords> любят и умеют делать видео.
+        Для нас это не просто работа — это способ говорить, вдохновлять,
+        рассказывать истории и создавать что-то настоящее. Берём на себя{" "}
+        <ColoredWords> полный цикл</ColoredWords> продакшна: разработку идеи,
+        написание сценария, съёмку, монтаж, цветокоррекцию, графику, визуальные
+        эффекты и звуковое оформление.
       </Paragraph>
       <DecorativeContainer>
         <RelativeContainer>
@@ -32,7 +28,13 @@ export default function AboutUs() {
       </DecorativeContainer>
       <Paragraph>
         {" "}
-        <Space></Space>Мы предлагаем
+        <Space></Space>Мы занимаемся <ColoredWords>Съемкой</ColoredWords> экшна,{" "}
+        <ColoredWords>постановкой</ColoredWords> трюковых сцен и сценических
+        боёв: Для сложных сцен мы заранее создаём превизы (снимаем визуальные
+        раскадровки), приглашаем каскадеров и актеров, постановщика трюков, экшн
+        оператора, чтобы продумать динамику, ритм и точную хореографию, для
+        всех.
+        {/*    Мы предлагаем
         <ColoredWords> широкий спектр услуг</ColoredWords>, начиная от
         разработки концепции видео и написания сценария по вашим требованиям и
         пожеланиям, до создания полноценной кинематографической работы - от
@@ -42,7 +44,7 @@ export default function AboutUs() {
           {" "}
           съемку, редактирование, цветокоррекцию, создание спецэффектов и
           звуковое оформление.
-        </ColoredWords2>
+        </ColoredWords2> */}
       </Paragraph>
       <Paragraph>
         Мы верим, что качественное видео - это важный инструмент для любого
@@ -56,9 +58,11 @@ export default function AboutUs() {
         Обращайтесь к нам, и мы <ColoredWords> готовы</ColoredWords> заняться
         реализацией вашей идеи <ColoredWords> уже сегодня.</ColoredWords>
       </Conclusion>
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.section``;
 
 const Title = styled.h2`
   ${titleStyles}

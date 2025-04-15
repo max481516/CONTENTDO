@@ -243,6 +243,11 @@ const PlayButton = styled.button`
 
 const PortfolioWrapper = styled.div`
   margin-top: calc(96rem / 16);
+  padding: 0 116px;
+
+  @media ${QUERIES.largeTabletAndDown} {
+    padding: 0;
+  }
 
   @media ${QUERIES.mobile} {
     margin-top: calc(48rem / 16);
