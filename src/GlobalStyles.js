@@ -193,11 +193,7 @@ body {
 }
 
 
-ul.hero-list {
-    list-style: url("data:image/svg+xml,%3Csvg width='24' height='16' viewBox='0 0 24 16' fill='%231C84D4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16 0V12.8584H15.999L15.9992 12.8586L12.8605 16.0002L8.28223 11.3844L4.67694 15.826H0V11.375H8.27295L0.131794 3.167L3.27051 0.0253906L11.5692 8.39224V0H16Z' fill='%231C84D4'/%3E%3C/svg%3E%0A") inside;
-    padding-left: 0;
-    margin: 0;
-  }
+
 
 
 
