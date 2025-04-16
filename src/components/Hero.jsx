@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { buttonStyles, QUERIES } from "../constants";
 import { useModal } from "../hooks/useModal";
 import Modal from "./Modal";
-import arrow from "../assets/arrow.svg";
 
 export default function Hero() {
   const { isOpen, modalType, openModal, closeModal } = useModal();
@@ -12,7 +11,7 @@ export default function Hero() {
         <FirstWord>делаем </FirstWord>контент!
       </Title>
       <Description>
-        <List>
+        <ul className="hero-list">
           <li>
             {""}
             {""}Рекламные ролики для брендов{" "}
@@ -21,7 +20,7 @@ export default function Hero() {
           <li>Разработка и постановка экшн сцен</li>
           <li>Постпродакшн: монтаж, графика, звук</li>
           <li>Съёмка событий (концерты, танцы, спортивные мероприятия)</li>
-        </List>
+        </ul>
       </Description>
       <SubDescription>
         Наша команда состоит из действующих - режиссеров, экшн операторов,
@@ -98,11 +97,6 @@ const Description = styled.p`
     grid-row: 2 / 3;
     text-align: start;
   }
-`;
-
-const List = styled.ul`
-  list-style: url(${arrow}) inside;
-  padding: 0;
 `;
 
 const SubDescription = styled.p`
