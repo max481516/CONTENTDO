@@ -34,25 +34,14 @@ export default function AboutUs() {
         раскадровки), приглашаем каскадеров и актеров, постановщика трюков, экшн
         оператора, чтобы продумать динамику, ритм и точную хореографию, для
         всех.
-        {/*    Мы предлагаем
-        <ColoredWords> широкий спектр услуг</ColoredWords>, начиная от
-        разработки концепции видео и написания сценария по вашим требованиям и
-        пожеланиям, до создания полноценной кинематографической работы - от
-        короткометражного фильма до полнометражного кино. Мы заботимся о каждой
-        детали работы по производству видео материалов, включая
-        <ColoredWords2>
-          {" "}
-          съемку, редактирование, цветокоррекцию, создание спецэффектов и
-          звуковое оформление.
-        </ColoredWords2> */}
       </Paragraph>
       <Paragraph>
         Мы верим, что качественное видео - это важный инструмент для любого
         бизнеса в нынешней цифровой эпохе. Мы стараемся создавать{" "}
         <ColoredWords> уникальный контент</ColoredWords>, который вызывает
-        интерес и вдохновение. Мы готовы создать для вас презентацию полного
-        цикла работы кино, чтобы вы смогли оценить наши профессиональные навыки
-        в создании качественного видео-контента.{" "}
+        интерес и вдохновение. Нам важен не только{" "}
+        <ColoredWords>результат</ColoredWords>, но и безопасность, поэтому
+        уделяем внимание к каждой детали.{" "}
       </Paragraph>
       <Conclusion>
         Обращайтесь к нам, и мы <ColoredWords> готовы</ColoredWords> заняться
@@ -62,7 +51,12 @@ export default function AboutUs() {
   );
 }
 
-const Wrapper = styled.section``;
+const Wrapper = styled.section`
+  // reducing bottom margin for second Paragraph
+  & > p:nth-child(4) {
+    margin-bottom: calc(32rem / 16);
+  }
+`;
 
 const Title = styled.h2`
   ${titleStyles}
@@ -116,27 +110,22 @@ const ColoredWords = styled.span`
   color: var(--color-details-primary);
 `;
 
-const ColoredWords2 = styled.span`
-  color: var(--color-details-secondary);
-`;
-
 const DecorativeContainer = styled.div`
-  margin-top: -34rem;
-  margin-bottom: -24rem;
+  margin-top: -30%;
+  margin-bottom: -25%;
 
   @media ${QUERIES.laptopAndDown} {
-    margin-top: -22rem;
-    margin-bottom: -16rem;
+    margin-bottom: -20%;
   }
 
   @media ${QUERIES.largeTabletAndDown} {
-    margin-top: -8rem;
-    margin-bottom: -4rem;
+    margin-top: -25%;
+    margin-bottom: -15%;
   }
 
   @media ${QUERIES.mobile} {
-    margin-top: -4rem;
-    margin-bottom: -2rem;
+    margin-top: -15%;
+    margin-bottom: -5%;
   }
 `;
 

@@ -87,7 +87,7 @@ const FirstWord = styled.span`
 
 const Description = styled.p`
   text-align: end;
-  line-height: 1.5;
+  line-height: 1.7;
   margin: 0;
   grid-column: 1 / 2;
   grid-row: 2 / 4;
