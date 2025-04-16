@@ -195,7 +195,8 @@ body {
 
 
 ul.hero-list {
-    list-style: url(${arrow}) inside;
+    list-style: inside;
+    list-style: url(${arrow});
     padding-left: 0;
     margin: 0;
   }
