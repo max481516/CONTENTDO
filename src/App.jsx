@@ -9,7 +9,7 @@ import ContactUs from "./components/ContactUs";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Info from "./components/Info";
+import PriceInfo from "./components/PriceInfo";
 import Portfolio from "./components/Portfolio";
 import Price from "./components/Price";
 import styled from "styled-components";
@@ -56,7 +56,7 @@ function App() {
           <Portfolio />
           <AboutUs />
           <Price />
-          <Info />
+          <PriceInfo />
           <ContactUs />
         </Main>
         <Footer />

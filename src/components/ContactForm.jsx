@@ -47,6 +47,9 @@ export default function ContactForm() {
 
       <Label htmlFor="phone"></Label>
       <StyledPhoneInput
+        id="phone"
+        name="phone"
+        type="tel"
         placeholder="Телефон"
         defaultCountry="RU"
         value={phone}

@@ -157,6 +157,9 @@ export default function OrderForm() {
 
       <Label htmlFor="phone" />
       <StyledPhoneInput
+        id="phone"
+        name="phone"
+        type="tel"
         placeholder="Телефон"
         defaultCountry="RU"
         value={phone}

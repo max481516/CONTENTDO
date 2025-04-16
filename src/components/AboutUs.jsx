@@ -72,7 +72,12 @@ const Paragraph = styled.p`
   font-weight: 600;
   text-transform: uppercase;
   color: var(--color-body-primary);
-  margin-bottom: calc(86rem / 16);
+  margin: 0 auto calc(86rem / 16);
+  width: 90%;
+
+  @media ${QUERIES.largeTabletAndDown} {
+    width: 100%;
+  }
 
   @media ${QUERIES.tabletAndDown} {
     font-size: calc(17rem / 16);
@@ -121,6 +126,11 @@ const DecorativeContainer = styled.div`
   @media ${QUERIES.largeTabletAndDown} {
     margin-top: -25%;
     margin-bottom: -15%;
+  }
+
+  @media ${QUERIES.tabletAndDown} {
+    margin-top: -20%;
+    margin-bottom: -10%;
   }
 
   @media ${QUERIES.mobile} {
