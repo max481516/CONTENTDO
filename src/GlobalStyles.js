@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 import "overlayscrollbars/overlayscrollbars.css";
-import arrow from "/src/assets/arrow.svg";
 
 const GlobalStyles = createGlobalStyle`
 //COLOR VARIABLES
@@ -195,8 +194,7 @@ body {
 
 
 ul.hero-list {
-    
-    list-style: url(${arrow});
+    list-style: url("../public/arrow.svg") inside;
     padding-left: 0;
     margin: 0;
   }
