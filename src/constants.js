@@ -34,6 +34,10 @@ const buttonStyles = css`
     background-color: var(--color-details-primary);
     color: var(--color-details-secondary);
   }
+
+  @media ${QUERIES.mobile} {
+    padding: 0.8rem 2em;
+  }
 `;
 
 const titleStyles = css`
@@ -48,12 +52,13 @@ const titleStyles = css`
 `;
 
 const inputStyles = css`
-  padding: 0.8rem;
+  padding: 0.6rem;
   border: 1px solid #444;
   border-radius: 4px;
   background: #222;
   color: white;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
 
   &:focus {
     background-color: #333;
@@ -62,7 +67,7 @@ const inputStyles = css`
   @media ${QUERIES.mobile} {
     padding: 0.5rem;
     font-size: 1rem;
-    margin-bottom: 0;
+    margin-bottom: 0.8rem;
   }
 
   @media (max-width: 358px) {

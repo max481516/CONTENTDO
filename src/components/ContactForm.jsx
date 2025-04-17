@@ -40,17 +40,23 @@ export default function ContactForm() {
     >
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
 
-      <Label htmlFor="name"></Label>
-      <Input id="name" type="text" name="name" placeholder="Имя" required />
+      <Label htmlFor="name">Имя</Label>
+      <Input
+        id="name"
+        type="text"
+        name="name"
+        placeholder="Введите ваше имя"
+        required
+      />
 
       <ValidationError prefix="Name" field="name" errors={state.errors} />
 
-      <Label htmlFor="phone"></Label>
+      <Label htmlFor="phone">Телефон</Label>
       <StyledPhoneInput
         id="phone"
         name="phone"
         type="tel"
-        placeholder="Телефон"
+        international
         defaultCountry="RU"
         value={phone}
         onChange={setPhone}
@@ -77,17 +83,13 @@ export default function ContactForm() {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-
-  @media (max-width: 358px) {
-    gap: 0.8rem;
-  }
+  gap: 0;
 `;
 
 const Title = styled.h2`
-  color: white;
+  color: var(--color-body-primary);
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 
   @media ${QUERIES.mobile} {
@@ -101,7 +103,18 @@ const Title = styled.h2`
 `;
 
 const Label = styled.label`
-  display: none;
+  display: flex;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--color-body-primary);
+
+  @media ${QUERIES.mobile} {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 358px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Input = styled.input`
@@ -150,6 +163,8 @@ const StyledPhoneInput = styled(PhoneInput)`
 const SubmitButton = styled.button`
   ${buttonStyles}
   border-radius: 5px;
+  padding: 0.7rem 2rem;
+  margin-top: 0.2rem;
 
   @media ${QUERIES.mobile} {
     font-size: 1rem;
@@ -157,16 +172,16 @@ const SubmitButton = styled.button`
   }
 
   @media (max-width: 358px) {
-    font-size: 0.8rem;
-    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
   }
 `;
 
 const ContactMessage = styled.p`
-  color: white;
+  color: var(--color-body-primary);
   text-align: center;
-  font-size: 1rem;
-  margin-top: 1rem;
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
 
   @media ${QUERIES.mobile} {
     font-size: 0.8rem;

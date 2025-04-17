@@ -241,7 +241,7 @@ const Form = styled.form`
 `;
 
 const Title = styled.h2`
-  color: white;
+  color: var(--color-body-primary);
   text-align: center;
   font-size: 2rem;
   margin-bottom: 1rem;

@@ -26,20 +26,17 @@ export default function ContactIcons() {
 const ContactIconsContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 6rem;
-  margin-top: 1rem;
-
-  @media ${QUERIES.mobile} {
-    gap: 3rem;
-  }
+  gap: 3rem;
+  margin-top: 1.2rem;
 
   @media (max-width: 358px) {
     gap: 2rem;
+    margin-top: 0.7lrem;
   }
 
   svg {
-    width: 55px;
-    height: 55px;
+    width: 38px;
+    height: 38px;
 
     @media ${QUERIES.mobile} {
       width: 35px;
@@ -47,8 +44,8 @@ const ContactIconsContainer = styled.div`
     }
 
     @media (max-width: 358px) {
-      width: 30px;
-      height: 30px;
+      width: 25px;
+      height: 25px;
     }
   }
 `;
@@ -59,9 +56,17 @@ const Contact = styled.a`
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  color: var(--color-body-primary);
+
+  &:hover {
+    color: var(--color-details-primary);
+    transition: color 0.3s ease;
+  }
 `;
 
 const IconLegend = styled.p`
+  font-size: 0.9rem;
+
   @media ${QUERIES.mobile} {
     font-size: 0.8rem;
   }

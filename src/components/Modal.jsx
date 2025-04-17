@@ -101,9 +101,9 @@ const Overlay = styled.div`
 const ModalContainer = styled.div`
   position: relative;
   background: var(--color-details-tertiary);
-  padding: 62px 54px;
+  padding: 42px 54px;
   border-radius: 8px;
-  width: min(90vw, 700px);
+  width: min(90vw, 500px);
 
   @media ${QUERIES.mobile} {
     padding: 24px 32px;
