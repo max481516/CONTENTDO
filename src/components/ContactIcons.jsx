@@ -31,7 +31,7 @@ const ContactIconsContainer = styled.div`
 
   @media (max-width: 358px) {
     gap: 2rem;
-    margin-top: 0.7lrem;
+    margin-top: 0.7rem;
   }
 
   svg {

@@ -141,26 +141,32 @@ export default function OrderForm() {
     >
       <Title>Заказать проект</Title>
 
-      <Label htmlFor="name" />
-      <Input id="name" type="text" name="name" placeholder="Имя" required />
+      <Label htmlFor="name">Имя</Label>
+      <Input
+        id="name"
+        type="text"
+        name="name"
+        placeholder="Введите ваше имя"
+        required
+      />
       <ValidationError prefix="Name" field="name" errors={state.errors} />
 
-      <Label htmlFor="email" />
+      <Label htmlFor="email">Email</Label>
       <Input
         id="email"
         type="email"
         name="email"
-        placeholder="Email"
+        placeholder="Введите ваш Email"
         required
       />
       <ValidationError prefix="Email" field="email" errors={state.errors} />
 
-      <Label htmlFor="phone" />
+      <Label htmlFor="phone">Телефон</Label>
       <StyledPhoneInput
         id="phone"
         name="phone"
         type="tel"
-        placeholder="Телефон"
+        international
         defaultCountry="RU"
         value={phone}
         onChange={setPhone}
@@ -168,11 +174,11 @@ export default function OrderForm() {
       />
       <ValidationError prefix="Phone" field="phone" errors={state.errors} />
 
-      <Label htmlFor="description" />
+      <Label htmlFor="description">Описание проекта</Label>
       <TextArea
         id="description"
         name="description"
-        placeholder="Описание проекта"
+        placeholder="Расскажите про ваш проект"
       />
       <ValidationError
         prefix="Description"
@@ -182,10 +188,10 @@ export default function OrderForm() {
 
       {/* File attachment UI */}
       <FileInputContainer>
-        <Label htmlFor="fileInput">
+        <UploadLabel htmlFor="fileInput">
           <StyledAttachFileIcon />
           Прикрепить файл
-        </Label>
+        </UploadLabel>
         <HiddenFileInput
           id="fileInput"
           type="file"
@@ -233,11 +239,7 @@ export default function OrderForm() {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-
-  @media (max-width: 358px) {
-    gap: 0.8rem;
-  }
+  gap: 0;
 `;
 
 const Title = styled.h2`
@@ -258,8 +260,17 @@ const Title = styled.h2`
 `;
 
 const Label = styled.label`
-  display: none;
-  margin: 0;
+  font-size: 1.1rem;
+  color: var(--color-body-primary);
+  display: flex;
+  justify-content: center;
+  @media ${QUERIES.mobile} {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 358px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Input = styled.input`
@@ -333,24 +344,7 @@ const TextArea = styled.textarea`
 `;
 
 const FileInputContainer = styled.div`
-  display: flex;
-  align-items: center;
   font-size: 0.9rem;
-  color: white;
-
-  label {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--color-body-secondary);
-    text-decoration: underline;
-
-    &:hover {
-      color: var(--color-details-primary);
-    }
-  }
 
   @media ${QUERIES.mobile} {
     margin-bottom: 0;
@@ -363,9 +357,27 @@ const FileInputContainer = styled.div`
   }
 `;
 
+const UploadLabel = styled(Label)`
+  width: fit-content;
+  justify-content: flex-start;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-body-secondary);
+
+  text-decoration: underline;
+
+  &:hover {
+    color: var(--color-details-primary);
+  }
+`;
+
 const StyledAttachFileIcon = styled(AttachFileIcon)`
   width: 1rem;
   height: 1rem;
+  color: var(--color-body-primary);
 `;
 
 const HiddenFileInput = styled.input`
