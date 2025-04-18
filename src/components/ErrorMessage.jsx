@@ -31,11 +31,11 @@ const ErrorContainer = styled.div`
 const FailMessage = styled.p`
   color: var(--color-details-secondary);
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 800;
 
   @media ${QUERIES.mobile} {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   @media (max-width: 358px) {

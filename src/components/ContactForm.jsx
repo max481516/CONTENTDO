@@ -17,10 +17,18 @@ export default function ContactForm() {
   const sanitizeInput = (input) => DOMPurify.sanitize(input);
 
   if (state.succeeded) {
-    return <SuccessMessage />;
+    return (
+      <Form>
+        <SuccessMessage />
+      </Form>
+    );
   }
   if (state.errors) {
-    return <ErrorMessage />;
+    return (
+      <Form>
+        <ErrorMessage />
+      </Form>
+    );
   }
 
   return (

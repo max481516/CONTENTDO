@@ -35,10 +35,18 @@ export default function OrderForm() {
 
   // If formspree succeeded or errors
   if (state.succeeded) {
-    return <SuccessMessage />;
+    return (
+      <Form>
+        <SuccessMessage />
+      </Form>
+    );
   }
   if (state.errors) {
-    return <ErrorMessage />;
+    return (
+      <Form>
+        <ErrorMessage />
+      </Form>
+    );
   }
 
   const handleFileChange = async (e) => {
@@ -196,6 +204,7 @@ export default function OrderForm() {
           id="fileInput"
           type="file"
           multiple
+          accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           onChange={handleFileChange}
         />
       </FileInputContainer>

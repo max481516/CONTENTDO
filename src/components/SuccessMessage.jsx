@@ -8,7 +8,7 @@ export default function SuccessMessage() {
 }
 
 const SuccessMessageText = styled.p`
-  color: var(--color-details-secondary);
+  color: var(--color-body-primary);
   text-align: center;
   font-size: 1.5rem;
   font-weight: 800;

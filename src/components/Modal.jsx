@@ -9,11 +9,11 @@ import { useOverlayScrollbars } from "overlayscrollbars-react";
 import "overlayscrollbars/styles/overlayscrollbars.css";
 
 export default function Modal({ isOpen, modalType, onClose }) {
-  // Ref to store the scroll position
+  // keep your scroll‐lock ref
   const scrollRef = useRef(0);
 
-  // Initialize OverlayScrollbars for the scrollable container
-  const [initFormOS] = useOverlayScrollbars({
+  // 1) get the ref callback (and instance if you ever need it)
+  const [osRef /*, osInstance*/] = useOverlayScrollbars({
     options: {
       scrollbars: {
         autoHide: "scroll",
@@ -22,53 +22,36 @@ export default function Modal({ isOpen, modalType, onClose }) {
       },
     },
     defer: true,
+    // you can keep your init log here
     events: {
       initialized: () =>
         console.log("OverlayScrollbars initialized on form container"),
     },
   });
 
+  // 2) just handle body‐lock in effect
   useEffect(() => {
     if (isOpen) {
-      // Capture the scroll position
       scrollRef.current = window.scrollY;
-
-      // Lock body scroll
       document.body.style.position = "fixed";
       document.body.style.top = `-${scrollRef.current}px`;
       document.body.style.width = "100%";
-
-      const formContainer = document.querySelector("#modal-form-container");
-      if (formContainer) {
-        initFormOS(formContainer);
-      }
     } else {
-      // If modal is closing, remove the fixed position and restore scroll
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
-
-      // Return user to where they were scrolled
-      window.scrollTo({
-        top: scrollRef.current,
-        left: 0,
-        behavior: "instant",
-      });
+      window.scrollTo({ top: scrollRef.current, left: 0, behavior: "instant" });
     }
-  }, [isOpen, initFormOS]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
-  const renderContent = () => {
-    switch (modalType) {
-      case "contact":
-        return <ContactForm />;
-      case "order":
-        return <OrderForm />;
-      default:
-        return null;
-    }
-  };
+  const renderContent = () =>
+    modalType === "contact" ? (
+      <ContactForm />
+    ) : modalType === "order" ? (
+      <OrderForm />
+    ) : null;
 
   return ReactDOM.createPortal(
     <Overlay onClick={onClose}>
@@ -76,7 +59,8 @@ export default function Modal({ isOpen, modalType, onClose }) {
         <CloseButton onClick={onClose}>
           <IoCloseOutline />
         </CloseButton>
-        <ScrollableFormContainer id="modal-form-container">
+        {/* 3) attach the scrollbar ref here */}
+        <ScrollableFormContainer ref={osRef}>
           {renderContent()}
         </ScrollableFormContainer>
       </ModalContainer>
@@ -104,7 +88,6 @@ const ModalContainer = styled.div`
   padding: 42px 54px;
   border-radius: 8px;
   width: min(90vw, 500px);
-  height: auto;
 
   @media ${QUERIES.mobile} {
     padding: 24px 32px;
