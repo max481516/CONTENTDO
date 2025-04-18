@@ -104,6 +104,7 @@ const ModalContainer = styled.div`
   padding: 42px 54px;
   border-radius: 8px;
   width: min(90vw, 500px);
+  height: auto;
 
   @media ${QUERIES.mobile} {
     padding: 24px 32px;

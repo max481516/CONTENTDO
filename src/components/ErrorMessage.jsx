@@ -17,10 +17,10 @@ const ErrorContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 
   @media ${QUERIES.mobile} {
-    gap: 1rem;
+    gap: 1.2rem;
   }
 
   @media (max-width: 358px) {

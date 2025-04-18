@@ -264,8 +264,9 @@ const Label = styled.label`
   color: var(--color-body-primary);
   display: flex;
   justify-content: center;
+
   @media ${QUERIES.mobile} {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   @media (max-width: 358px) {
@@ -275,6 +276,11 @@ const Label = styled.label`
 
 const Input = styled.input`
   ${inputStyles}
+  font-size: 1rem;
+
+  @media ${QUERIES.mobile} {
+    font-size: 0.85rem;
+  }
 `;
 
 const StyledPhoneInput = styled(PhoneInput)`
@@ -317,6 +323,7 @@ const StyledPhoneInput = styled(PhoneInput)`
 `;
 
 const TextArea = styled.textarea`
+  font-size: 1rem;
   padding: 0.8rem;
   margin-bottom: -0.5rem;
   border: 1px solid #444;
@@ -331,9 +338,9 @@ const TextArea = styled.textarea`
   }
 
   @media ${QUERIES.mobile} {
+    font-size: 0.9rem;
     resize: none;
     padding: 0.5rem;
-    font-size: 1rem;
     margin-bottom: 0;
   }
 
@@ -345,6 +352,7 @@ const TextArea = styled.textarea`
 
 const FileInputContainer = styled.div`
   font-size: 0.9rem;
+  margin-top: 0.7rem;
 
   @media ${QUERIES.mobile} {
     margin-bottom: 0;
@@ -387,10 +395,14 @@ const HiddenFileInput = styled.input`
 const FileList = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0.8rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  @media ${QUERIES.mobile} {
+    margin-bottom: 0.3rem;
+  }
 `;
 
 const FileItem = styled.li`
@@ -406,7 +418,7 @@ const FileItem = styled.li`
 
 const FileName = styled.span`
   color: white;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   flex-grow: 1;
 
   @media ${QUERIES.mobile} {
@@ -434,15 +446,17 @@ const RemoveButton = styled.button`
 const SubmitButton = styled.button`
   ${buttonStyles}
   border-radius: 5px;
+  padding: 0.7rem 2rem;
+  margin-top: 0.2rem;
 
   @media ${QUERIES.mobile} {
     font-size: 1rem;
-    padding: 0.7rem 1rem;
+    padding: 0.5rem 1rem;
+    margin-top: 0;
   }
 
   @media (max-width: 358px) {
-    font-size: 0.7rem;
-    padding: 0.4rem 0.7rem;
-    margin-top: -1.2rem;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
   }
 `;
