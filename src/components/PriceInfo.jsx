@@ -7,7 +7,7 @@ export default function PriceInfo() {
     <Cards>
       <Card>
         <Text>
-          Почему мы <br /> не можем сразу сказать точную стоимость?
+          Почему мы <br /> не можем сразу назвать точную стоимость?
         </Text>
         <Decoration>
           <Union />
@@ -22,21 +22,24 @@ export default function PriceInfo() {
       <Card>
         <Text>
           {" "}
-          Стоимость зависит только от ваших пожеланий и вашего бюджета.
+          Мы ориентируемся на ваши идеи и финансовые возможности, чтобы
+          предложить наилучшее решение.
         </Text>
         <Number>02</Number>
       </Card>
       <Card>
         <Text>
           {" "}
-          От сложности съёмки (локации, актёры, реквизит, техника). От объёма
-          постпродакшна. От сроков и сценария
+          На стоимость влияют следующие факторы: <br />
+          - сложность съёмки (локации, актёры, реквизит, техника) <br />
+          - объём постпродакшна <br />
+          - сроки и сценарий <br />
         </Text>
         <Number>03</Number>
       </Card>
       <Card>
         <Text>
-          Все цены <br /> обговариваются отдельно.
+          Все цены <br /> обговариваются индивидуально.
         </Text>
       </Card>
     </Cards>
@@ -59,7 +62,7 @@ const Cards = styled.div`
   @media ${QUERIES.mobile} {
     margin: calc(24rem / 16);
     grid-template-columns: 45vw 45vw;
-    grid-auto-rows: 150px 150px 100px;
+    grid-auto-rows: 150px 170px 80px;
   }
 `;
 
@@ -74,6 +77,7 @@ const Card = styled.div`
   &:nth-child(1) {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
+    color: var(--color-details-secondary);
     background-color: var(--color-details-tertiary);
 
     @media ${QUERIES.mobile} {
@@ -107,10 +111,12 @@ const Card = styled.div`
     @media ${QUERIES.mobile} {
       grid-column: 2 / 3;
       grid-row: 2 / 4;
+      justify-content: center;
     }
   }
 
   &:nth-child(5) {
+    color: var(--color-details-secondary);
     grid-column: 3 / 4;
     grid-row: 2 / 3;
     display: flex;
@@ -143,8 +149,16 @@ const Text = styled.p`
     font-size: calc(16rem / 16);
   }
 
+  @media ${QUERIES.tabletAndDown} {
+    font-size: calc(15rem / 16);
+  }
+
   @media ${QUERIES.mobile} {
     font-size: calc(12rem / 16);
+  }
+
+  @media (max-width: 358px) {
+    font-size: calc(11rem / 16);
   }
 `;
 

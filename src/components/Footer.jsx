@@ -83,7 +83,7 @@ const FooterLink = styled.a`
   }
 
   @media ${QUERIES.mobile} {
-    font-size: calc(12rem / 16);
+    font-size: calc(14rem / 16);
   }
 `;
 
