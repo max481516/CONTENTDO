@@ -10,10 +10,12 @@ export default function ContactUs() {
     <Wrapper>
       <Title id="Contacts">Связаться с нами</Title>
       <InfoText>
-        Если у вас есть любые вопросы, или вы готовы начать с нами
-        сотрудничество, пишете нам как можно скорее. <br />
-        Мы будем рады на все ответить и предоставить вам самый лучший сервис,
-        сервис который достоин вас и вашего времени!
+        Если у вас есть вопросы или вы готовы начать сотрудничество с нами,
+        пожалуйста, свяжитесь с нами как можно скорее! <br />
+        Мы с радостью ответим на все ваши вопросы и предоставим вам лучший
+        сервис, который достоин вас и вашего времени. <br />
+        Если вы готовы заказать проект, воспользуйтесь кнопкой «Заказать проект»
+        в <OrderLink href="#Header">начале сайта.</OrderLink>
       </InfoText>
       <Button onClick={() => openModal("contact")}>Связаться!</Button>
       <Modal isOpen={isOpen} modalType={modalType} onClose={closeModal} />
@@ -50,7 +52,7 @@ const InfoText = styled.p`
 
   @media ${QUERIES.mobile} {
     max-width: 100%;
-    font-size: calc(12rem / 16);
+    font-size: calc(13rem / 16);
     margin-top: calc(24rem / 16);
   }
 `;
@@ -65,5 +67,16 @@ const Button = styled.button`
 
   @media ${QUERIES.mobile} {
     margin-top: calc(24rem / 16);
+  }
+`;
+
+const OrderLink = styled.a`
+  text-decoration: underline;
+  color: var(--color-body-primary);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-details-primary);
+    transition: color 0.2s ease-in-out;
   }
 `;
