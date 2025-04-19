@@ -182,7 +182,7 @@ form select {
 
 //Global Styles
 body {
-  color: var(--color-details-secondary);
+  color: var(--color-body-primary);
   font-size: calc(19rem/16);
   font-family: "Manrope", serif;
   font-optical-sizing: auto;

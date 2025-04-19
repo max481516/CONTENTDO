@@ -68,7 +68,9 @@ const FooterLinks = styled.ul`
   }
 `;
 
-const FooterLinkItem = styled.li``;
+const FooterLinkItem = styled.li`
+  color: var(--color-details-secondary);
+`;
 
 const FooterLink = styled.a`
   text-decoration: none;
@@ -105,7 +107,7 @@ const Socials = styled.div`
   @media ${QUERIES.mobile} {
     margin-left: 2rem;
     margin-top: 0;
-    gap: 3rem;
+    gap: 2rem;
   }
 `;
 

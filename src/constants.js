@@ -45,6 +45,7 @@ const titleStyles = css`
   font-size: calc(50rem / 16);
   padding: 0 0 2rem;
   text-transform: uppercase;
+  color: var(--color-details-secondary);
 
   @media ${QUERIES.mobile} {
     font-size: calc(30rem / 16);

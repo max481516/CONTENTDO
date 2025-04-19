@@ -191,6 +191,9 @@ const NavLink = styled.li`
 `;
 
 const NavSocialIcons = styled(SocialIcons)`
+  a {
+    color: var(--color-details-secondary);
+  }
   div {
     display: none;
     @media ${QUERIES.tabletAndDown} {

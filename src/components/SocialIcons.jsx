@@ -63,12 +63,16 @@ const SocialItems = styled.div`
     gap: 1rem;
     width: 80%;
   }
+
+  @media (max-width: 358px) {
+    width: 70%;
+  }
 `;
 
 const SocialItem = styled.div``;
 
 const SocialLink = styled.a`
-  color: var(--color-details-secondary);
+  color: var(--color-body-primary);
 
   &:hover {
     color: var(--color-details-primary);
