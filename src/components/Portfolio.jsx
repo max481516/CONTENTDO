@@ -21,10 +21,10 @@ export default function Portfolio() {
             effect={isMobile ? "slide" : "coverflow"}
             centeredSlides={true}
             initialSlide={0}
-            slidesPerView={isMobile ? 1.35 : 2}
+            slidesPerView={isMobile ? 1.15 : 2}
             loopedSlides={4}
             loop={true}
-            spaceBetween={isMobile ? -15 : -200}
+            spaceBetween={isMobile ? -25 : -200}
             coverflowEffect={
               isMobile
                 ? undefined
