@@ -10,7 +10,7 @@ export default function Header() {
         <StyledHeaderLogo />
       </HeaderLogoContainer>
       <VideoContainer>
-        {/*      <BackgroundVideoElement
+        <BackgroundVideoElement
           id="background-video"
           autoPlay
           muted
@@ -23,7 +23,7 @@ export default function Header() {
             type="video/mp4"
           />
           Your browser does not support HTML5 video.
-        </BackgroundVideoElement> */}
+        </BackgroundVideoElement>
       </VideoContainer>
       <Navbar />
     </HeaderContainer>

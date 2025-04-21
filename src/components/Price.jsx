@@ -31,7 +31,7 @@ function zeroPad(num, places) {
 }
 
 function AnimatedPrice() {
-  const [displayNumber, setDisplayNumber] = useState("00000");
+  const [displayNumber, setDisplayNumber] = useState("0000000");
   const [hasAnimated, setHasAnimated] = useState(false);
   const [finished, setFinished] = useState(false);
   // 'finished' to indicate we've switched to ????? or not
@@ -57,18 +57,18 @@ function AnimatedPrice() {
 
   function startAnimation() {
     let currentValue = 0;
-    const maxValue = 99999;
-    const step = 2222; // change step size to control speed
-    const intervalMs = 50; // update interval
+    const maxValue = 1000000;
+    const step = 4444; // change step size to control speed
+    const intervalMs = 40; // update interval
 
     const interval = setInterval(() => {
       currentValue += step;
       if (currentValue >= maxValue) {
         clearInterval(interval);
-        setDisplayNumber("99999");
+        setDisplayNumber("9999999");
         // Show "99999" briefly then switch to ?????
         setTimeout(() => {
-          setDisplayNumber("?????");
+          setDisplayNumber("???????");
           setFinished(true);
         }, 200);
       } else {
@@ -79,12 +79,7 @@ function AnimatedPrice() {
 
   return (
     <AnimatedPriceStyled ref={containerRef}>
-      {/* Static front text */}
-      от 300.000 ₽{/* The animated middle portion */}
-      {/* If we haven’t switched to ?????, show the currency sign, otherwise skip it */}
-      {/* Static trailing text: "до ??????" or you could show just "до ?" once finished */}{" "}
-      до <span> {displayNumber}</span>
-      {!finished && "₽"}
+      <span> {displayNumber}₽</span>
     </AnimatedPriceStyled>
   );
 }
@@ -107,23 +102,17 @@ const AnimatedPriceStyled = styled.h2`
     margin: 0 0.5rem;
   }
 
-  @media ${QUERIES.laptopAndDown} {
-    font-size: calc(78rem / 16);
-  }
+  font-size: calc(68rem / 16);
 
   @media ${QUERIES.largeTabletAndDown} {
-    font-size: calc(68rem / 16);
+    font-size: calc(56rem / 16);
   }
 
   @media ${QUERIES.tabletAndDown} {
-    font-size: calc(62rem / 16);
+    font-size: calc(52rem / 16);
   }
 
   @media ${QUERIES.mobile} {
-    font-size: calc(28rem / 16);
-  }
-
-  @media (max-width: 358px) {
-    font-size: calc(26rem / 16);
+    font-size: calc(42rem / 16);
   }
 `;

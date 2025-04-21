@@ -191,6 +191,8 @@ const NavLink = styled.li`
 `;
 
 const NavSocialIcons = styled(SocialIcons)`
+  flex-wrap: nowrap;
+
   a {
     color: var(--color-details-secondary);
   }
@@ -198,7 +200,6 @@ const NavSocialIcons = styled(SocialIcons)`
     display: none;
     @media ${QUERIES.tabletAndDown} {
       display: flex;
-      flex-wrap: nowrap;
       padding-bottom: 7rem;
     }
 

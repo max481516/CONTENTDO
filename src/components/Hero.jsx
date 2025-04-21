@@ -113,6 +113,7 @@ const SubDescription = styled.p`
   grid-row: 2 / 3;
   align-self: stretch; /* Matches height with left column */
   margin: 0; /* Removes default spacing */
+  margin-top: 3px;
 
   @media ${QUERIES.mobile} {
     grid-column: 1 / 3;
