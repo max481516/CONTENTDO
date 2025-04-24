@@ -11,7 +11,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import PriceInfo from "./components/PriceInfo";
 import Portfolio from "./components/Portfolio";
-import Price from "./components/Price";
+/* import Price from "./components/Price"; */
 import styled from "styled-components";
 import { QUERIES } from "./constants";
 
@@ -55,7 +55,7 @@ function App() {
           <Hero />
           <Portfolio />
           <AboutUs />
-          <Price />
+          {/* <Price /> */}
           <PriceInfo />
           <ContactUs />
         </Main>
