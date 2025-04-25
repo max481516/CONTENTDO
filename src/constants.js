@@ -41,6 +41,9 @@ const buttonStyles = css`
 `;
 
 const titleStyles = css`
+  font-family: "Sansation", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   text-align: center;
   font-size: calc(50rem / 16);
   padding: 0 0 2rem;

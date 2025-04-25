@@ -143,7 +143,9 @@ const NavLinksCenterWrapper = styled.div`
 
 const NavLinks = styled.ul`
   list-style: none;
-
+  font-family: "Sansation", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   margin: 0;
   padding: 0;
 
