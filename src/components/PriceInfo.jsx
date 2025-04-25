@@ -41,8 +41,8 @@ export default function PriceInfo() {
       </Card>
       <Card>
         <Text>
-          Готовы обсудить ваш проект?
-          <br /> Свяжитесь с нами!
+          Хотите картинку как в кино?
+          <br /> Обращайтесь!
         </Text>
       </Card>
     </Cards>
