@@ -268,6 +268,7 @@ const RelativeWrapper = styled.div`
   .swiper-button-prev,
   .swiper-button-next {
     position: absolute;
+    color: var(--color-details-primary);
     top: 50%;
     transform: translateY(-50%);
     width: 40px;
