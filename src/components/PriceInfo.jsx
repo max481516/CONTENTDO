@@ -7,7 +7,8 @@ export default function PriceInfo() {
     <Cards>
       <Card>
         <Text>
-          Почему мы <br /> не можем сразу назвать точную стоимость?
+          Стоимость видео <br /> определяется индивидуально — потому что каждый
+          проект уникален
         </Text>
         <Decoration>
           <Union />
@@ -15,7 +16,8 @@ export default function PriceInfo() {
       </Card>
       <Card>
         <Text>
-          Все просто, каждое видео уникально, мы не делаем все по шаблонам.
+          Мы не работаем по шаблонам — каждый ролик создаётся с нуля под ваши
+          задачи
         </Text>
         <Number>01</Number>
       </Card>
@@ -39,7 +41,8 @@ export default function PriceInfo() {
       </Card>
       <Card>
         <Text>
-          Все цены <br /> обговариваются индивидуально.
+          Готовы обсудить ваш проект?
+          <br /> Свяжитесь с нами!
         </Text>
       </Card>
     </Cards>
