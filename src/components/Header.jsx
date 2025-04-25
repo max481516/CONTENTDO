@@ -45,15 +45,15 @@ const HeaderContainer = styled.header`
 
 const HeaderLogoContainer = styled.div`
   position: absolute;
-  padding-bottom: 8px;
   bottom: 0;
   width: 55%;
   left: calc(3px * 16);
   line-height: 1;
 
   @media ${QUERIES.mobile} {
-    width: auto; /* Remove percentage-based width */
-    left: 16px; /* Align to the right */
+    width: 100%;
+    left: 0;
+    padding-left: 8px;
   }
 `;
 
@@ -62,8 +62,9 @@ const StyledHeaderLogo = styled(HeaderLogo)`
   height: 100%;
 
   @media ${QUERIES.mobile} {
-    height: 39px; /* Exact match for 39px (39rem/16) */
-    width: fit-content;
+    height: 39px;
+    width: auto;
+    max-width: 100%;
   }
 
   @media (max-width: 358px) {
