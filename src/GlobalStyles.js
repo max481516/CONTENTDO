@@ -184,9 +184,9 @@ form select {
 body {
   color: var(--color-body-primary);
   font-size: calc(19rem/16);
-  font-family: "Manrope", serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
+  font-family: "Sansation", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   letter-spacing: -2%;
   font-style: normal;
   background-color: var(--color-background);
