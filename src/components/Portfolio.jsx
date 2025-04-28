@@ -57,8 +57,8 @@ export default function Portfolio() {
 
             <SwiperSlide>
               <VideoSlide
-                src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1734536756/video1_niv0lb.mp4"
-                poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_0,w_1920,h_1072,c_thumb/v1734536756/video1_niv0lb.jpg"
+                src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1745824362/rap-1_mfgzqi.mp4"
+                poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_3,w_1920,h_1080,c_thumb,g_auto/v1745824362/rap-1_mfgzqi.jpg"
                 title="Nemo enim ipsam"
                 description="Nemo enim ipsam voluptatem quia voluptas sit"
               />
@@ -66,8 +66,8 @@ export default function Portfolio() {
 
             <SwiperSlide>
               <VideoSlide
-                src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1734536756/video3_sbde3r.mov"
-                poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_0,w_1920,h_1072,c_thumb,g_auto/v1734536756/video3_sbde3r.jpg"
+                src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1745824362/rap-2_lofvry.mp4"
+                poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_0,w_1920,h_1080,c_thumb,g_auto/v1745824362/rap-2_lofvry.jpg"
                 title="Nemo enim ipsam"
                 description="Nemo enim ipsam voluptatem quia voluptas sit"
               />
@@ -75,8 +75,8 @@ export default function Portfolio() {
 
             <SwiperSlide>
               <VideoSlide
-                src="https://res.cloudinary.com/dqs3mkxnr/video/upload/f_auto,q_auto/v1734536763/video4_j2hftg.mp4"
-                poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_0,w_1920,h_1072,c_thumb,g_auto/v1734536763/video4_j2hftg.jpg"
+                src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1745824368/shrink-1_ozswsu.mp4"
+                poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_8,w_1920,h_1080,c_thumb,g_auto/v1745824368/shrink-1_ozswsu.jpg"
                 title="Nemo enim ipsam"
                 description="Nemo enim ipsam voluptatem quia voluptas sit"
               />
@@ -114,6 +114,9 @@ function VideoSlide({ src, poster, title, description }) {
   };
 
   const handleVideoPaused = () => {
+    const video = videoRef.current;
+    // don’t reset overlay if the pause was due to scrubbing/seeking
+    if (video && video.seeking) return;
     resetToOverlay();
   };
 
@@ -132,6 +135,7 @@ function VideoSlide({ src, poster, title, description }) {
           <source src={src} type="video/mp4" />
           Your browser does not support HTML5 video.
         </Video>
+
         {showOverlay && (
           <Overlay>
             <ButtonCircle>
@@ -142,6 +146,7 @@ function VideoSlide({ src, poster, title, description }) {
           </Overlay>
         )}
       </VideoWrapper>
+
       <Description>
         <VideoTitle>{title}</VideoTitle>
         <VideoDescription>{description}</VideoDescription>

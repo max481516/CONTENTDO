@@ -6,7 +6,7 @@ const GlobalStyles = createGlobalStyle`
 :root {
   --color-body-primary: hsla(0, 0%, 71%, 1);
   --color-body-secondary: hsla(0, 0%, 33%, 1);
-  --color-details-primary: #319aaa ;
+  --color-details-primary: #08a4a7 ;
   --color-details-secondary: hsla(0, 0%, 95%, 1);
   --color-details-tertiary: hsla(0, 0%, 12%, 1);
   --color-background: hsla(0, 0%, 5%, 1);
@@ -37,6 +37,28 @@ const GlobalStyles = createGlobalStyle`
     opacity: 0;
     transform: translate(20px, -20px) scale(0.95);
     transform-origin: top right;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
   }
 }
 
