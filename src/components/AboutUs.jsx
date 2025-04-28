@@ -1,69 +1,87 @@
 import styled from "styled-components";
 import { titleStyles, QUERIES } from "../constants.js";
-import AboutUsText from "../assets/AboutUsText.svg?react";
-import Smoke from "../assets/Smoke.svg?react";
+import video from "../assets/BackgroundVideo.mp4";
 
 export default function AboutUs() {
   return (
     <Wrapper>
-      <Title id="AboutUs">О НАС</Title>
-      <Paragraph>
-        {" "}
-        <FirstWords>Наша компания </FirstWords>— это не просто студия, а
-        творческое пространство, где рождаются{" "}
-        <ColoredWords>яркие истории.</ColoredWords> Мы не просто снимаем и
-        монтируем — мы передаём <ColoredWords>эмоции,</ColoredWords> вовлекаем
-        зрителя и превращаем идеи в визуальные образы. От концепции до
-        финального рендера: сценарий, съёмка, постпродакшн, графика и звук —{" "}
-        <ColoredWords>всё под ключ,</ColoredWords> с искренней увлечённостью
-        процессом.
-      </Paragraph>
-      <DecorativeContainer>
-        <RelativeContainer>
-          <DecorativeText>
-            <AboutUsText />
-          </DecorativeText>
-          {/* <StyledSmoke src={smoke} /> */}
-          <StyledSmoke />
-        </RelativeContainer>
-      </DecorativeContainer>
-      <Paragraph>
-        {" "}
-        <Space></Space>
-        Наша <ColoredWords>специализация</ColoredWords> — экшен-съемка и{" "}
-        постановка трюков, но мы создаём видео
-        <ColoredWords> любого формата:</ColoredWords> от рекламы до кино. Для
-        сложных сцен заранее делаем превизы (визуальные раскадровки), привлекаем
-        каскадёров, постановщиков боёв и экшн-операторов, чтобы{" "}
-        <ColoredWords>продумать </ColoredWords>
-        динамику, хореографию и зрелищность. А ещё —{" "}
-        <ColoredWords>снимаем </ColoredWords> интервью, презентации, музыкальные
-        клипы и работаем с CGI. <ColoredWords>Главное для нас </ColoredWords> —
-        энергия кадра, будь то драка, диалог или рекламный ролик.
-      </Paragraph>
+      <VideoBackground autoPlay muted loop playsInline src={video} />
+      <ContentWrapper>
+        <Title id="AboutUs">О НАС</Title>
+        <Paragraph>
+          {" "}
+          <FirstWords>Наша компания </FirstWords>— это не просто студия, а
+          творческое пространство, где рождаются{" "}
+          <ColoredWords>яркие истории.</ColoredWords> Мы не просто снимаем и
+          монтируем — мы передаём <ColoredWords>эмоции,</ColoredWords> вовлекаем
+          зрителя и превращаем идеи в визуальные образы. От концепции до
+          финального рендера: сценарий, съёмка, постпродакшн, графика и звук —{" "}
+          <ColoredWords>всё под ключ,</ColoredWords> с искренней увлечённостью
+          процессом.
+        </Paragraph>
+        <Paragraph>
+          {" "}
+          <Space></Space>
+          Наша <ColoredWords>специализация</ColoredWords> — экшен-съемка и{" "}
+          постановка трюков, но мы создаём видео
+          <ColoredWords> любого формата:</ColoredWords> от рекламы до кино. Для
+          сложных сцен заранее делаем превизы (визуальные раскадровки),
+          привлекаем каскадёров, постановщиков боёв и экшн-операторов, чтобы{" "}
+          <ColoredWords>продумать </ColoredWords>
+          динамику, хореографию и зрелищность. А ещё —{" "}
+          <ColoredWords>снимаем </ColoredWords> интервью, презентации,
+          музыкальные клипы и работаем с CGI.{" "}
+          <ColoredWords>Главное для нас </ColoredWords> — энергия кадра, будь то
+          драка, диалог или рекламный ролик.
+        </Paragraph>
 
-      <Paragraph>
-        Мы верим, что качественное видео — это важный инструмент для любого
-        бизнеса в нынешнюю цифровую эпоху. Мы создаём{" "}
-        <ColoredWords>уникальный контент,</ColoredWords> который вызывает
-        интерес и вдохновляет. Нам важен не только результат, но и процесс,
-        поэтому мы уделяем внимание каждой детали, чтобы достичь того что вам
-        именно <ColoredWords>нужно.</ColoredWords>
-      </Paragraph>
+        <Paragraph>
+          Мы верим, что качественное видео — это важный инструмент для любого
+          бизнеса в нынешнюю цифровую эпоху. Мы создаём{" "}
+          <ColoredWords>уникальный контент,</ColoredWords> который вызывает
+          интерес и вдохновляет. Нам важен не только результат, но и процесс,
+          поэтому мы уделяем внимание каждой детали, чтобы достичь того что вам
+          именно <ColoredWords>нужно.</ColoredWords>
+        </Paragraph>
 
-      <Conclusion>
-        Обращайтесь к нам, и мы <ColoredWords> готовы</ColoredWords> заняться
-        реализацией вашей идеи <ColoredWords> уже сегодня.</ColoredWords>
-      </Conclusion>
+        <Conclusion>
+          Обращайтесь к нам, и мы <ColoredWords> готовы</ColoredWords> заняться
+          реализацией вашей идеи <ColoredWords> уже сегодня.</ColoredWords>
+        </Conclusion>
+      </ContentWrapper>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.section`
+  position: relative;
+  width: 100vw;
+  left: 50%; /* to cancel horizontal overflow */
+  margin-left: -50vw;
+  height: 100%;
+  overflow: hidden;
+`;
+
+const ContentWrapper = styled.div`
+  position: relative;
   // reducing bottom margin for second Paragraph
   & > p:nth-child(4) {
     margin-bottom: calc(32rem / 16);
   }
+`;
+
+const VideoBackground = styled.video`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.6;
 `;
 
 const Title = styled.h2`
@@ -80,7 +98,8 @@ const Paragraph = styled.p`
   font-weight: 600;
   text-transform: uppercase;
   color: var(--color-body-primary);
-  margin: 0 auto calc(86rem / 16);
+  margin: 0 auto calc(62rem / 16);
+
   width: 90%;
   line-height: 1.4;
 
@@ -90,12 +109,11 @@ const Paragraph = styled.p`
 
   @media ${QUERIES.tabletAndDown} {
     font-size: calc(17rem / 16);
-    margin-bottom: calc(66rem / 16);
+    padding: 0 1rem;
   }
 
   @media ${QUERIES.mobile} {
     font-size: calc(14rem / 16);
-    margin-bottom: 1.5rem;
   }
 `;
 
@@ -122,65 +140,6 @@ const Space = styled.span`
 
 const ColoredWords = styled.span`
   color: var(--color-details-primary);
-`;
-
-const DecorativeContainer = styled.div`
-  margin-top: -30%;
-  margin-bottom: -25%;
-
-  @media ${QUERIES.laptopAndDown} {
-    margin-bottom: -20%;
-  }
-
-  @media ${QUERIES.largeTabletAndDown} {
-    margin-top: -25%;
-    margin-bottom: -15%;
-  }
-
-  @media ${QUERIES.tabletAndDown} {
-    margin-top: -20%;
-    margin-bottom: -10%;
-  }
-
-  @media ${QUERIES.mobile} {
-    margin-top: -15%;
-    margin-bottom: -5%;
-  }
-`;
-
-const RelativeContainer = styled.div`
-  margin: 0 -3rem;
-  display: block;
-  width: 100vw;
-  height: auto;
-  object-fit: cover;
-  position: relative;
-
-  @media ${QUERIES.tabletAndDown} {
-    margin: 0 -2rem;
-  }
-
-  @media ${QUERIES.mobile} {
-    margin: 0 -1rem;
-  }
-`;
-
-const DecorativeText = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.5);
-  z-index: 2;
-
-  @media ${QUERIES.tabletAndDown} {
-    transform: translate(-50%, -50%) scale(1.3);
-  }
-`;
-
-const StyledSmoke = styled(Smoke)`
-  width: 100%;
-  height: auto;
-  object-fit: cover;
 `;
 
 const Conclusion = styled.p`
