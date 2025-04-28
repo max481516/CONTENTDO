@@ -206,11 +206,11 @@ form select {
 body {
   color: var(--color-body-primary);
   font-size: calc(19rem/16);
-  font-family: "Manrope", serif;
+  font-family: "Jura", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
-  letter-spacing: -2%;
   font-style: normal;
+  letter-spacing: -2%;
   background-color: var(--color-background);
 }
 

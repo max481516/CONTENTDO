@@ -143,9 +143,6 @@ const NavLinksCenterWrapper = styled.div`
 
 const NavLinks = styled.ul`
   list-style: none;
-  font-family: "Sansation", sans-serif;
-  font-weight: 400;
-  font-style: normal;
   margin: 0;
   padding: 0;
 
@@ -176,10 +173,12 @@ const NavLinks = styled.ul`
 
 const NavLink = styled.li`
   a {
+    font-weight: 700;
     color: white;
     text-decoration: none;
     font-size: 1.4rem;
     transition: color 0.3s ease;
+    text-transform: uppercase;
 
     &:hover {
       color: var(--color-details-primary);
@@ -187,7 +186,6 @@ const NavLink = styled.li`
 
     @media ${QUERIES.tabletAndDown} {
       font-size: 2rem;
-      text-transform: uppercase;
     }
   }
 `;
