@@ -140,6 +140,10 @@ const Card = styled.div`
 `;
 
 const Text = styled.p`
+  font-family: "Jura", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   padding: 0.9rem;
   text-align: start;
   font-size: calc(19rem / 16);

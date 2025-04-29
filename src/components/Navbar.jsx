@@ -173,6 +173,9 @@ const NavLinks = styled.ul`
 
 const NavLink = styled.li`
   a {
+    font-family: "Jura", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
     font-weight: 700;
     color: white;
     text-decoration: none;
