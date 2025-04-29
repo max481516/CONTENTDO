@@ -71,7 +71,7 @@ const Cards = styled.div`
 
 const Card = styled.div`
   position: relative;
-  border: 1px solid var(--color-details-tertiary);
+  border: 1px solid var(--color-body-primary);
   border-radius: 10px;
   display: flex;
   flex-direction: column;

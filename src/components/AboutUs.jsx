@@ -1,11 +1,33 @@
 import styled from "styled-components";
 import { titleStyles, QUERIES } from "../constants.js";
 import video from "../assets/BackgroundVideo.mp4";
+import mobileVideo from "../assets/BackgroundVideoMobile.mp4";
+import PriceInfo from "./PriceInfo.jsx";
+import { useEffect, useState } from "react";
 
 export default function AboutUs() {
+  const [src, setSrc] = useState(video);
+
+  useEffect(() => {
+    const mq = window.matchMedia(QUERIES.mobile);
+    const update = (e) => {
+      setSrc(e.matches ? mobileVideo : video);
+    };
+    update(mq); // set initial media query state
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   return (
     <Wrapper>
-      <VideoBackground autoPlay muted loop playsInline src={video} />
+      <VideoBackground
+        autoPlay
+        muted
+        loop
+        playsInline
+        src={src}
+        type="video/mp4"
+      ></VideoBackground>
       <ContentWrapper>
         <Title id="AboutUs">О НАС</Title>
         <Paragraph>
@@ -37,6 +59,7 @@ export default function AboutUs() {
           реализацией вашей идеи <ColoredWords> уже сегодня.</ColoredWords>
         </Conclusion>
       </ContentWrapper>
+      <PriceInfo />
     </Wrapper>
   );
 }
@@ -47,11 +70,13 @@ const Wrapper = styled.section`
   left: 50%; /* to cancel horizontal overflow */
   margin-left: -50vw;
   height: 100%;
-  overflow: hidden;
+  overflow-y: visible;
 `;
 
 const ContentWrapper = styled.div`
   position: relative;
+  height: 100%; /* fill the wrapper */
+  overflow-y: auto;
   // reducing bottom margin for second Paragraph
   & > p:nth-child(4) {
     margin-bottom: calc(32rem / 16);
@@ -70,6 +95,9 @@ const VideoBackground = styled.video`
   object-fit: cover;
   z-index: 0;
   opacity: 0.6;
+
+  @media ${QUERIES.mobile} {
+  }
 `;
 
 const Title = styled.h2`
@@ -141,4 +169,3 @@ const Conclusion = styled.p`
     padding: 0 1rem;
   }
 `;
-/* dqwy */
