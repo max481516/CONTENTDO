@@ -33,6 +33,7 @@ export default function ContactForm() {
 
   return (
     <Form
+      method="POST"
       onSubmit={(e) => {
         // Preprocess form data before sending
         e.preventDefault();
@@ -76,6 +77,12 @@ export default function ContactForm() {
       <SubmitButton type="submit" disabled={state.submitting}>
         ОТПРАВИТЬ
       </SubmitButton>
+
+      <div
+        className="h-captcha"
+        data-sitekey="8686bbfc-5ea4-4db4-8c0e-a72450e2f6a2"
+        dangerouslySetInnerHTML={{ __html: "" }}
+      />
 
       <ContactMessage>
         Либо свяжитесь с нами любым удобным способом, и мы перезвоним вам в

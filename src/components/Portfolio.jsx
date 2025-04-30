@@ -314,7 +314,7 @@ const CarouselContainer = styled.div`
     background: transparent;
 
     @media ${QUERIES.mobile} {
-      filter: brightness(0.4);
+      filter: brightness(1);
     }
   }
 
