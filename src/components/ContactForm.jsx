@@ -39,6 +39,7 @@ export default function ContactForm() {
 
   return (
     <Form
+      method="POST"
       onSubmit={async (e) => {
         e.preventDefault();
         e.target.name.value = sanitizeInput(e.target.name.value);
@@ -69,7 +70,6 @@ export default function ContactForm() {
       }}
     >
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
-
       <Label htmlFor="name">Имя</Label>
       <Input
         id="name"
@@ -78,9 +78,7 @@ export default function ContactForm() {
         placeholder="Введите ваше имя"
         required
       />
-
       <ValidationError prefix="Name" field="name" errors={state.errors} />
-
       <Label htmlFor="phone">Телефон</Label>
       <StyledPhoneInput
         id="phone"
@@ -92,18 +90,14 @@ export default function ContactForm() {
         onChange={setPhone}
         required
       />
-
       <ValidationError prefix="Phone" field="phone" errors={state.errors} />
-
       <SubmitButton type="submit" disabled={state.submitting}>
         ОТПРАВИТЬ
       </SubmitButton>
-
       <ContactMessage>
         Либо свяжитесь с нами любым удобным способом, и мы перезвоним вам в
         удобное для вас время!
       </ContactMessage>
-
       <ContactIcons />
     </Form>
   );
