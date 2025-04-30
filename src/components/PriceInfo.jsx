@@ -1,56 +1,64 @@
 import styled from "styled-components";
 import Union from "../assets/Union.svg?react";
-import { QUERIES } from "../constants";
+import { QUERIES, titleStyles } from "../constants";
 
 export default function PriceInfo() {
   return (
-    <Cards>
-      <Card>
-        <Text>
-          Стоимость видео <br /> определяется индивидуально — потому что каждый
-          проект уникален
-        </Text>
-        <Decoration>
-          <Union />
-        </Decoration>
-      </Card>
-      <Card>
-        <Text>
-          Мы не работаем по шаблонам — каждый ролик создаётся с нуля под ваши
-          задачи
-        </Text>
-        <Number>01</Number>
-      </Card>
-      <Card>
-        <Text>
-          {" "}
-          Мы ориентируемся на ваши идеи и финансовые возможности, чтобы
-          предложить наилучшее решение.
-        </Text>
-        <Number>02</Number>
-      </Card>
-      <Card>
-        <Text>
-          {" "}
-          На стоимость влияют следующие факторы: <br />
-          - сложность съёмки (локации, актёры, реквизит, техника) <br />
-          - объём постпродакшна <br />
-          - сроки и сценарий <br />
-        </Text>
-        <Number>03</Number>
-      </Card>
-      <Card>
-        <Text>
-          Хотите картинку как в кино?
-          <br /> Обращайтесь!
-        </Text>
-      </Card>
-    </Cards>
+    <>
+      <Title id="Pricing">СТОИМОСТЬ</Title>
+      <Cards>
+        <Card>
+          <Text>
+            Стоимость видео <br /> определяется индивидуально — потому что
+            каждый проект уникален
+          </Text>
+          <Decoration>
+            <Union />
+          </Decoration>
+        </Card>
+        <Card>
+          <Text>
+            Мы не работаем по шаблонам — каждый ролик создаётся с нуля под ваши
+            задачи
+          </Text>
+          <Number>01</Number>
+        </Card>
+        <Card>
+          <Text>
+            {" "}
+            Мы ориентируемся на ваши идеи и финансовые возможности, чтобы
+            предложить наилучшее решение.
+          </Text>
+          <Number>02</Number>
+        </Card>
+        <Card>
+          <Text>
+            {" "}
+            На стоимость влияют следующие факторы: <br />
+            - сложность съёмки (локации, актёры, реквизит, техника) <br />
+            - объём постпродакшна <br />
+            - сроки и сценарий <br />
+          </Text>
+          <Number>03</Number>
+        </Card>
+        <Card>
+          <Text>
+            Хотите картинку как в кино?
+            <br /> Обращайтесь!
+          </Text>
+        </Card>
+      </Cards>
+    </>
   );
 }
 
+const Title = styled.h2`
+  ${titleStyles}
+  margin-top: 2rem;
+`;
+
 const Cards = styled.div`
-  margin: calc(75rem / 16);
+  margin: 0 calc(75rem / 16) calc(75rem / 16);
   display: grid;
   justify-content: center;
   grid-template-columns: 1fr 1fr 1fr;
@@ -59,11 +67,11 @@ const Cards = styled.div`
   overflow-wrap: break-word;
 
   @media ${QUERIES.largeTabletAndDown} {
-    margin: 3rem 1rem 0;
+    margin: 0 calc(50rem / 16) calc(50rem / 16);
   }
 
   @media ${QUERIES.mobile} {
-    margin: calc(24rem / 16);
+    margin: 0 calc(24rem / 16) calc(24rem / 16);
     grid-template-columns: 45vw 45vw;
     grid-auto-rows: 150px 170px 80px;
   }
@@ -71,7 +79,7 @@ const Cards = styled.div`
 
 const Card = styled.div`
   position: relative;
-  border: 1px solid var(--color-body-primary);
+  border: 1px solid var(--color-details-tertiary);
   border-radius: 10px;
   display: flex;
   flex-direction: column;

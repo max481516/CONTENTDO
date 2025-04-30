@@ -1,17 +1,20 @@
 import styled from "styled-components";
 import { titleStyles, QUERIES } from "../constants.js";
-import video from "../assets/BackgroundVideo.mp4";
-import mobileVideo from "../assets/BackgroundVideoMobile.mp4";
-import PriceInfo from "./PriceInfo.jsx";
+
 import { useEffect, useState } from "react";
 
 export default function AboutUs() {
-  const [src, setSrc] = useState(video);
+  const desktopVideo =
+    "https://res.cloudinary.com/dqs3mkxnr/video/upload/v1745998900/BackgroundVideo_kchaip.mp4";
+  const mobileVideo =
+    "https://res.cloudinary.com/dqs3mkxnr/video/upload/v1745998900/BackgroundVideoMobile_wkrmr6.mp4";
+
+  const [src, setSrc] = useState(desktopVideo);
 
   useEffect(() => {
     const mq = window.matchMedia(QUERIES.mobile);
     const update = (e) => {
-      setSrc(e.matches ? mobileVideo : video);
+      setSrc(e.matches ? mobileVideo : desktopVideo);
     };
     update(mq); // set initial media query state
     mq.addEventListener("change", update);
@@ -32,26 +35,30 @@ export default function AboutUs() {
         <Title id="AboutUs">О НАС</Title>
         <Paragraph>
           {" "}
-          <FirstWords>Мы </FirstWords>— сообщество людей, которые по-настоящему
-          любят и умеют делать видео. Для нас это не просто работа — это способ
-          говорить, вдохновлять, рассказывать истории и создавать что-то
-          настоящее.
+          <FirstWords>Мы </FirstWords>— сообщество людей, которые{" "}
+          <ColoredWords>по-настоящему </ColoredWords>
+          любят и умеют делать видео. Для нас это{" "}
+          <ColoredWords>не просто</ColoredWords> работа — это способ говорить,
+          вдохновлять, рассказывать истории и создавать что-то настоящее.
         </Paragraph>
         <Paragraph>
           {" "}
           <Space></Space>
-          Для сложных сцен мы заранее создаём превизы (снимаем визуальные
-          раскадровки), приглашаем каскадеров и актеров, постановщика трюков,
-          экшн оператора, чтобы продумать динамику, ритм и точную хореографию,
-          для всех. Обсуждаем всевозможные варианты реализации проекта,
+          Для сложных сцен мы заранее <ColoredWords>создаём</ColoredWords>{" "}
+          превизы (снимаем визуальные раскадровки), приглашаем каскадеров и
+          актеров, постановщика трюков, экшн оператора, чтобы{" "}
+          <ColoredWords>продумать</ColoredWords> динамику, ритм и точную
+          хореографию, для всех. Обсуждаем всевозможные{" "}
+          <ColoredWords>варианты</ColoredWords> реализации проекта,
           подготавливаем заранее оборудование, обсуждаем точный план действий.
         </Paragraph>
 
         <Paragraph>
-          Берём на себя полный цикл продакшна: разработку идеи, написание
-          сценария, съёмку, монтаж, цветокоррекцию, графику, визуальные эффекты
-          и звуковое оформление. <br />
-          Наша цель создавать кинематографичный, высококачественный контент.
+          Берём на себя <ColoredWords>полный цикл </ColoredWords>продакшна:
+          разработку идеи, написание сценария, съёмку, монтаж, цветокоррекцию,
+          графику, визуальные эффекты и звуковое оформление. <br />
+          Наша <ColoredWords>цель</ColoredWords> создавать кинематографичный,
+          высококачественный контент.
         </Paragraph>
 
         <Conclusion>
@@ -59,18 +66,22 @@ export default function AboutUs() {
           реализацией вашей идеи <ColoredWords> уже сегодня.</ColoredWords>
         </Conclusion>
       </ContentWrapper>
-      <PriceInfo />
     </Wrapper>
   );
 }
 
 const Wrapper = styled.section`
   position: relative;
+  padding: 5rem 0;
   width: 100vw;
   left: 50%; /* to cancel horizontal overflow */
   margin-left: -50vw;
   height: 100%;
   overflow-y: visible;
+
+  @media ${QUERIES.mobile} {
+    padding: 1rem 0;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -90,29 +101,23 @@ const VideoBackground = styled.video`
   width: auto;
   height: 100%;
   min-width: 100%;
-  min-height: 100%;
   transform: translate(-50%, -50%);
   object-fit: cover;
   z-index: 0;
   opacity: 0.6;
-
-  @media ${QUERIES.mobile} {
-  }
 `;
 
 const Title = styled.h2`
   ${titleStyles}
-  margin-top: 4rem;
-
-  @media ${QUERIES.mobile} {
-    margin-top: calc(46rem / 16);
-  }
 `;
 
 const Paragraph = styled.p`
   font-size: calc(19rem / 16);
   font-weight: 600;
-  text-transform: uppercase;
+  font-family: "Jura", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  /* text-transform: uppercase; */
   color: var(--color-body-primary);
   margin: 0 auto calc(32rem / 16);
 

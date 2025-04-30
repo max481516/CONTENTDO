@@ -15,6 +15,10 @@ const QUERIES = {
 };
 
 const buttonStyles = css`
+  font-family: "Jura", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 700;
   padding: 1rem 2rem;
   border: 2px solid var(--color-details-primary);
   background-color: transparent;

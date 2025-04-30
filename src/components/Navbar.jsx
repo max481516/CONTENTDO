@@ -195,6 +195,7 @@ const NavLink = styled.li`
 
 const NavSocialIcons = styled(SocialIcons)`
   flex-wrap: nowrap;
+  width: 80%;
 
   a {
     color: var(--color-details-secondary);

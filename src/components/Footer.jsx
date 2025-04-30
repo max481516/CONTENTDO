@@ -76,6 +76,10 @@ const FooterLink = styled.a`
   text-decoration: none;
   cursor: pointer;
   color: inherit;
+  font-family: "Jura", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: calc(20rem / 16);
 
   &:hover {
     color: var(--color-details-primary);
