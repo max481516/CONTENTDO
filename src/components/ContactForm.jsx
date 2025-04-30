@@ -8,9 +8,15 @@ import DOMPurify from "dompurify";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useState } from "react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function ContactForm() {
-  const [state, handleSubmit] = useForm("xanqwyqb");
+  const { executeRecaptcha } = useGoogleReCaptcha();
+  const [state, handleSubmit] = useForm("xanqwyqb", {
+    data: {
+      "g-recaptcha-response": executeRecaptcha ? executeRecaptcha : null,
+    },
+  });
   const [phone, setPhone] = useState("");
 
   // Sanitization Function
@@ -33,18 +39,33 @@ export default function ContactForm() {
 
   return (
     <Form
-      method="POST"
-      onSubmit={(e) => {
-        // Preprocess form data before sending
+      onSubmit={async (e) => {
         e.preventDefault();
         e.target.name.value = sanitizeInput(e.target.name.value);
+
+        if (!executeRecaptcha) {
+          console.error("reCAPTCHA not available");
+          return;
+        }
+
+        const token = await executeRecaptcha("contact_form");
+        console.log("reCAPTCHA token:", token);
 
         console.log("Sanitized Form Data:", {
           name: e.target.name.value,
           phone,
         });
 
-        handleSubmit(e); // Send sanitized data to Formspree
+        // Create a new event with the reCAPTCHA token
+        const event = {
+          ...e,
+          target: {
+            ...e.target,
+            "g-recaptcha-response": { value: token },
+          },
+        };
+
+        handleSubmit(event);
       }}
     >
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
@@ -78,12 +99,6 @@ export default function ContactForm() {
         ОТПРАВИТЬ
       </SubmitButton>
 
-      <div
-        className="h-captcha"
-        data-sitekey="8686bbfc-5ea4-4db4-8c0e-a72450e2f6a2"
-        dangerouslySetInnerHTML={{ __html: "" }}
-      />
-
       <ContactMessage>
         Либо свяжитесь с нами любым удобным способом, и мы перезвоним вам в
         удобное для вас время!
@@ -93,6 +108,8 @@ export default function ContactForm() {
     </Form>
   );
 }
+
+// ... rest of your styled components remain the same
 
 // Styled Components
 const Form = styled.form`

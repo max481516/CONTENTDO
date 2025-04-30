@@ -14,6 +14,7 @@ import Portfolio from "./components/Portfolio";
 /* import Price from "./components/Price"; */
 import styled from "styled-components";
 import { QUERIES } from "./constants";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 function App() {
   // Initialize OS on the body element
@@ -38,29 +39,32 @@ function App() {
 
   return (
     <>
-      {/* Optionally, you can also wrap your main content in an OS component */}
-      <OverlayScrollbarsComponent
-        options={{
-          scrollbars: {
-            autoHide: "scroll",
-            clickScroll: true,
-            theme: "os-theme-light",
-          },
-        }}
-        className="os-theme-light"
-        defer
-      >
-        <Header />
-        <Main>
-          <Hero />
-          <Portfolio />
-          <AboutUs />
-          {/* <Price /> */}
-          <PriceInfo />
-          <ContactUs />
-        </Main>
-        <Footer />
-      </OverlayScrollbarsComponent>
+      <GoogleReCaptchaProvider reCaptchaKey="6LchrykrAAAAADw1EZxLPw5cp0RDh3sFSZMt_y9k">
+        {/* Your other components */}
+
+        <OverlayScrollbarsComponent
+          options={{
+            scrollbars: {
+              autoHide: "scroll",
+              clickScroll: true,
+              theme: "os-theme-light",
+            },
+          }}
+          className="os-theme-light"
+          defer
+        >
+          <Header />
+          <Main>
+            <Hero />
+            <Portfolio />
+            <AboutUs />
+            {/* <Price /> */}
+            <PriceInfo />
+            <ContactUs />
+          </Main>
+          <Footer />
+        </OverlayScrollbarsComponent>
+      </GoogleReCaptchaProvider>
     </>
   );
 }
