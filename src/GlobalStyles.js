@@ -215,6 +215,10 @@ body {
   background-color: var(--color-background);
 }
 
+button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
 
 
 
