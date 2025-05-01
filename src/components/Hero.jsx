@@ -28,7 +28,9 @@ export default function Hero() {
         Каждый специалист здесь — мастер своего дела, способный воплотить даже
         самые сложные проекты.
       </SubDescription>
-      <Button onClick={() => openModal("order")}>ЗАКАЗАТЬ ПРОЕКТ</Button>
+      <Button id="order-btn" onClick={() => openModal("order")}>
+        ЗАКАЗАТЬ ПРОЕКТ
+      </Button>
       <Modal isOpen={isOpen} modalType={modalType} onClose={closeModal} />
     </HeroContainer>
   );

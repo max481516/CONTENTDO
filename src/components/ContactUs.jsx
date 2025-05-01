@@ -13,7 +13,8 @@ export default function ContactUs() {
         Если у вас есть вопросы или вы готовы начать сотрудничество с нами,
         пожалуйста, свяжитесь как можно скорее! Мы с радостью ответим на все
         ваши вопросы. Если вы готовы заказать проект, воспользуйтесь кнопкой
-        «Заказать проект» в <OrderLink href="#Header">начале сайта.</OrderLink>
+        «Заказать проект» в{" "}
+        <OrderLink href="#order-btn">начале сайта.</OrderLink>
       </InfoText>
       <Button onClick={() => openModal("contact")}>Связаться!</Button>
       <Modal isOpen={isOpen} modalType={modalType} onClose={closeModal} />
