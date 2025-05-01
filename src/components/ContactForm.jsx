@@ -1,41 +1,49 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useForm, ValidationError } from "@formspree/react";
-import { buttonStyles, inputStyles, QUERIES } from "../constants";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import DOMPurify from "dompurify";
 import ContactIcons from "./ContactIcons";
 import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
-import DOMPurify from "dompurify";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-import { useState } from "react";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { buttonStyles, inputStyles, QUERIES } from "../constants";
 
 export default function ContactForm() {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const [state, handleSubmit] = useForm("xanqwyqb");
   const [phone, setPhone] = useState("");
   const [recaptchaError, setRecaptchaError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Initialize reCAPTCHA on component mount
+  useEffect(() => {
+    if (executeRecaptcha) {
+      executeRecaptcha("page_view");
+    }
+  }, [executeRecaptcha]);
 
   const sanitizeInput = (input) => DOMPurify.sanitize(input);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setRecaptchaError(null);
-
-    if (!executeRecaptcha) {
-      setRecaptchaError("reCAPTCHA not loaded - please refresh the page");
-      return;
-    }
+    setIsSubmitting(true);
 
     try {
       // Sanitize inputs
       e.target.name.value = sanitizeInput(e.target.name.value);
 
-      // Get reCAPTCHA token
-      const token = await executeRecaptcha("contact_form");
+      if (!executeRecaptcha) {
+        throw new Error("reCAPTCHA not initialized");
+      }
 
-      // Create a modified event with the reCAPTCHA token
-      const formEvent = {
+      // Get reCAPTCHA token
+      const token = await executeRecaptcha("form_submit");
+
+      // Create modified event with reCAPTCHA token
+      const submitEvent = {
         ...e,
         target: {
           ...e.target,
@@ -43,11 +51,13 @@ export default function ContactForm() {
         },
       };
 
-      // Use Formspree's handleSubmit with the modified event
-      await handleSubmit(formEvent);
+      // Submit using Formspree's handler
+      await handleSubmit(submitEvent);
     } catch (error) {
       console.error("Submission error:", error);
-      setRecaptchaError("Failed to submit form. Please try again.");
+      setRecaptchaError("Ошибка при отправке. Пожалуйста, попробуйте ещё раз.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -64,12 +74,13 @@ export default function ContactForm() {
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
 
       {recaptchaError && (
-        <ErrorMessage style={{ color: "red", textAlign: "center" }}>
+        <div
+          style={{ color: "red", textAlign: "center", marginBottom: "1rem" }}
+        >
           {recaptchaError}
-        </ErrorMessage>
+        </div>
       )}
 
-      {/* Rest of your form fields remain the same */}
       <Label htmlFor="name">Имя</Label>
       <Input
         id="name"
@@ -78,25 +89,22 @@ export default function ContactForm() {
         placeholder="Введите ваше имя"
         required
       />
-
       <ValidationError prefix="Name" field="name" errors={state.errors} />
 
       <Label htmlFor="phone">Телефон</Label>
       <StyledPhoneInput
         id="phone"
         name="phone"
-        type="tel"
         international
         defaultCountry="RU"
         value={phone}
         onChange={setPhone}
         required
       />
-
       <ValidationError prefix="Phone" field="phone" errors={state.errors} />
 
-      <SubmitButton type="submit" disabled={state.submitting}>
-        {state.submitting ? "Отправка..." : "ОТПРАВИТЬ"}
+      <SubmitButton type="submit" disabled={isSubmitting || state.submitting}>
+        {isSubmitting ? "Отправка..." : "ОТПРАВИТЬ"}
       </SubmitButton>
 
       <ContactMessage>
