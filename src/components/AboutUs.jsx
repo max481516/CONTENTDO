@@ -28,6 +28,8 @@ export default function AboutUs() {
         muted
         loop
         playsInline
+        webkit-playsinline="true"
+        preload="auto"
         src={src}
         type="video/mp4"
       ></VideoBackground>
