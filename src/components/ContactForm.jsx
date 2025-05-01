@@ -1,65 +1,20 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useForm, ValidationError } from "@formspree/react";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-import DOMPurify from "dompurify";
+import { buttonStyles, inputStyles, QUERIES } from "../constants";
 import ContactIcons from "./ContactIcons";
 import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
-import { buttonStyles, inputStyles, QUERIES } from "../constants";
+import DOMPurify from "dompurify";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import { useState } from "react";
 
 export default function ContactForm() {
-  const { executeRecaptcha } = useGoogleReCaptcha();
   const [state, handleSubmit] = useForm("xanqwyqb");
   const [phone, setPhone] = useState("");
-  const [recaptchaError, setRecaptchaError] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Initialize reCAPTCHA on component mount
-  useEffect(() => {
-    if (executeRecaptcha) {
-      executeRecaptcha("page_view");
-    }
-  }, [executeRecaptcha]);
-
+  // Sanitization Function
   const sanitizeInput = (input) => DOMPurify.sanitize(input);
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    setRecaptchaError(null);
-    setIsSubmitting(true);
-
-    try {
-      // Sanitize inputs
-      e.target.name.value = sanitizeInput(e.target.name.value);
-
-      if (!executeRecaptcha) {
-        throw new Error("reCAPTCHA not initialized");
-      }
-
-      // Get reCAPTCHA token
-      const token = await executeRecaptcha("form_submit");
-
-      // Create modified event with reCAPTCHA token
-      const submitEvent = {
-        ...e,
-        target: {
-          ...e.target,
-          "g-recaptcha-response": { value: token },
-        },
-      };
-
-      // Submit using Formspree's handler
-      await handleSubmit(submitEvent);
-    } catch (error) {
-      console.error("Submission error:", error);
-      setRecaptchaError("Ошибка при отправке. Пожалуйста, попробуйте ещё раз.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   if (state.succeeded) {
     return (
@@ -68,18 +23,30 @@ export default function ContactForm() {
       </Form>
     );
   }
+  if (state.errors) {
+    return (
+      <Form>
+        <ErrorMessage />
+      </Form>
+    );
+  }
 
   return (
-    <Form onSubmit={handleFormSubmit}>
-      <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
+    <Form
+      onSubmit={(e) => {
+        // Preprocess form data before sending
+        e.preventDefault();
+        e.target.name.value = sanitizeInput(e.target.name.value);
 
-      {recaptchaError && (
-        <div
-          style={{ color: "red", textAlign: "center", marginBottom: "1rem" }}
-        >
-          {recaptchaError}
-        </div>
-      )}
+        console.log("Sanitized Form Data:", {
+          name: e.target.name.value,
+          phone,
+        });
+
+        handleSubmit(e); // Send sanitized data to Formspree
+      }}
+    >
+      <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
 
       <Label htmlFor="name">Имя</Label>
       <Input
@@ -89,22 +56,25 @@ export default function ContactForm() {
         placeholder="Введите ваше имя"
         required
       />
+
       <ValidationError prefix="Name" field="name" errors={state.errors} />
 
       <Label htmlFor="phone">Телефон</Label>
       <StyledPhoneInput
         id="phone"
         name="phone"
+        type="tel"
         international
         defaultCountry="RU"
         value={phone}
         onChange={setPhone}
         required
       />
+
       <ValidationError prefix="Phone" field="phone" errors={state.errors} />
 
-      <SubmitButton type="submit" disabled={isSubmitting || state.submitting}>
-        {isSubmitting ? "Отправка..." : "ОТПРАВИТЬ"}
+      <SubmitButton type="submit" disabled={state.submitting}>
+        ОТПРАВИТЬ
       </SubmitButton>
 
       <ContactMessage>
@@ -116,6 +86,7 @@ export default function ContactForm() {
     </Form>
   );
 }
+
 // Styled Components
 const Form = styled.form`
   display: flex;
