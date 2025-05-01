@@ -12,15 +12,44 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function ContactForm() {
   const { executeRecaptcha } = useGoogleReCaptcha();
-  const [state, handleSubmit] = useForm("xanqwyqb", {
-    data: {
-      "g-recaptcha-response": executeRecaptcha ? executeRecaptcha : null,
-    },
-  });
+  const [state, handleSubmit] = useForm("xanqwyqb");
   const [phone, setPhone] = useState("");
+  const [recaptchaError, setRecaptchaError] = useState(null);
 
-  // Sanitization Function
   const sanitizeInput = (input) => DOMPurify.sanitize(input);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    setRecaptchaError(null);
+
+    if (!executeRecaptcha) {
+      setRecaptchaError("reCAPTCHA not loaded - please refresh the page");
+      return;
+    }
+
+    try {
+      // Sanitize inputs
+      e.target.name.value = sanitizeInput(e.target.name.value);
+
+      // Get reCAPTCHA token
+      const token = await executeRecaptcha("contact_form");
+
+      // Create a modified event with the reCAPTCHA token
+      const formEvent = {
+        ...e,
+        target: {
+          ...e.target,
+          "g-recaptcha-response": { value: token },
+        },
+      };
+
+      // Use Formspree's handleSubmit with the modified event
+      await handleSubmit(formEvent);
+    } catch (error) {
+      console.error("Submission error:", error);
+      setRecaptchaError("Failed to submit form. Please try again.");
+    }
+  };
 
   if (state.succeeded) {
     return (
@@ -29,47 +58,18 @@ export default function ContactForm() {
       </Form>
     );
   }
-  if (state.errors) {
-    return (
-      <Form>
-        <ErrorMessage />
-      </Form>
-    );
-  }
 
   return (
-    <Form
-      method="POST"
-      onSubmit={async (e) => {
-        e.preventDefault();
-        e.target.name.value = sanitizeInput(e.target.name.value);
-
-        if (!executeRecaptcha) {
-          console.error("reCAPTCHA not available");
-          return;
-        }
-
-        const token = await executeRecaptcha("contact_form");
-        console.log("reCAPTCHA token:", token);
-
-        console.log("Sanitized Form Data:", {
-          name: e.target.name.value,
-          phone,
-        });
-
-        // Create a new event with the reCAPTCHA token
-        const event = {
-          ...e,
-          target: {
-            ...e.target,
-            "g-recaptcha-response": { value: token },
-          },
-        };
-
-        handleSubmit(event);
-      }}
-    >
+    <Form onSubmit={handleFormSubmit}>
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
+
+      {recaptchaError && (
+        <ErrorMessage style={{ color: "red", textAlign: "center" }}>
+          {recaptchaError}
+        </ErrorMessage>
+      )}
+
+      {/* Rest of your form fields remain the same */}
       <Label htmlFor="name">Имя</Label>
       <Input
         id="name"
@@ -78,7 +78,9 @@ export default function ContactForm() {
         placeholder="Введите ваше имя"
         required
       />
+
       <ValidationError prefix="Name" field="name" errors={state.errors} />
+
       <Label htmlFor="phone">Телефон</Label>
       <StyledPhoneInput
         id="phone"
@@ -90,21 +92,22 @@ export default function ContactForm() {
         onChange={setPhone}
         required
       />
+
       <ValidationError prefix="Phone" field="phone" errors={state.errors} />
+
       <SubmitButton type="submit" disabled={state.submitting}>
-        ОТПРАВИТЬ
+        {state.submitting ? "Отправка..." : "ОТПРАВИТЬ"}
       </SubmitButton>
+
       <ContactMessage>
         Либо свяжитесь с нами любым удобным способом, и мы перезвоним вам в
         удобное для вас время!
       </ContactMessage>
+
       <ContactIcons />
     </Form>
   );
 }
-
-// ... rest of your styled components remain the same
-
 // Styled Components
 const Form = styled.form`
   display: flex;
