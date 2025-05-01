@@ -1,20 +1,65 @@
+import { useState, useRef } from "react";
 import styled from "styled-components";
 import { useForm, ValidationError } from "@formspree/react";
-import { buttonStyles, inputStyles, QUERIES } from "../constants";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import DOMPurify from "dompurify";
 import ContactIcons from "./ContactIcons";
 import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
-import DOMPurify from "dompurify";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-import { useState } from "react";
+import { buttonStyles, inputStyles, QUERIES } from "../constants";
 
 export default function ContactForm() {
   const [state, handleSubmit] = useForm("xanqwyqb");
   const [phone, setPhone] = useState("");
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const [captchaError, setCaptchaError] = useState(false);
+  const captchaRef = useRef(null);
 
-  // Sanitization Function
   const sanitizeInput = (input) => DOMPurify.sanitize(input);
+
+  const handleCaptchaVerify = (token) => {
+    setCaptchaToken(token);
+    setCaptchaError(false);
+  };
+
+  const handleCaptchaError = () => {
+    setCaptchaError(true);
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    // Verify captcha was completed
+    if (!captchaToken) {
+      setCaptchaError(true);
+      captchaRef.current.execute();
+      return;
+    }
+
+    // Sanitize inputs
+    e.target.name.value = sanitizeInput(e.target.name.value);
+
+    // Create form data with captcha token
+    const formData = new FormData(e.target);
+    formData.append("h-captcha-response", captchaToken);
+
+    // Submit using Formspree's handler
+    const submitEvent = {
+      ...e,
+      target: {
+        ...e.target,
+        "h-captcha-response": { value: captchaToken },
+      },
+    };
+
+    await handleSubmit(submitEvent);
+
+    // Reset captcha after submission
+    captchaRef.current.resetCaptcha();
+    setCaptchaToken(null);
+  };
 
   if (state.succeeded) {
     return (
@@ -23,30 +68,18 @@ export default function ContactForm() {
       </Form>
     );
   }
-  if (state.errors) {
-    return (
-      <Form>
-        <ErrorMessage />
-      </Form>
-    );
-  }
 
   return (
-    <Form
-      onSubmit={(e) => {
-        // Preprocess form data before sending
-        e.preventDefault();
-        e.target.name.value = sanitizeInput(e.target.name.value);
-
-        console.log("Sanitized Form Data:", {
-          name: e.target.name.value,
-          phone,
-        });
-
-        handleSubmit(e); // Send sanitized data to Formspree
-      }}
-    >
+    <Form onSubmit={handleFormSubmit}>
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
+
+      {captchaError && (
+        <div
+          style={{ color: "red", textAlign: "center", marginBottom: "1rem" }}
+        >
+          Пожалуйста, подтвердите что вы не робот
+        </div>
+      )}
 
       <Label htmlFor="name">Имя</Label>
       <Input
@@ -56,25 +89,32 @@ export default function ContactForm() {
         placeholder="Введите ваше имя"
         required
       />
-
       <ValidationError prefix="Name" field="name" errors={state.errors} />
 
       <Label htmlFor="phone">Телефон</Label>
       <StyledPhoneInput
         id="phone"
         name="phone"
-        type="tel"
         international
         defaultCountry="RU"
         value={phone}
         onChange={setPhone}
         required
       />
-
       <ValidationError prefix="Phone" field="phone" errors={state.errors} />
 
+      {/* hCaptcha Widget */}
+      <div style={{ margin: "1rem 0" }}>
+        <HCaptcha
+          sitekey="8686bbfc-5ea4-4db4-8c0e-a72450e2f6a2" // Replace with your actual key
+          onVerify={handleCaptchaVerify}
+          onError={handleCaptchaError}
+          ref={captchaRef}
+        />
+      </div>
+
       <SubmitButton type="submit" disabled={state.submitting}>
-        ОТПРАВИТЬ
+        {state.submitting ? "Отправка..." : "ОТПРАВИТЬ"}
       </SubmitButton>
 
       <ContactMessage>
