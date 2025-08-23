@@ -367,9 +367,7 @@ const VideoDescription = styled.p`
   font-size: 0.8rem;
   width: 60%;
   color: var(--color-body-secondary);
-
  
-
 
   @media ${QUERIES.mobile} {
     width: 100%;
