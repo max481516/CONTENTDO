@@ -23,7 +23,7 @@ export default function Header() {
             src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1738167667/output_pfqe7f.mp4"
             type="video/mp4"
           />
-          Your browser does not support HTML5 video.
+          Your browser does not support HTML5 video
         </BackgroundVideoElement>
       </VideoContainer>
       <Navbar />
