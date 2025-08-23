@@ -98,11 +98,11 @@ const Title = styled.h2`
   color: var(--color-body-primary);
   text-align: center;
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 
   @media ${QUERIES.mobile} {
     font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   @media (max-width: 358px) {
@@ -112,7 +112,7 @@ const Title = styled.h2`
 
 const Label = styled.label`
   display: flex;
-  justify-content: center;
+  justify-content: start;
   font-size: 1.1rem;
   color: var(--color-body-primary);
 

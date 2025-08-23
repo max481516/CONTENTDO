@@ -272,7 +272,7 @@ const Label = styled.label`
   font-size: 1.1rem;
   color: var(--color-body-primary);
   display: flex;
-  justify-content: center;
+  justify-content: start;
 
   @media ${QUERIES.mobile} {
     font-size: 0.9rem;
