@@ -50,17 +50,16 @@ export default function Portfolio() {
               <VideoSlide
                 src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1734536816/video2_c8fe03.mp4"
                 poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_0,w_1920,h_1080,c_thumb,g_auto/v1734536816/video2_c8fe03.jpg"
-                title="Nemo enim ipsam"
-                description="Nemo enim ipsam voluptatem quia voluptas sit"
+                title="Новый взгляд"
+                description="Рекламный ролик кабинета психиатра: помощь и поддержка для душевного равновесия."
               />
             </SwiperSlide>
-
             <SwiperSlide>
               <VideoSlide
                 src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1745824362/rap-1_mfgzqi.mp4"
                 poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_3,w_1920,h_1080,c_thumb,g_auto/v1745824362/rap-1_mfgzqi.jpg"
-                title="Nemo enim ipsam"
-                description="Nemo enim ipsam voluptatem quia voluptas sit"
+                title="Ритмы улиц"
+                description="Сборник динамичных рэп-клипов — энергия, стиль и уличная культура."
               />
             </SwiperSlide>
 
@@ -68,8 +67,8 @@ export default function Portfolio() {
               <VideoSlide
                 src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1745824362/rap-2_lofvry.mp4"
                 poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_0,w_1920,h_1080,c_thumb,g_auto/v1745824362/rap-2_lofvry.jpg"
-                title="Nemo enim ipsam"
-                description="Nemo enim ipsam voluptatem quia voluptas sit"
+                title="Фридомклаб - Мне все равно"
+                description="Клип российского исполнителя с атмосферой эмоций и яркой подачей."
               />
             </SwiperSlide>
 
@@ -77,8 +76,8 @@ export default function Portfolio() {
               <VideoSlide
                 src="https://res.cloudinary.com/dqs3mkxnr/video/upload/v1745824368/shrink-1_ozswsu.mp4"
                 poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_8,w_1920,h_1080,c_thumb,g_auto/v1745824368/shrink-1_ozswsu.jpg"
-                title="Nemo enim ipsam"
-                description="Nemo enim ipsam voluptatem quia voluptas sit"
+                title="Шаг к гармонии"
+                description="Вторая реклама кабинета психиатра, подчеркивающая доверие и заботу о каждом пациенте."
               />
             </SwiperSlide>
           </Swiper>
@@ -355,17 +354,25 @@ const VideoTitle = styled.h3`
   text-transform: uppercase;
   margin: 0;
 
+  @media ${QUERIES.tabletAndDown} {
+    font-size: 0.8rem;
+  }
+
   @media ${QUERIES.mobile} {
     font-size: 0.8rem;
   }
 `;
 
 const VideoDescription = styled.p`
-  font-size: calc(12rem / 16);
-  text-transform: capitalize;
+  font-size: 0.8rem;
+  width: 60%;
   color: var(--color-body-secondary);
 
+ 
+
+
   @media ${QUERIES.mobile} {
+    width: 100%;
     font-size: calc(10rem / 16);
   }
 `;

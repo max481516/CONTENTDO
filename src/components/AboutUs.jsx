@@ -94,6 +94,10 @@ const ContentWrapper = styled.div`
   & > p:nth-child(4) {
     margin-bottom: calc(32rem / 16);
   }
+
+  @media ${QUERIES.mobile} {
+    height: 100dvh;
+  }
 `;
 
 const VideoBackground = styled.video`
