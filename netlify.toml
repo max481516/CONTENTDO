@@ -1,0 +1,14 @@
+# Netlify configuration – disable false positives for Firebase public keys
+
+[context.production.environment]
+  SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
+  SECRETS_SCAN_SMART_DETECTION_OMIT_VALUES = "true"
+
+# Apply same flags for all other deploy contexts (e.g. deploy previews)
+[context.deploy-preview.environment]
+  SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
+  SECRETS_SCAN_SMART_DETECTION_OMIT_VALUES = "true"
+
+[context.branch-deploy.environment]
+  SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
+  SECRETS_SCAN_SMART_DETECTION_OMIT_VALUES = "true"
