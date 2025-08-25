@@ -115,6 +115,7 @@ const Label = styled.label`
   justify-content: start;
   font-size: 1.1rem;
   color: var(--color-body-primary);
+  margin-bottom: 4px;
 
   @media ${QUERIES.mobile} {
     font-size: 1rem;
