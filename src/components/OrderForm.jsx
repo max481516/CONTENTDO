@@ -3,16 +3,15 @@ import { useForm, ValidationError } from "@formspree/react";
 import { useState } from "react";
 import { buttonStyles, inputStyles, QUERIES } from "../constants";
 import { IoCloseOutline } from "react-icons/io5";
-import AttachFileIcon from "../assets/AttachFileIcon.svg?react";
+import AttachFileIcon from "../assets/AttachFileIcon.svg";
 import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
-import { storage } from "../firebase/firebaseConfig";
+import { storage } from "../lib/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { app } from "../firebase/firebaseConfig";
+import { app } from "../lib/firebase";
 import DOMPurify from "dompurify";
 import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024;
 

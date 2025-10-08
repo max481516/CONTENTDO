@@ -1,6 +1,6 @@
 import Navbar from "./Navbar";
 import styled from "styled-components";
-import HeaderLogo from "../assets/logo.svg?react";
+import HeaderLogo from "../assets/logo.svg";
 import { QUERIES } from "../constants";
 
 export default function Header() {

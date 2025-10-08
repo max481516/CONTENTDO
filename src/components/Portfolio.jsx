@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation } from "swiper/modules";
-import "swiper/css/bundle";
 import styled from "styled-components";
 import { IoMdPlay } from "react-icons/io";
 import { titleStyles, QUERIES } from "../constants";

@@ -9,7 +9,14 @@ exports.validateFile = onCall(
   {
     region: "europe-central2",
     cors: {
-      origin: ["http://localhost:5173"], // or '*' for dev
+      // Allow local dev environments
+      origin: [
+        "http://localhost:3000", // Next.js dev
+        "http://localhost:5173", // legacy Vite dev
+        // TODO: add your Netlify preview/prod domains, e.g.:
+        // "https://<your-site>.netlify.app",
+        // "https://<your-custom-domain>",
+      ],
       methods: ["POST", "OPTIONS"],
       // credentials: true, // if needed
     },

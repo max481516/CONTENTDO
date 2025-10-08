@@ -222,7 +222,6 @@ button {
 
 
 
-
 `;
 
 export default GlobalStyles;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Union from "../assets/Union.svg?react";
+import Union from "../assets/Union.svg";
 import { QUERIES, titleStyles } from "../constants";
 
 export default function PriceInfo() {

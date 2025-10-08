@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa6";
 import { IoCloseOutline } from "react-icons/io5";
-import Logo from "../assets/LogoSmall.svg?react";
+import Logo from "../assets/LogoSmall.svg";
 import { QUERIES } from "../constants.js";
 import SocialIcons from "./SocialIcons.jsx";
 

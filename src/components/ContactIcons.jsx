@@ -1,6 +1,6 @@
-import EmailIcon from "../assets/Email.svg?react";
-import WhatsappIcon from "../assets/Whatsapp.svg?react";
-import TelegramIcon from "../assets/Telegram.svg?react";
+import EmailIcon from "../assets/Email.svg";
+import WhatsappIcon from "../assets/Whatsapp.svg";
+import TelegramIcon from "../assets/Telegram.svg";
 import styled from "styled-components";
 import { QUERIES } from "../constants";
 

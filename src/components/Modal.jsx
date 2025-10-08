@@ -6,7 +6,6 @@ import { useEffect, useRef } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { QUERIES } from "../constants";
 import { useOverlayScrollbars } from "overlayscrollbars-react";
-import "overlayscrollbars/styles/overlayscrollbars.css";
 
 export default function Modal({ isOpen, modalType, onClose }) {
   // keep your scroll‐lock ref

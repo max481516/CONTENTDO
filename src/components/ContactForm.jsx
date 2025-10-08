@@ -6,7 +6,6 @@ import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
 import DOMPurify from "dompurify";
 import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
 import { useState } from "react";
 
 export default function ContactForm() {

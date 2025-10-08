@@ -1,7 +1,7 @@
-import VK from "../assets/VK.svg?react";
-import Insta from "../assets/Insta.svg?react";
-import YT from "../assets/YT.svg?react";
-import TikTok from "../assets/TikTok.svg?react";
+import VK from "../assets/VK.svg";
+import Insta from "../assets/Insta.svg";
+import YT from "../assets/YT.svg";
+import TikTok from "../assets/TikTok.svg";
 import styled from "styled-components";
 import { QUERIES } from "../constants";
 
