@@ -12,3 +12,14 @@
 [context.branch-deploy.environment]
   SECRETS_SCAN_SMART_DETECTION_ENABLED = "false"
   SECRETS_SCAN_SMART_DETECTION_OMIT_VALUES = "true"
+
+# Build settings for Next.js
+[build]
+  command = "npm run next:build"
+  publish = ".next"
+
+  [build.environment]
+    NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

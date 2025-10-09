@@ -1,24 +1,24 @@
+"use client";
+
 import styled from "styled-components";
-import { useForm, ValidationError } from "@formspree/react";
 import { useState } from "react";
 import { buttonStyles, inputStyles, QUERIES } from "../constants";
 import { IoCloseOutline } from "react-icons/io5";
 import AttachFileIcon from "../assets/AttachFileIcon.svg";
-import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
+import ErrorMessage from "./ErrorMessage";
 import { storage } from "../lib/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { app } from "../lib/firebase";
 import DOMPurify from "dompurify";
 import PhoneInput from "react-phone-number-input";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024;
 
 export default function OrderForm() {
-  // Formspree
-  const [state, handleSubmit] = useForm("mqaezked");
-
   // Local state
   const [files, setFiles] = useState([]);
   const [uploadProgress, setUploadProgress] = useState({});
@@ -32,21 +32,10 @@ export default function OrderForm() {
   const functions = getFunctions(app, "europe-central2");
   const validateFile = httpsCallable(functions, "validateFile");
 
-  // If formspree succeeded or errors
-  if (state.succeeded) {
-    return (
-      <Form>
-        <SuccessMessage />
-      </Form>
-    );
-  }
-  if (state.errors) {
-    return (
-      <Form>
-        <ErrorMessage />
-      </Form>
-    );
-  }
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const showSuccess = searchParams.get("success") === "order";
+  const showError = searchParams.get("error") === "order";
 
   const handleFileChange = async (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -128,24 +117,44 @@ export default function OrderForm() {
   };
 
   return (
+    showSuccess ? (
+      <Form>
+        <SuccessMessage />
+      </Form>
+    ) : showError ? (
+      <Form>
+        <ErrorMessage />
+      </Form>
+    ) : (
     <Form
-      onSubmit={(e) => {
-        // Preprocess form data before sending
+      name="order"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      action="/?success=order"
+      onSubmit={async (e) => {
         e.preventDefault();
-        e.target.name.value = sanitizeInput(e.target.name.value);
-        e.target.email.value = sanitizeInput(e.target.email.value);
-        e.target.description.value = sanitizeInput(e.target.description.value);
-
-        console.log("Sanitized Form Data:", {
-          name: e.target.name.value,
-          email: e.target.email.value,
-          phone,
-          description: e.target.description.value,
-        });
-
-        handleSubmit(e); // Send sanitized data to Formspree
+        const form = e.currentTarget;
+        // sanitize before submit
+        form.name.value = sanitizeInput(form.name.value);
+        form.email.value = sanitizeInput(form.email.value);
+        form.description.value = sanitizeInput(form.description.value);
+        try {
+          const formData = new FormData(form);
+          await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString(),
+          });
+          router.push("/?success=order");
+        } catch (err) {
+          router.push("/?error=order");
+        }
       }}
     >
+      {/* Netlify form hidden fields */}
+      <input type="hidden" name="form-name" value="order" />
+      <input type="hidden" name="bot-field" />
       <Title>Заказать проект</Title>
 
       <Label htmlFor="name">Имя</Label>
@@ -156,7 +165,6 @@ export default function OrderForm() {
         placeholder="Введите ваше имя"
         required
       />
-      <ValidationError prefix="Name" field="name" errors={state.errors} />
 
       <Label htmlFor="email">Email</Label>
       <Input
@@ -166,7 +174,6 @@ export default function OrderForm() {
         placeholder="Введите ваш Email"
         required
       />
-      <ValidationError prefix="Email" field="email" errors={state.errors} />
 
       <Label htmlFor="phone">Телефон</Label>
       <StyledPhoneInput
@@ -179,18 +186,12 @@ export default function OrderForm() {
         onChange={setPhone}
         required
       />
-      <ValidationError prefix="Phone" field="phone" errors={state.errors} />
 
       <Label htmlFor="description">Описание проекта</Label>
       <TextArea
         id="description"
         name="description"
         placeholder="Расскажите про ваш проект"
-      />
-      <ValidationError
-        prefix="Description"
-        field="description"
-        errors={state.errors}
       />
 
       {/* File attachment UI */}
@@ -221,7 +222,7 @@ export default function OrderForm() {
         ))}
       </FileList>
 
-      {/* Hidden inputs for each uploaded file URL so Formspree sees them */}
+      {/* Hidden inputs for each uploaded file URL so Netlify receives them */}
       {uploadedFileURLs.map((url, i) => (
         <HiddenInput
           key={i}
@@ -233,14 +234,12 @@ export default function OrderForm() {
 
       <SubmitButton
         type="submit"
-        disabled={
-          state.submitting ||
-          files.some((file) => (uploadProgress[file.name] || 0) < 100)
-        }
+        disabled={files.some((file) => (uploadProgress[file.name] || 0) < 100)}
       >
         ОТПРАВИТЬ
       </SubmitButton>
     </Form>
+    )
   );
 }
 

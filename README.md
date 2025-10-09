@@ -28,8 +28,8 @@ Currently, two official plugins are available:
 
 - [4] Client-only boundaries
 
-  - [ ] Add `'use client'` to DOM/effect components (OverlayScrollbars wrapper)
-  - [ ] Initialize OverlayScrollbars on `document.body` in a small client provider
+  - [x] Add `'use client'` to DOM/effect components (Navbar, Hero, Portfolio, Modal)
+  - [x] Initialize OverlayScrollbars on `document.body` in a small client provider (`app/OverlayScrollbarsProvider.tsx`, included in `app/layout.tsx`)
 
 - [5] Firebase (keep) and env migration
 
@@ -51,11 +51,11 @@ Currently, two official plugins are available:
 
 - [6] Netlify Forms (replace Formspree)
 
-  - [ ] Remove Formspree usage from `ContactForm` and `OrderForm`
-  - [ ] Add `data-netlify="true"`, `name="contact"`/`"order"`, `method="POST"`, and hidden `input name="form-name"`
-  - [ ] Add honeypot: `data-netlify-honeypot="bot-field"` and hidden `input name="bot-field"`
-  - [ ] Include a hidden static form (same fields) for detection (e.g., in `app/page.tsx`)
-  - [ ] Keep Firebase Storage uploads; submit file URLs as hidden inputs
+  - [x] Remove Formspree usage from `ContactForm` and `OrderForm`
+  - [x] Add `data-netlify="true"`, `name="contact"`/`"order"`, `method="POST"`, and hidden `input name="form-name"`
+  - [x] Add honeypot: `data-netlify-honeypot="bot-field"` and hidden `input name="bot-field"`
+  - [x] Include a hidden static form (same fields) for detection (`app/NetlifyFormsDetect.tsx`, included in `app/layout.tsx`)
+  - [x] Keep Firebase Storage uploads; submit file URLs as hidden inputs
 
 - [7] SVGR and assets
 
@@ -64,8 +64,8 @@ Currently, two official plugins are available:
 
 - [8] Netlify deployment
 
-  - [ ] Add `@netlify/plugin-nextjs` to `netlify.toml`
-  - [ ] Build command: `next build`; publish directory: `.next`
+  - [x] Add `@netlify/plugin-nextjs` to `netlify.toml`
+  - [x] Build command: `npm run next:build`; publish directory: `.next`
   - [ ] Add env vars in Netlify UI: `NEXT_PUBLIC_FIREBASE_*`
 
 - [9] Cleanup Vite after Next runs locally

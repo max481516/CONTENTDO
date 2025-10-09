@@ -1,28 +1,36 @@
+"use client";
+
 import styled from "styled-components";
-import { useForm, ValidationError } from "@formspree/react";
 import { buttonStyles, inputStyles, QUERIES } from "../constants";
 import ContactIcons from "./ContactIcons";
-import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
+import ErrorMessage from "./ErrorMessage";
 import DOMPurify from "dompurify";
 import PhoneInput from "react-phone-number-input";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function ContactForm() {
-  const [state, handleSubmit] = useForm("xanqwyqb");
   const [phone, setPhone] = useState("");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const showSuccess = searchParams.get("success") === "contact";
+  const showError = searchParams.get("error") === "contact";
 
   // Sanitization Function
   const sanitizeInput = (input) => DOMPurify.sanitize(input);
 
-  if (state.succeeded) {
+  if (showSuccess) {
     return (
       <Form>
         <SuccessMessage />
       </Form>
     );
   }
-  if (state.errors) {
+
+  if (showError) {
     return (
       <Form>
         <ErrorMessage />
@@ -32,19 +40,32 @@ export default function ContactForm() {
 
   return (
     <Form
-      onSubmit={(e) => {
-        // Preprocess form data before sending
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      action="/?success=contact"
+      onSubmit={async (e) => {
         e.preventDefault();
-        e.target.name.value = sanitizeInput(e.target.name.value);
-
-        console.log("Sanitized Form Data:", {
-          name: e.target.name.value,
-          phone,
-        });
-
-        handleSubmit(e); // Send sanitized data to Formspree
+        const form = e.currentTarget;
+        // Preprocess form data before sending
+        form.name.value = sanitizeInput(form.name.value);
+        try {
+          const formData = new FormData(form);
+          await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString(),
+          });
+          router.push("/?success=contact");
+        } catch (err) {
+          router.push("/?error=contact");
+        }
       }}
     >
+      {/* Netlify form hidden fields */}
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="bot-field" />
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
 
       <Label htmlFor="name">Имя</Label>
@@ -56,7 +77,6 @@ export default function ContactForm() {
         required
       />
 
-      <ValidationError prefix="Name" field="name" errors={state.errors} />
 
       <Label htmlFor="phone">Телефон</Label>
       <StyledPhoneInput
@@ -70,9 +90,8 @@ export default function ContactForm() {
         required
       />
 
-      <ValidationError prefix="Phone" field="phone" errors={state.errors} />
 
-      <SubmitButton type="submit" disabled={state.submitting}>
+      <SubmitButton type="submit">
         ОТПРАВИТЬ
       </SubmitButton>
 

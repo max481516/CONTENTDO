@@ -1,3 +1,5 @@
+"use client";
+
 import styled from "styled-components";
 import { buttonStyles, QUERIES } from "../constants";
 import { useModal } from "../hooks/useModal";

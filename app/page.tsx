@@ -1,7 +1,6 @@
 "use client";
 
 import styled from "styled-components";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import Header from "../src/components/Header.jsx";
 import Hero from "../src/components/Hero.jsx";
 import Portfolio from "../src/components/Portfolio.jsx";
@@ -13,17 +12,7 @@ import { QUERIES } from "../src/constants.js";
 
 export default function Page() {
   return (
-    <OverlayScrollbarsComponent
-      options={{
-        scrollbars: {
-          autoHide: "scroll",
-          clickScroll: true,
-          theme: "os-theme-light",
-        },
-      }}
-      className="os-theme-light"
-      defer
-    >
+    <>
       <Header />
       <Main>
         <Hero />
@@ -33,7 +22,7 @@ export default function Page() {
         <ContactUs />
       </Main>
       <Footer />
-    </OverlayScrollbarsComponent>
+    </>
   );
 }
 

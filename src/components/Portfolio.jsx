@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation } from "swiper/modules";

@@ -3,6 +3,8 @@ import 'react-phone-number-input/style.css';
 import 'swiper/css/bundle';
 import ClientGlobalStyles from './ClientGlobalStyles';
 import StyledComponentsRegistry from './StyledComponentsRegistry';
+import OverlayScrollbarsProvider from './OverlayScrollbarsProvider';
+import NetlifyFormsDetect from './NetlifyFormsDetect';
 
 export const metadata = {
   title: 'CONTENTDO',
@@ -19,8 +21,11 @@ export default function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <ClientGlobalStyles />
+          <OverlayScrollbarsProvider />
           {children}
           <div id="modal-root" />
+          {/* Hidden server-rendered forms for Netlify detection */}
+          <NetlifyFormsDetect />
         </StyledComponentsRegistry>
       </body>
     </html>
