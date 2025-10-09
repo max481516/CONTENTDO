@@ -58,7 +58,7 @@ export default function ContactForm() {
             body: new URLSearchParams(formData).toString(),
           });
           router.push("/?success=contact");
-        } catch (err) {
+        } catch {
           router.push("/?error=contact");
         }
       }}

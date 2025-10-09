@@ -33,8 +33,7 @@ function zeroPad(num, places) {
 function AnimatedPrice() {
   const [displayNumber, setDisplayNumber] = useState("0000000");
   const [hasAnimated, setHasAnimated] = useState(false);
-  const [finished, setFinished] = useState(false);
-  // 'finished' to indicate we've switched to ????? or not
+  // switched to ????? indicator could be added later if needed
 
   const containerRef = useRef(null);
 
@@ -69,7 +68,6 @@ function AnimatedPrice() {
         // Show "99999" briefly then switch to ?????
         setTimeout(() => {
           setDisplayNumber("???????");
-          setFinished(true);
         }, 200);
       } else {
         setDisplayNumber(zeroPad(currentValue, 5));

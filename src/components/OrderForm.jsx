@@ -147,7 +147,7 @@ export default function OrderForm() {
             body: new URLSearchParams(formData).toString(),
           });
           router.push("/?success=order");
-        } catch (err) {
+        } catch {
           router.push("/?error=order");
         }
       }}
