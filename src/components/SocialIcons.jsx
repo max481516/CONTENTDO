@@ -15,7 +15,7 @@ export default function SocialIcons({ className }) {
           rel="noopener noreferrer"
           aria-label="ВКонтакте"
         >
-          <VK prefixId="icon-1" />
+          <VK />
         </SocialLink>
       </SocialItem>
       <SocialItem>
@@ -25,7 +25,7 @@ export default function SocialIcons({ className }) {
           rel="noopener noreferrer"
           aria-label="Instagram"
         >
-          <Insta prefixId="icon-2" />
+          <Insta />
         </SocialLink>
       </SocialItem>
       <SocialItem>
@@ -35,7 +35,7 @@ export default function SocialIcons({ className }) {
           rel="noopener noreferrer"
           aria-label="TikTok"
         >
-          <TikTok prefixId="icon-4" />
+          <TikTok />
         </SocialLink>
       </SocialItem>
       <SocialItem>
@@ -45,7 +45,7 @@ export default function SocialIcons({ className }) {
           rel="noopener noreferrer"
           aria-label="YouTube"
         >
-          <YT prefixId="icon-3" />
+          <YT />
         </SocialLink>
       </SocialItem>
     </SocialItems>

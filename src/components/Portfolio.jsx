@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import styled from "styled-components";
@@ -8,7 +8,14 @@ import { IoMdPlay } from "react-icons/io";
 import { titleStyles, QUERIES } from "../constants";
 
 export default function Portfolio() {
-  const isMobile = window.innerWidth <= 550;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handle = () => setIsMobile(window.innerWidth <= 550);
+    handle();
+    window.addEventListener("resize", handle);
+    return () => window.removeEventListener("resize", handle);
+  }, []);
 
   return (
     <PortfolioWrapper>

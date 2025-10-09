@@ -49,7 +49,7 @@ function Navbar() {
       <MenuToggle onClick={toggleMobileMenu} aria-label="Toggle Menu">
         {isMobileMenuOpen ? <StyledIoCloseOutline size={45} /> : <FaBars />}
       </MenuToggle>
-      <NavLinks isMobileMenuOpen={isMobileMenuOpen} isClosing={isClosing}>
+      <NavLinks $isMobileMenuOpen={isMobileMenuOpen} $isClosing={isClosing}>
         <NavLinksCenterWrapper>
           <NavLink>
             <a href="#AboutUs" onClick={handleLinkClick}>
@@ -149,8 +149,8 @@ const NavLinks = styled.ul`
   padding: 0;
 
   @media ${QUERIES.tabletAndDown} {
-    display: ${({ isMobileMenuOpen, isClosing }) =>
-      isMobileMenuOpen || isClosing ? "flex" : "none"};
+    display: ${({ $isMobileMenuOpen, $isClosing }) =>
+      $isMobileMenuOpen || $isClosing ? "flex" : "none"};
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -166,8 +166,8 @@ const NavLinks = styled.ul`
     height: 100vh;
     min-height: -webkit-fill-available;
     transform-origin: top right;
-    animation: ${({ isClosing }) =>
-      isClosing
+    animation: ${({ $isClosing }) =>
+      $isClosing
         ? "fadeOut 0.3s forwards ease-out"
         : "fadeIn 0.3s forwards ease-out"};
   }

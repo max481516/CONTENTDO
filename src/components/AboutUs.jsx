@@ -1,3 +1,5 @@
+"use client";
+
 import styled from "styled-components";
 import { titleStyles, QUERIES } from "../constants.js";
 
@@ -28,7 +30,6 @@ export default function AboutUs() {
         muted
         loop
         playsInline
-        webkit-playsinline="true"
         preload="auto"
         src={src}
         type="video/mp4"

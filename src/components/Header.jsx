@@ -15,7 +15,6 @@ export default function Header() {
           autoPlay
           muted
           playsInline
-          webkit-playsinline="true"
           preload="auto"
           loop
         >
