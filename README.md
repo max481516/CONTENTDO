@@ -59,7 +59,7 @@ Currently, two official plugins are available:
 
 - [7] SVGR and assets
 
-  - [ ] Configure `@svgr/webpack`; replace `*.svg?react` with `import Icon from '.../icon.svg'`
+  - [x] Configure `@svgr/webpack`; replaced any `*.svg?react` with `import Icon from '.../icon.svg'` (none remained). Added TS module typings: `src/types/svg.d.ts`.
   - [ ] Move large static media to `public/`; consider `next/image`
 
 - [8] Netlify deployment

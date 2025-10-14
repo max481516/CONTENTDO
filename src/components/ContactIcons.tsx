@@ -1,9 +1,3 @@
-// @ts-ignore - allow importing SVGs as React components without custom module types
-import EmailIcon from "../assets/Email.svg";
-// @ts-ignore
-import WhatsappIcon from "../assets/Whatsapp.svg";
-// @ts-ignore
-import TelegramIcon from "../assets/Telegram.svg";
 import styled from "styled-components";
 import { QUERIES } from "../constants";
 
@@ -11,15 +5,15 @@ export default function ContactIcons() {
   return (
     <ContactIconsContainer>
       <Contact>
-        <EmailIcon />
+        <Icon $name="Email" aria-hidden />
         <IconLegend>Почта</IconLegend>
       </Contact>
       <Contact>
-        <WhatsappIcon />
+        <Icon $name="Whatsapp" aria-hidden />
         <IconLegend>WhatsApp</IconLegend>
       </Contact>
       <Contact>
-        <TelegramIcon />
+        <Icon $name="Telegram" aria-hidden />
         <IconLegend>Telegram</IconLegend>
       </Contact>
     </ContactIconsContainer>
@@ -35,21 +29,6 @@ const ContactIconsContainer = styled.div`
   @media (max-width: 358px) {
     gap: 2rem;
     margin-top: 0.7rem;
-  }
-
-  svg {
-    width: 38px;
-    height: 38px;
-
-    @media ${QUERIES.mobile} {
-      width: 35px;
-      height: 35px;
-    }
-
-    @media (max-width: 358px) {
-      width: 25px;
-      height: 25px;
-    }
   }
 `;
 
@@ -76,5 +55,25 @@ const IconLegend = styled.p`
 
   @media (max-width: 358px) {
     font-size: 0.6rem;
+  }
+`;
+
+// Masked icon that inherits color
+const Icon = styled.span<{ $name: string}>`
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  background-color: currentColor;
+  mask: url(${(p) => `/icons/${p.$name}.svg`}) no-repeat center / contain;
+  -webkit-mask: url(${(p) => `/icons/${p.$name}.svg`}) no-repeat center / contain;
+
+  @media ${QUERIES.mobile} {
+    width: 35px;
+    height: 35px;
+  }
+
+  @media (max-width: 358px) {
+    width: 25px;
+    height: 25px;
   }
 `;

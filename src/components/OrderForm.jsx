@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useState } from "react";
 import { buttonStyles, inputStyles, QUERIES } from "../constants";
 import { IoCloseOutline } from "react-icons/io5";
-import AttachFileIcon from "../assets/AttachFileIcon.svg";
 import SuccessMessage from "./SuccessMessage";
 import ErrorMessage from "./ErrorMessage";
 import { storage } from "../lib/firebase";
@@ -390,10 +389,13 @@ const UploadLabel = styled(Label)`
   }
 `;
 
-const StyledAttachFileIcon = styled(AttachFileIcon)`
+const StyledAttachFileIcon = styled.span`
+  display: inline-block;
   width: 1rem;
   height: 1rem;
-  color: var(--color-body-primary);
+  background-color: currentColor;
+  mask: url('/icons/AttachFileIcon.svg') no-repeat center / contain;
+  -webkit-mask: url('/icons/AttachFileIcon.svg') no-repeat center / contain;
 `;
 
 const HiddenFileInput = styled.input`
