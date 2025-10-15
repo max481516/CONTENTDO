@@ -77,7 +77,6 @@ export default function ContactForm() {
         required
       />
 
-
       <Label htmlFor="phone">Телефон</Label>
       <StyledPhoneInput
         id="phone"
@@ -87,13 +86,10 @@ export default function ContactForm() {
         defaultCountry="RU"
         value={phone}
         onChange={setPhone}
-        required
+        rules={{ required: true }}
       />
 
-
-      <SubmitButton type="submit">
-        ОТПРАВИТЬ
-      </SubmitButton>
+      <SubmitButton type="submit">ОТПРАВИТЬ</SubmitButton>
 
       <ContactMessage>
         Либо свяжитесь с нами любым удобным способом, и мы перезвоним вам в

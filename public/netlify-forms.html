@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Netlify Forms Detection</title>
+    <meta name="robots" content="noindex" />
+    <style>body{display:none}</style>
+  </head>
+  <body>
+    <!-- Hidden fallback forms so Netlify can detect them at build time -->
+    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="name" />
+      <input type="tel" name="phone" />
+      <input type="text" name="bot-field" />
+    </form>
+
+    <form name="order" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="order" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="description"></textarea>
+      <!-- representative hidden file URL field for parser awareness -->
+      <input type="hidden" name="fileUrl_1" />
+      <input type="text" name="bot-field" />
+    </form>
+  </body>
+</html>

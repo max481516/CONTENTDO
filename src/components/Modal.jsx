@@ -4,10 +4,11 @@ import styled from "styled-components";
 import ReactDOM from "react-dom";
 import ContactForm from "./ContactForm";
 import OrderForm from "./OrderForm";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { QUERIES } from "../constants";
 import { useOverlayScrollbars } from "overlayscrollbars-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Modal({ isOpen, modalType, onClose }) {
   // keep your scroll‐lock ref
@@ -29,6 +30,21 @@ export default function Modal({ isOpen, modalType, onClose }) {
         console.log("OverlayScrollbars initialized on form container"),
     },
   });
+
+  // Next router tools for clearing query params on close
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const handleClose = useCallback(() => {
+    // Remove success/error flags so forms render fresh next time
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("success");
+    params.delete("error");
+    const qs = params.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+    onClose();
+  }, [onClose, router, pathname, searchParams]);
 
   // 2) just handle body‐lock in effect
   useEffect(() => {
@@ -55,9 +71,9 @@ export default function Modal({ isOpen, modalType, onClose }) {
     ) : null;
 
   return ReactDOM.createPortal(
-    <Overlay onClick={onClose}>
+    <Overlay onClick={handleClose}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
-        <CloseButton onClick={onClose}>
+        <CloseButton onClick={handleClose}>
           <IoCloseOutline />
         </CloseButton>
         {/* 3) attach the scrollbar ref here */}

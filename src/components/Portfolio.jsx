@@ -30,7 +30,7 @@ export default function Portfolio() {
             centeredSlides={true}
             initialSlide={0}
             slidesPerView={isMobile ? 1.15 : 2}
-            loopedSlides={4}
+            loopedslides={4}
             loop={true}
             spaceBetween={isMobile ? -25 : -200}
             coverflowEffect={
@@ -375,7 +375,6 @@ const VideoDescription = styled.p`
   font-size: 0.8rem;
   width: 60%;
   color: var(--color-body-secondary);
- 
 
   @media ${QUERIES.mobile} {
     width: 100%;

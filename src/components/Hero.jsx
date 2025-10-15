@@ -93,7 +93,7 @@ const FirstWord = styled.span`
   color: var(--color-details-primary);
 `;
 
-const Description = styled.p`
+const Description = styled.div`
   text-align: end;
   line-height: 1.7;
   margin: 0;

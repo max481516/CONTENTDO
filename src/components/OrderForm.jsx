@@ -183,7 +183,7 @@ export default function OrderForm() {
         defaultCountry="RU"
         value={phone}
         onChange={setPhone}
-        required
+        rules={{ required: true }}
       />
 
       <Label htmlFor="description">Описание проекта</Label>
