@@ -1,12 +1,13 @@
 import Navbar from "./Navbar";
 import styled from "styled-components";
 import { QUERIES } from "../constants";
+import Logo from "../assets/logo.svg";
 
 export default function Header() {
   return (
     <HeaderContainer id="Header">
       <HeaderLogoContainer>
-        <StyledHeaderLogo src="/icons/logo.svg" alt="CONTENTDO" />
+        <StyledHeaderLogo />
       </HeaderLogoContainer>
       <VideoContainer>
         <BackgroundVideoElement
@@ -56,7 +57,7 @@ const HeaderLogoContainer = styled.div`
   }
 `;
 
-const StyledHeaderLogo = styled.img`
+const StyledHeaderLogo = styled(Logo)`
   color: var(--color-details-secondary);
   height: 100%;
 

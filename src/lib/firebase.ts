@@ -1,6 +1,6 @@
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getStorage } from 'firebase/storage';
-import { getAuth } from 'firebase/auth';
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 
 // Next.js envs must be prefixed with NEXT_PUBLIC_ to be exposed to the client
 const firebaseConfig = {
@@ -20,9 +20,9 @@ export const auth = getAuth(app);
 
 // Analytics only on the client; returns null on server or if unsupported
 export async function getAnalyticsClient() {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
   try {
-    const { isSupported, getAnalytics } = await import('firebase/analytics');
+    const { isSupported, getAnalytics } = await import("firebase/analytics");
     return (await isSupported()) ? getAnalytics(app) : null;
   } catch {
     return null;

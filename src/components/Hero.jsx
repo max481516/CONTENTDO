@@ -56,7 +56,7 @@ const HeroContainer = styled.section`
 `;
 
 const Title = styled.h1`
-  font-family: "Jura", sans-serif;
+  font-family: var(--font-jura), sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 

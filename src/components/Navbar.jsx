@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { FaBars } from "react-icons/fa6";
 import { IoCloseOutline } from "react-icons/io5";
 import { QUERIES } from "../constants.js";
+import LogoSmall from "../assets/LogoSmall.svg";
 import SocialIcons from "./SocialIcons.jsx";
 
 function Navbar() {
@@ -43,7 +44,7 @@ function Navbar() {
   return (
     <NavbarContainer aria-label="navigation">
       <LogoContainer href="/">
-        <StyledLogo src="/icons/LogoSmall.svg" alt="CONTENTDO" />
+        <StyledLogo />
       </LogoContainer>
       <MenuToggle onClick={toggleMobileMenu} aria-label="Toggle Menu">
         {isMobileMenuOpen ? <StyledIoCloseOutline size={45} /> : <FaBars />}
@@ -95,7 +96,6 @@ const LogoContainer = styled.a`
   width: 100px;
   font-size: 1.5rem;
   font-weight: bold;
-  color: white;
   text-decoration: none;
   padding-top: 16px;
 
@@ -105,9 +105,9 @@ const LogoContainer = styled.a`
   }
 `;
 
-const StyledLogo = styled.img`
-  height: 100%;
-  width: auto;
+const StyledLogo = styled(LogoSmall)`
+  width: 100%;
+  height: auto;
   color: var(--color-details-primary);
 `;
 
@@ -174,7 +174,7 @@ const NavLinks = styled.ul`
 
 const NavLink = styled.li`
   a {
-    font-family: "Jura", sans-serif;
+    font-family: var(--font-jura), sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
     font-weight: 700;

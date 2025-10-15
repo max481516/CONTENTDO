@@ -1,3 +1,7 @@
+import VK from "../assets/VK.svg";
+import Insta from "../assets/Insta.svg";
+import YT from "../assets/YT.svg";
+import TikTok from "../assets/TikTok.svg";
 import styled from "styled-components";
 import { QUERIES } from "../constants";
 
@@ -11,7 +15,7 @@ export default function SocialIcons({ className }) {
           rel="noopener noreferrer"
           aria-label="ВКонтакте"
         >
-          <Icon $name="VK" aria-hidden />
+          <VK width={49} height={49} />
         </SocialLink>
       </SocialItem>
       <SocialItem>
@@ -21,7 +25,7 @@ export default function SocialIcons({ className }) {
           rel="noopener noreferrer"
           aria-label="Instagram"
         >
-          <Icon $name="Insta" aria-hidden />
+          <Insta width={41} height={41} />
         </SocialLink>
       </SocialItem>
       <SocialItem>
@@ -31,7 +35,7 @@ export default function SocialIcons({ className }) {
           rel="noopener noreferrer"
           aria-label="TikTok"
         >
-          <Icon $name="TikTok" aria-hidden />
+          <TikTok width={50} height={50} />
         </SocialLink>
       </SocialItem>
       <SocialItem>
@@ -41,7 +45,7 @@ export default function SocialIcons({ className }) {
           rel="noopener noreferrer"
           aria-label="YouTube"
         >
-          <Icon $name="YT" aria-hidden />
+          <YT width={50} height={38} />
         </SocialLink>
       </SocialItem>
     </SocialItems>
@@ -74,14 +78,8 @@ const SocialLink = styled.a`
     color: var(--color-details-primary);
     transition: color 0.3s ease;
   }
-`;
 
-// Generic masked icon, tinted by currentColor
-const Icon = styled.span`
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background-color: currentColor;
-  mask: url(${(p) => `/icons/${p.$name}.svg`}) no-repeat center / contain;
-  -webkit-mask: url(${(p) => `/icons/${p.$name}.svg`}) no-repeat center / contain;
+  svg {
+    display: block;
+  }
 `;

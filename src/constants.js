@@ -15,7 +15,7 @@ const QUERIES = {
 };
 
 const buttonStyles = css`
-  font-family: "Jura", sans-serif;
+  font-family: var(--font-jura), sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
   font-weight: 700;
@@ -45,7 +45,7 @@ const buttonStyles = css`
 `;
 
 const titleStyles = css`
-  font-family: "Jura", sans-serif;
+  font-family: var(--font-jura), sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
   text-align: center;

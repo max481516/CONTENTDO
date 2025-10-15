@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Union from "../assets/Union.svg";
 import { QUERIES, titleStyles } from "../constants";
 
 export default function PriceInfo() {
@@ -12,7 +13,7 @@ export default function PriceInfo() {
             каждый проект уникален
           </Text>
           <Decoration>
-            <Icon aria-hidden />
+            <StyledUnion aria-hidden />
           </Decoration>
         </Card>
         <Card>
@@ -56,20 +57,10 @@ const Title = styled.h2`
   margin-top: 2rem;
 `;
 
-// Masked decoration icon from public
-const Icon = styled.span`
-  display: inline-block;
-  width: 48px;
-  height: 48px;
-  background-color: currentColor;
-  color: var(--color-details-secondary);
-  mask: url('/icons/Union.svg') no-repeat center / contain;
-  -webkit-mask: url('/icons/Union.svg') no-repeat center / contain;
-
-  @media ${QUERIES.mobile} {
-    width: 32px;
-    height: 32px;
-  }
+const StyledUnion = styled(Union)`
+  width: 17px;
+  height: 17px;
+  color: var(--color-details-primary);
 `;
 
 const Cards = styled.div`
@@ -204,7 +195,7 @@ const Decoration = styled.div`
 
 const Number = styled.p`
   color: var(--color-details-tertiary);
-  font-family: Inter;
+  font-family: var(--font-inter);
   font-size: calc(20rem / 16);
   font-weight: 700;
   position: absolute;

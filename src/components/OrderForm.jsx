@@ -14,6 +14,7 @@ import DOMPurify from "dompurify";
 import PhoneInput from "react-phone-number-input";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import AttachFileIcon from "../assets/AttachFileIcon.svg";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024;
 
@@ -115,16 +116,15 @@ export default function OrderForm() {
     );
   };
 
-  return (
-    showSuccess ? (
-      <Form>
-        <SuccessMessage />
-      </Form>
-    ) : showError ? (
-      <Form>
-        <ErrorMessage />
-      </Form>
-    ) : (
+  return showSuccess ? (
+    <Form>
+      <SuccessMessage />
+    </Form>
+  ) : showError ? (
+    <Form>
+      <ErrorMessage />
+    </Form>
+  ) : (
     <Form
       name="order"
       method="POST"
@@ -238,7 +238,6 @@ export default function OrderForm() {
         ОТПРАВИТЬ
       </SubmitButton>
     </Form>
-    )
   );
 }
 
@@ -389,13 +388,11 @@ const UploadLabel = styled(Label)`
   }
 `;
 
-const StyledAttachFileIcon = styled.span`
-  display: inline-block;
+const StyledAttachFileIcon = styled(AttachFileIcon)`
   width: 1rem;
   height: 1rem;
-  background-color: currentColor;
-  mask: url('/icons/AttachFileIcon.svg') no-repeat center / contain;
-  -webkit-mask: url('/icons/AttachFileIcon.svg') no-repeat center / contain;
+  display: inline-block;
+  color: var(--color-body-primary);
 `;
 
 const HiddenFileInput = styled.input`
