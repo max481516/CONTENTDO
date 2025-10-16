@@ -8,14 +8,8 @@ import { IoMdPlay } from "react-icons/io";
 import { titleStyles, QUERIES } from "../constants";
 
 export default function Portfolio() {
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handle = () => setIsMobile(window.innerWidth <= 550);
-    handle();
-    window.addEventListener("resize", handle);
-    return () => window.removeEventListener("resize", handle);
-  }, []);
+  // TypeScript: Check if window exists (client-side only) to avoid SSR error
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 550;
 
   return (
     <PortfolioWrapper>

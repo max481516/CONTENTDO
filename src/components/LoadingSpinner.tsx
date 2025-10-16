@@ -23,8 +23,8 @@ const Container = styled.div`
 `;
 
 const Spinner = styled.div`
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border: 4px solid var(--color-details-tertiary);
   border-top-color: var(--color-details-primary);
   border-radius: 50%;
