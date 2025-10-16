@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=20.18.1 <21"
+  },
   "scripts": {
     "lint": "eslint .",
     "next:dev": "next dev",
@@ -31,8 +34,8 @@
     "swiper": "^11.1.15"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5",
     "@eslint/js": "^9.13.0",
+    "@netlify/plugin-nextjs": "^5",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20.11.30",
     "@types/react": "^18.3.12",
