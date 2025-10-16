@@ -9,11 +9,12 @@ import AboutUs from "../src/components/AboutUs.jsx";
 import PriceInfo from "../src/components/PriceInfo.jsx";
 import ContactUs from "../src/components/ContactUs.jsx";
 import Footer from "../src/components/Footer.jsx";
+import LoadingSpinner from "../src/components/LoadingSpinner";
 import { QUERIES } from "../src/constants.js";
 
 export default function Page() {
   return (
-    <Suspense fallback={<LoadingFallback>Loading...</LoadingFallback>}>
+    <Suspense fallback={<LoadingSpinner />}>
       <Header />
       <Main>
         <Hero />
@@ -40,11 +41,3 @@ const Main = styled.main`
   }
 `;
 
-const LoadingFallback = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-size: 1.5rem;
-  color: #666;
-`;
