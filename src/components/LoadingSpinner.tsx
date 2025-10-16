@@ -1,5 +1,6 @@
 "use client";
 
+import { titleStyles } from "../constants";
 import styled from "styled-components";
 
 export default function LoadingSpinner() {
@@ -37,6 +38,7 @@ const Spinner = styled.div`
 `;
 
 const Text = styled.p`
+  ${titleStyles}
   font-size: 1.25rem;
   color: var(--color-body-primary);
   font-weight: 500;
