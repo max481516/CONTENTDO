@@ -24,7 +24,7 @@ const manrope = Manrope({
 });
 const jura = Jura({
   subsets: ["latin", "cyrillic"],
-  display: "swap",
+  display: "block",
   variable: "--font-jura",
 });
 
