@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import styled from "styled-components";
 import Header from "../src/components/Header.jsx";
 import Hero from "../src/components/Hero.jsx";
@@ -12,7 +13,7 @@ import { QUERIES } from "../src/constants.js";
 
 export default function Page() {
   return (
-    <>
+    <Suspense fallback={<LoadingFallback>Loading...</LoadingFallback>}>
       <Header />
       <Main>
         <Hero />
@@ -22,7 +23,7 @@ export default function Page() {
         <ContactUs />
       </Main>
       <Footer />
-    </>
+    </Suspense>
   );
 }
 
@@ -37,4 +38,13 @@ const Main = styled.main`
   @media ${QUERIES.mobile} {
     padding: 0 1rem;
   }
+`;
+
+const LoadingFallback = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.5rem;
+  color: #666;
 `;
