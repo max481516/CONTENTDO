@@ -8,7 +8,7 @@ import { IoMdPlay } from "react-icons/io";
 import { titleStyles, QUERIES } from "../constants";
 
 export default function Portfolio() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
     const handle = () => setIsMobile(window.innerWidth <= 550);
@@ -30,7 +30,6 @@ export default function Portfolio() {
             centeredSlides={true}
             initialSlide={0}
             slidesPerView={isMobile ? 1.15 : 2}
-            loopedslides={4}
             loop={true}
             spaceBetween={isMobile ? -25 : -200}
             coverflowEffect={
@@ -95,9 +94,18 @@ export default function Portfolio() {
   );
 }
 
-function VideoSlide({ src, poster, title, description }) {
-  const [showOverlay, setShowOverlay] = useState(true);
-  const videoRef = useRef(null);
+// TypeScript: Define props for the VideoSlide component
+interface VideoSlideProps {
+  src: string;
+  poster: string;
+  title: string;
+  description: string;
+}
+
+function VideoSlide({ src, poster, title, description }: VideoSlideProps) {
+  const [showOverlay, setShowOverlay] = useState<boolean>(true);
+  // TypeScript: Ref must specify it points to an HTMLVideoElement
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const handlePlayClick = () => {
     const video = videoRef.current;
@@ -122,7 +130,7 @@ function VideoSlide({ src, poster, title, description }) {
 
   const handleVideoPaused = () => {
     const video = videoRef.current;
-    // don’t reset overlay if the pause was due to scrubbing/seeking
+    // don't reset overlay if the pause was due to scrubbing/seeking
     if (video && video.seeking) return;
     resetToOverlay();
   };

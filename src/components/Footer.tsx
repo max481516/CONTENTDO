@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { QUERIES } from "../constants";
 import SocialIcons from "./SocialIcons";
 
+// This component has no props, so we don't need a Props interface
 export default function Footer() {
   return (
     <FooterContainer>

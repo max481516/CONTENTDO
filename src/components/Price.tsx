@@ -25,17 +25,20 @@ const Title = styled.h2`
   }
 `;
 
+// TypeScript: Explicitly type the function parameters and return type
 // Helper to zero-pad the number to at least 5 digits
-function zeroPad(num, places) {
+function zeroPad(num: number, places: number): string {
   return String(num).padStart(places, "0");
 }
 
 function AnimatedPrice() {
-  const [displayNumber, setDisplayNumber] = useState("0000000");
-  const [hasAnimated, setHasAnimated] = useState(false);
-  // switched to ????? indicator could be added later if needed
-
-  const containerRef = useRef(null);
+  // TypeScript infers these as string and boolean automatically
+  const [displayNumber, setDisplayNumber] = useState<string>("0000000");
+  const [hasAnimated, setHasAnimated] = useState<boolean>(false);
+  
+  // TypeScript: Ref must specify the element type it will reference
+  // HTMLDivElement means it will point to a <div> element
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;

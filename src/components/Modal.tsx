@@ -10,11 +10,18 @@ import { QUERIES } from "../constants";
 import { useOverlayScrollbars } from "overlayscrollbars-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export default function Modal({ isOpen, modalType, onClose }) {
-  // keep your scroll‐lock ref
-  const scrollRef = useRef(0);
+// TypeScript: Define the props interface
+interface ModalProps {
+  isOpen: boolean; // Can only be true or false
+  modalType: "contact" | "order" | null; // Can only be these specific strings or null
+  onClose: () => void; // Function that takes no parameters and returns nothing
+}
 
-  // 1) get the ref callback (and instance if you ever need it)
+export default function Modal({ isOpen, modalType, onClose }: ModalProps) {
+  // TypeScript: Ref must be typed with number since we store scrollY
+  const scrollRef = useRef<number>(0);
+
+  // get the ref callback (and instance if you ever need it)
   const [osRef /*, osInstance*/] = useOverlayScrollbars({
     options: {
       scrollbars: {
@@ -24,7 +31,6 @@ export default function Modal({ isOpen, modalType, onClose }) {
       },
     },
     defer: true,
-    // you can keep your init log here
     events: {
       initialized: () =>
         console.log("OverlayScrollbars initialized on form container"),
@@ -46,7 +52,7 @@ export default function Modal({ isOpen, modalType, onClose }) {
     onClose();
   }, [onClose, router, pathname, searchParams]);
 
-  // 2) just handle body‐lock in effect
+  // Handle body scroll lock
   useEffect(() => {
     if (isOpen) {
       scrollRef.current = window.scrollY;
@@ -76,13 +82,12 @@ export default function Modal({ isOpen, modalType, onClose }) {
         <CloseButton onClick={handleClose}>
           <IoCloseOutline />
         </CloseButton>
-        {/* 3) attach the scrollbar ref here */}
-        <ScrollableFormContainer ref={osRef}>
+        <ScrollableFormContainer ref={osRef as any}>
           {renderContent()}
         </ScrollableFormContainer>
       </ModalContainer>
     </Overlay>,
-    document.getElementById("modal-root")
+    document.getElementById("modal-root")!
   );
 }
 

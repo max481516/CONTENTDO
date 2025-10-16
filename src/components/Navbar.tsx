@@ -6,11 +6,11 @@ import { FaBars } from "react-icons/fa6";
 import { IoCloseOutline } from "react-icons/io5";
 import { QUERIES } from "../constants.js";
 import LogoSmall from "../assets/LogoSmall.svg";
-import SocialIcons from "./SocialIcons.jsx";
+import SocialIcons from "./SocialIcons";
 
 function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [isClosing, setIsClosing] = useState<boolean>(false);
 
   const toggleMobileMenu = () => {
     if (isMobileMenuOpen) {
@@ -142,7 +142,7 @@ const NavLinksCenterWrapper = styled.div`
   }
 `;
 
-const NavLinks = styled.ul`
+const NavLinks = styled.ul<{ $isMobileMenuOpen: boolean; $isClosing: boolean }>`
   list-style: none;
   margin: 0;
   padding: 0;

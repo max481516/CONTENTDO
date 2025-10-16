@@ -12,15 +12,15 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export default function ContactForm() {
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState<string>("");
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const showSuccess = searchParams.get("success") === "contact";
   const showError = searchParams.get("error") === "contact";
 
-  // Sanitization Function
-  const sanitizeInput = (input) => DOMPurify.sanitize(input);
+  // TypeScript: Sanitization function types input and return as string
+  const sanitizeInput = (input: string): string => DOMPurify.sanitize(input);
 
   if (showSuccess) {
     return (
@@ -49,13 +49,16 @@ export default function ContactForm() {
         e.preventDefault();
         const form = e.currentTarget;
         // Preprocess form data before sending
-        form.name.value = sanitizeInput(form.name.value);
+        const nameInput = form.elements.namedItem("name") as HTMLInputElement;
+        if (nameInput) {
+          nameInput.value = sanitizeInput(nameInput.value);
+        }
         try {
           const formData = new FormData(form);
           await fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString(),
+            body: new URLSearchParams(formData as any).toString(),
           });
           router.push("/?success=contact");
         } catch {

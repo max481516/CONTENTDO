@@ -5,7 +5,12 @@ import TikTok from "../assets/TikTok.svg";
 import styled from "styled-components";
 import { QUERIES } from "../constants";
 
-export default function SocialIcons({ className }) {
+// TypeScript: Define the shape of props this component accepts
+interface SocialIconsProps {
+  className?: string; // The "?" means this prop is optional
+}
+
+export default function SocialIcons({ className }: SocialIconsProps) {
   return (
     <SocialItems className={className}>
       <SocialItem>

@@ -2,7 +2,6 @@
 
 import styled from "styled-components";
 import { titleStyles, QUERIES } from "../constants.js";
-
 import { useEffect, useState } from "react";
 
 export default function AboutUs() {
@@ -11,11 +10,12 @@ export default function AboutUs() {
   const mobileVideo =
     "https://res.cloudinary.com/dqs3mkxnr/video/upload/v1745998900/BackgroundVideoMobile_wkrmr6.mp4";
 
-  const [src, setSrc] = useState(desktopVideo);
+  const [src, setSrc] = useState<string>(desktopVideo);
 
   useEffect(() => {
     const mq = window.matchMedia(QUERIES.mobile);
-    const update = (e) => {
+    // TypeScript: Type the event parameter for MediaQueryList
+    const update = (e: MediaQueryListEvent | MediaQueryList) => {
       setSrc(e.matches ? mobileVideo : desktopVideo);
     };
     update(mq); // set initial media query state
@@ -32,7 +32,6 @@ export default function AboutUs() {
         playsInline
         preload="auto"
         src={src}
-        type="video/mp4"
       ></VideoBackground>
       <ContentWrapper>
         <Title id="AboutUs">О НАС</Title>

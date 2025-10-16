@@ -2,13 +2,13 @@
 
 import { Suspense } from "react";
 import styled from "styled-components";
-import Header from "../src/components/Header.jsx";
-import Hero from "../src/components/Hero.jsx";
-import Portfolio from "../src/components/Portfolio.jsx";
-import AboutUs from "../src/components/AboutUs.jsx";
-import PriceInfo from "../src/components/PriceInfo.jsx";
-import ContactUs from "../src/components/ContactUs.jsx";
-import Footer from "../src/components/Footer.jsx";
+import Header from "../src/components/Header";
+import Hero from "../src/components/Hero";
+import Portfolio from "../src/components/Portfolio";
+import AboutUs from "../src/components/AboutUs";
+import PriceInfo from "../src/components/PriceInfo";
+import ContactUs from "../src/components/ContactUs";
+import Footer from "../src/components/Footer";
 import LoadingSpinner from "../src/components/LoadingSpinner";
 import { QUERIES } from "../src/constants.js";
 
@@ -40,4 +40,3 @@ const Main = styled.main`
     padding: 0 1rem;
   }
 `;
-

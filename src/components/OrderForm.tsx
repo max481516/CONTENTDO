@@ -19,14 +19,14 @@ import AttachFileIcon from "../assets/AttachFileIcon.svg";
 const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024;
 
 export default function OrderForm() {
-  // Local state
-  const [files, setFiles] = useState([]);
-  const [uploadProgress, setUploadProgress] = useState({});
-  const [uploadedFileURLs, setUploadedFileURLs] = useState([]);
-  const [phone, setPhone] = useState("");
+  // TypeScript: Type all state variables
+  const [files, setFiles] = useState<File[]>([]);
+  const [uploadProgress, setUploadProgress] = useState<Record<string, number>>({});
+  const [uploadedFileURLs, setUploadedFileURLs] = useState<string[]>([]);
+  const [phone, setPhone] = useState<string>("");
 
   // Sanitization Function
-  const sanitizeInput = (input) => DOMPurify.sanitize(input);
+  const sanitizeInput = (input: string): string => DOMPurify.sanitize(input);
 
   //firebase functions initialization
   const functions = getFunctions(app, "europe-central2");
@@ -37,18 +37,18 @@ export default function OrderForm() {
   const showSuccess = searchParams.get("success") === "order";
   const showError = searchParams.get("error") === "order";
 
-  const handleFileChange = async (e) => {
-    const selectedFiles = Array.from(e.target.files);
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = Array.from(e.target.files || []);
 
     // Filter out invalid files
-    const validatedFiles = [];
+    const validatedFiles: File[] = [];
     for (const file of selectedFiles) {
       try {
         // Call the validateFile Firebase function
         console.log("Sending fileName to validateFile:", file.name);
         await validateFile({ fileName: file.name });
         validatedFiles.push(file);
-      } catch (error) {
+      } catch (error: any) {
         console.error(`${file.name} is invalid:`, error.message);
         alert(`File ${file.name} is not allowed: ${error.message}`);
       }
@@ -77,7 +77,7 @@ export default function OrderForm() {
   };
 
   // Upload logic
-  const uploadFileToFirebase = (file) => {
+  const uploadFileToFirebase = (file: File) => {
     const storageRef = ref(storage, `uploads/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -101,7 +101,7 @@ export default function OrderForm() {
   };
 
   //Delete accidental file from the list
-  const handleDeleteFile = (fileName) => {
+  const handleDeleteFile = (fileName: string) => {
     // Remove file from `files` state
     setFiles((prev) => prev.filter((file) => file.name !== fileName));
     // Remove progress tracking for the file
@@ -135,15 +135,20 @@ export default function OrderForm() {
         e.preventDefault();
         const form = e.currentTarget;
         // sanitize before submit
-        form.name.value = sanitizeInput(form.name.value);
-        form.email.value = sanitizeInput(form.email.value);
-        form.description.value = sanitizeInput(form.description.value);
+        const nameInput = form.elements.namedItem("name") as HTMLInputElement;
+        const emailInput = form.elements.namedItem("email") as HTMLInputElement;
+        const descInput = form.elements.namedItem("description") as HTMLTextAreaElement;
+        
+        if (nameInput) nameInput.value = sanitizeInput(nameInput.value);
+        if (emailInput) emailInput.value = sanitizeInput(emailInput.value);
+        if (descInput) descInput.value = sanitizeInput(descInput.value);
+        
         try {
           const formData = new FormData(form);
           await fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString(),
+            body: new URLSearchParams(formData as any).toString(),
           });
           router.push("/?success=order");
         } catch {
