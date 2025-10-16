@@ -3,7 +3,11 @@
 import styled from "styled-components";
 import Header from "../src/components/Header.jsx";
 import Hero from "../src/components/Hero.jsx";
-import Portfolio from "../src/components/Portfolio.jsx";
+import dynamic from "next/dynamic";
+const Portfolio = dynamic(() => import("../src/components/Portfolio.jsx"), {
+  ssr: false,
+  loading: () => null,
+});
 import AboutUs from "../src/components/AboutUs.jsx";
 import PriceInfo from "../src/components/PriceInfo.jsx";
 import ContactUs from "../src/components/ContactUs.jsx";
