@@ -1,9 +1,9 @@
-import VK from "../assets/VK.svg";
-import Insta from "../assets/Insta.svg";
-import YT from "../assets/YT.svg";
-import TikTok from "../assets/TikTok.svg";
+import VK from "@/assets/VK.svg";
+import Insta from "@/assets/Insta.svg";
+import YT from "@/assets/YT.svg";
+import TikTok from "@/assets/TikTok.svg";
 import styled from "styled-components";
-import { QUERIES } from "../constants";
+import { QUERIES } from "@/constants";
 
 // TypeScript: Define the shape of props this component accepts
 interface SocialIconsProps {

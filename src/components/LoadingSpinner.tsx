@@ -1,6 +1,6 @@
 "use client";
 
-import { titleStyles } from "../constants";
+import { titleStyles } from "@/constants";
 import styled from "styled-components";
 
 export default function LoadingSpinner() {

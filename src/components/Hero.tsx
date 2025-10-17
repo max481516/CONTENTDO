@@ -1,8 +1,8 @@
 "use client";
 
 import styled from "styled-components";
-import { buttonStyles, QUERIES } from "../constants";
-import { useModal } from "../hooks/useModal";
+import { buttonStyles, QUERIES } from "@/constants";
+import { useModal } from "@/hooks/useModal";
 import Modal from "./Modal";
 
 export default function Hero() {

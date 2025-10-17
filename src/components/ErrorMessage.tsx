@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { QUERIES } from "../constants";
+import { QUERIES } from "@/constants";
 import ContactIcons from "./ContactIcons";
 
 export default function ErrorMessage() {

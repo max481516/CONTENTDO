@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { titleStyles, QUERIES } from "../constants";
+import { titleStyles, QUERIES } from "@/constants";
 
 export default function Price() {
   return (

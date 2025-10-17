@@ -1,8 +1,8 @@
-import EmailIcon from "../assets/Email.svg";
-import WhatsappIcon from "../assets/Whatsapp.svg";
-import TelegramIcon from "../assets/Telegram.svg";
+import EmailIcon from "@/assets/Email.svg";
+import WhatsappIcon from "@/assets/Whatsapp.svg";
+import TelegramIcon from "@/assets/Telegram.svg";
 import styled from "styled-components";
-import { QUERIES } from "../constants";
+import { QUERIES } from "@/constants";
 
 export default function ContactIcons() {
   return (

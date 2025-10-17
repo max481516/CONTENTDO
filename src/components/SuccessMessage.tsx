@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { QUERIES } from "../constants";
+import { QUERIES } from "@/constants";
 
 export default function SuccessMessage() {
   return (

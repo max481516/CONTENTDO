@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { titleStyles, QUERIES } from "../constants.js";
+import { titleStyles, QUERIES } from "@/constants";
 import { useEffect, useState } from "react";
 
 export default function AboutUs() {

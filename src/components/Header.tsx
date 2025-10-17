@@ -1,7 +1,7 @@
 import Navbar from "./Navbar";
 import styled from "styled-components";
-import { QUERIES } from "../constants";
-import Logo from "../assets/logo.svg";
+import { QUERIES } from "@/constants";
+import Logo from "@/assets/logo.svg";
 
 export default function Header() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { buttonStyles, inputStyles, QUERIES } from "../constants";
+import { buttonStyles, inputStyles, QUERIES } from "@/constants";
 import ContactIcons from "./ContactIcons";
 import SuccessMessage from "./SuccessMessage";
 import ErrorMessage from "./ErrorMessage";

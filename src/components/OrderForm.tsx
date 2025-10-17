@@ -2,19 +2,19 @@
 
 import styled from "styled-components";
 import { useState } from "react";
-import { buttonStyles, inputStyles, QUERIES } from "../constants";
+import { buttonStyles, inputStyles, QUERIES } from "@/constants";
 import { IoCloseOutline } from "react-icons/io5";
 import SuccessMessage from "./SuccessMessage";
 import ErrorMessage from "./ErrorMessage";
-import { storage } from "../lib/firebase";
+import { storage } from "@/lib/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { app } from "../lib/firebase";
+import { app } from "@/lib/firebase";
 import DOMPurify from "dompurify";
 import PhoneInput from "react-phone-number-input";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import AttachFileIcon from "../assets/AttachFileIcon.svg";
+import AttachFileIcon from "@/assets/AttachFileIcon.svg";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024;
 

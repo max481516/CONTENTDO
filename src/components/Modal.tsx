@@ -6,7 +6,7 @@ import ContactForm from "./ContactForm";
 import OrderForm from "./OrderForm";
 import { useEffect, useRef, useCallback } from "react";
 import { IoCloseOutline } from "react-icons/io5";
-import { QUERIES } from "../constants";
+import { QUERIES } from "@/constants";
 import { useOverlayScrollbars } from "overlayscrollbars-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 

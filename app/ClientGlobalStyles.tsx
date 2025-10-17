@@ -1,7 +1,7 @@
 "use client";
 
 import { createGlobalStyle } from "styled-components";
-import GlobalStyles from "../src/styles/GlobalStyles";
+import GlobalStyles from "@/styles/GlobalStyles";
 
 const Vars = createGlobalStyle`
   :root {

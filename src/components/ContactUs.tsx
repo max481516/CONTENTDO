@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { titleStyles, buttonStyles, QUERIES } from "../constants";
-import { useModal } from "../hooks/useModal";
+import { titleStyles, buttonStyles, QUERIES } from "@/constants";
+import { useModal } from "@/hooks/useModal";
 import Modal from "./Modal";
 
 export default function ContactUs() {

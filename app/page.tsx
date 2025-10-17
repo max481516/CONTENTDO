@@ -2,15 +2,15 @@
 
 import { Suspense } from "react";
 import styled from "styled-components";
-import Header from "../src/components/Header";
-import Hero from "../src/components/Hero";
-import Portfolio from "../src/components/Portfolio";
-import AboutUs from "../src/components/AboutUs";
-import PriceInfo from "../src/components/PriceInfo";
-import ContactUs from "../src/components/ContactUs";
-import Footer from "../src/components/Footer";
-import LoadingSpinner from "../src/components/LoadingSpinner";
-import { QUERIES } from "../src/constants.js";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import Portfolio from "@/components/Portfolio";
+import AboutUs from "@/components/AboutUs";
+import PriceInfo from "@/components/PriceInfo";
+import ContactUs from "@/components/ContactUs";
+import Footer from "@/components/Footer";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import { QUERIES } from "@/constants";
 
 export default function Page() {
   return (
