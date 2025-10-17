@@ -5,7 +5,6 @@ import "swiper/css/bundle";
 import ClientGlobalStyles from "./ClientGlobalStyles";
 import StyledComponentsRegistry from "./StyledComponentsRegistry";
 import OverlayScrollbarsProvider from "./OverlayScrollbarsProvider";
-import NetlifyFormsDetect from "./NetlifyFormsDetect";
 import { Inter, Manrope, Jura } from "next/font/google";
 
 export const metadata = {
@@ -41,8 +40,6 @@ export default function RootLayout({
     >
       <head />
       <body>
-        {/* Hidden server-rendered forms for Netlify detection - must be outside client components */}
-        <NetlifyFormsDetect />
         <StyledComponentsRegistry>
           <ClientGlobalStyles />
           <OverlayScrollbarsProvider />
