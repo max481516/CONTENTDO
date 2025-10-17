@@ -1,7 +1,7 @@
 "use client";
 
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useState } from "react";
 import { buttonStyles, inputStyles, QUERIES } from "@/constants";
 import { IoCloseOutline } from "react-icons/io5";
 import SuccessMessage from "./SuccessMessage";
