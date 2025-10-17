@@ -41,13 +41,13 @@ export default function RootLayout({
     >
       <head />
       <body>
+        {/* Hidden server-rendered forms for Netlify detection - must be outside client components */}
+        <NetlifyFormsDetect />
         <StyledComponentsRegistry>
           <ClientGlobalStyles />
           <OverlayScrollbarsProvider />
           {children}
           <div id="modal-root" />
-          {/* Hidden server-rendered forms for Netlify detection */}
-          <NetlifyFormsDetect />
         </StyledComponentsRegistry>
       </body>
     </html>

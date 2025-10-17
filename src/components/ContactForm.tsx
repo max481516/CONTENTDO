@@ -55,13 +55,27 @@ export default function ContactForm() {
         }
         try {
           const formData = new FormData(form);
-          await fetch("/", {
+          
+          // DEBUG: Log form data being sent
+          console.log("📤 Submitting contact form with data:");
+          for (let [key, value] of formData.entries()) {
+            console.log(`  ${key}: ${value}`);
+          }
+          
+          const response = await fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams(formData as any).toString(),
           });
-          router.push("/?success=contact");
-        } catch {
+          
+          if (response.ok) {
+            router.push("/?success=contact");
+          } else {
+            console.error("Form submission failed:", response.status, response.statusText);
+            router.push("/?error=contact");
+          }
+        } catch (error) {
+          console.error("Form submission error:", error);
           router.push("/?error=contact");
         }
       }}

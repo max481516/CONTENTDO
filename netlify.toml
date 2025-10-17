@@ -16,7 +16,8 @@
 # Build settings for Next.js
 [build]
   command = "npm run next:build"
-  publish = ".next"
+  # Don't set publish dir when using @netlify/plugin-nextjs
+  # The plugin handles the deployment automatically
 
   [build.environment]
     NODE_VERSION = "20.18.1"
