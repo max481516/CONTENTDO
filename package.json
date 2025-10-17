@@ -7,10 +7,12 @@
     "node": ">=20.18.1 <21"
   },
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p 3000",
     "lint": "eslint .",
-    "next:dev": "next dev",
-    "next:build": "next build",
-    "next:start": "next start -p 3000"
+    "lint:fix": "eslint . --fix",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "dompurify": "^3.2.3",
@@ -38,6 +40,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
+    "@types/dompurify": "^3.0.5",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.11.30",
     "@types/react": "^18.3.12",

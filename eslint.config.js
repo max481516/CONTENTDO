@@ -6,7 +6,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 export default [
   { ignores: ["dist", ".next", "node_modules"] },
   {
-    files: ["**/*.{js,jsx}"],
+    files: ["**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,

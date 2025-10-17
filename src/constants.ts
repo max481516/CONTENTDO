@@ -1,13 +1,29 @@
 import { css } from "styled-components";
 
-const BREAKPOINTS = {
+// TypeScript: Define the shape of breakpoints
+interface Breakpoints {
+  laptopMax: number;
+  largeTabletMax: number;
+  tabletMax: number;
+  mobileMax: number;
+}
+
+const BREAKPOINTS: Breakpoints = {
   laptopMax: 1499,
   largeTabletMax: 1099,
   tabletMax: 769,
   mobileMax: 549,
 };
 
-const QUERIES = {
+// TypeScript: Define the shape of media queries
+interface MediaQueries {
+  laptopAndDown: string;
+  largeTabletAndDown: string;
+  tabletAndDown: string;
+  mobile: string;
+}
+
+const QUERIES: MediaQueries = {
   laptopAndDown: `(max-width: ${BREAKPOINTS.laptopMax / 16}rem)`,
   largeTabletAndDown: `(max-width: ${BREAKPOINTS.largeTabletMax / 16}rem)`,
   tabletAndDown: `(max-width: ${BREAKPOINTS.tabletMax / 16}rem)`,
@@ -85,3 +101,4 @@ const inputStyles = css`
 `;
 
 export { BREAKPOINTS, QUERIES, buttonStyles, titleStyles, inputStyles };
+export type { Breakpoints, MediaQueries };
