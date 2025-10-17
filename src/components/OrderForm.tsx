@@ -159,6 +159,8 @@ export default function OrderForm() {
       {/* Netlify form hidden fields */}
       <input type="hidden" name="form-name" value="order" />
       <input type="hidden" name="bot-field" />
+      {/* Hidden input to capture phone value for Netlify */}
+      <input type="hidden" name="phone" value={phone || ""} />
       <Title>Заказать проект</Title>
 
       <Label htmlFor="name">Имя</Label>
@@ -179,10 +181,9 @@ export default function OrderForm() {
         required
       />
 
-      <Label htmlFor="phone">Телефон</Label>
+      <Label htmlFor="phone-display">Телефон</Label>
       <StyledPhoneInput
-        id="phone"
-        name="phone"
+        id="phone-display"
         type="tel"
         international
         defaultCountry="RU"

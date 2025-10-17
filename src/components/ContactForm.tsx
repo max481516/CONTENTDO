@@ -69,6 +69,8 @@ export default function ContactForm() {
       {/* Netlify form hidden fields */}
       <input type="hidden" name="form-name" value="contact" />
       <input type="hidden" name="bot-field" />
+      {/* Hidden input to capture phone value for Netlify */}
+      <input type="hidden" name="phone" value={phone || ""} />
       <Title>Оставьте ваши контакты и мы с вами свяжемся</Title>
 
       <Label htmlFor="name">Имя</Label>
@@ -80,10 +82,9 @@ export default function ContactForm() {
         required
       />
 
-      <Label htmlFor="phone">Телефон</Label>
+      <Label htmlFor="phone-display">Телефон</Label>
       <StyledPhoneInput
-        id="phone"
-        name="phone"
+        id="phone-display"
         type="tel"
         international
         defaultCountry="RU"
