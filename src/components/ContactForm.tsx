@@ -47,6 +47,13 @@ export default function ContactForm() {
       action="/?success=contact"
       onSubmit={async (e) => {
         e.preventDefault();
+
+        // Validate phone number (PhoneInput doesn't support native required attribute)
+        if (!phone) {
+          alert("Пожалуйста, введите номер телефона");
+          return;
+        }
+
         const form = e.currentTarget;
         // Preprocess form data before sending
         const nameInput = form.elements.namedItem("name") as HTMLInputElement;
@@ -55,23 +62,27 @@ export default function ContactForm() {
         }
         try {
           const formData = new FormData(form);
-          
+
           // DEBUG: Log form data being sent
           console.log("📤 Submitting contact form with data:");
           for (let [key, value] of formData.entries()) {
             console.log(`  ${key}: ${value}`);
           }
-          
+
           const response = await fetch("/netlify-forms.html", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams(formData as any).toString(),
           });
-          
+
           if (response.ok) {
             router.push("/?success=contact");
           } else {
-            console.error("Form submission failed:", response.status, response.statusText);
+            console.error(
+              "Form submission failed:",
+              response.status,
+              response.statusText
+            );
             router.push("/?error=contact");
           }
         } catch (error) {
@@ -99,12 +110,10 @@ export default function ContactForm() {
       <Label htmlFor="phone-display">Телефон</Label>
       <StyledPhoneInput
         id="phone-display"
-        type="tel"
         international
         defaultCountry="RU"
         value={phone}
         onChange={setPhone}
-        rules={{ required: true }}
       />
 
       <SubmitButton type="submit">ОТПРАВИТЬ</SubmitButton>

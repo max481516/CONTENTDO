@@ -21,7 +21,9 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024 * 1024;
 export default function OrderForm() {
   // TypeScript: Type all state variables
   const [files, setFiles] = useState<File[]>([]);
-  const [uploadProgress, setUploadProgress] = useState<Record<string, number>>({});
+  const [uploadProgress, setUploadProgress] = useState<Record<string, number>>(
+    {}
+  );
   const [uploadedFileURLs, setUploadedFileURLs] = useState<string[]>([]);
   const [phone, setPhone] = useState<string>("");
 
@@ -133,35 +135,48 @@ export default function OrderForm() {
       action="/?success=order"
       onSubmit={async (e) => {
         e.preventDefault();
+
+        // Validate phone number (PhoneInput doesn't support native required attribute)
+        if (!phone) {
+          alert("Пожалуйста, введите номер телефона");
+          return;
+        }
+
         const form = e.currentTarget;
         // sanitize before submit
         const nameInput = form.elements.namedItem("name") as HTMLInputElement;
         const emailInput = form.elements.namedItem("email") as HTMLInputElement;
-        const descInput = form.elements.namedItem("description") as HTMLTextAreaElement;
-        
+        const descInput = form.elements.namedItem(
+          "description"
+        ) as HTMLTextAreaElement;
+
         if (nameInput) nameInput.value = sanitizeInput(nameInput.value);
         if (emailInput) emailInput.value = sanitizeInput(emailInput.value);
         if (descInput) descInput.value = sanitizeInput(descInput.value);
-        
+
         try {
           const formData = new FormData(form);
-          
+
           // DEBUG: Log form data being sent
           console.log("📤 Submitting order form with data:");
           for (let [key, value] of formData.entries()) {
             console.log(`  ${key}: ${value}`);
           }
-          
+
           const response = await fetch("/netlify-forms.html", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams(formData as any).toString(),
           });
-          
+
           if (response.ok) {
             router.push("/?success=order");
           } else {
-            console.error("Form submission failed:", response.status, response.statusText);
+            console.error(
+              "Form submission failed:",
+              response.status,
+              response.statusText
+            );
             router.push("/?error=order");
           }
         } catch (error) {
@@ -198,12 +213,10 @@ export default function OrderForm() {
       <Label htmlFor="phone-display">Телефон</Label>
       <StyledPhoneInput
         id="phone-display"
-        type="tel"
         international
         defaultCountry="RU"
         value={phone}
         onChange={setPhone}
-        rules={{ required: true }}
       />
 
       <Label htmlFor="description">Описание проекта</Label>
@@ -246,7 +259,7 @@ export default function OrderForm() {
         <HiddenInput
           type="hidden"
           name="fileUrls"
-          value={uploadedFileURLs.join('\n')}
+          value={uploadedFileURLs.join("\n")}
         />
       )}
 
