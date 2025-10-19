@@ -146,26 +146,16 @@ export default function OrderForm() {
         try {
           const formData = new FormData(form);
           
-          // Remove empty fileUrl fields to avoid cluttering the email
-          const filteredData = new FormData();
-          for (let [key, value] of formData.entries()) {
-            // Skip empty fileUrl fields
-            if (key.startsWith('fileUrl_') && !value) {
-              continue;
-            }
-            filteredData.append(key, value);
-          }
-          
           // DEBUG: Log form data being sent
           console.log("📤 Submitting order form with data:");
-          for (let [key, value] of filteredData.entries()) {
+          for (let [key, value] of formData.entries()) {
             console.log(`  ${key}: ${value}`);
           }
           
           const response = await fetch("/netlify-forms.html", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(filteredData as any).toString(),
+            body: new URLSearchParams(formData as any).toString(),
           });
           
           if (response.ok) {
@@ -251,15 +241,14 @@ export default function OrderForm() {
         ))}
       </FileList>
 
-      {/* Hidden inputs for each uploaded file URL so Netlify receives them */}
-      {uploadedFileURLs.map((url, i) => (
+      {/* Single hidden field with all file URLs (one per line) */}
+      {uploadedFileURLs.length > 0 && (
         <HiddenInput
-          key={i}
           type="hidden"
-          name={`fileUrl_${i + 1}`}
-          value={url}
+          name="fileUrls"
+          value={uploadedFileURLs.join('\n')}
         />
-      ))}
+      )}
 
       <SubmitButton
         type="submit"
