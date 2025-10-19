@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { buttonStyles, inputStyles, QUERIES } from "@/constants";
-import { IoCloseOutline } from "react-icons/io5";
+import { IoCloseOutline, IoCheckmarkCircle } from "react-icons/io5";
 import SuccessMessage from "./SuccessMessage";
 import ErrorMessage from "./ErrorMessage";
 import { storage } from "@/lib/firebase";
@@ -246,7 +246,11 @@ export default function OrderForm() {
         {files.map((file) => (
           <FileItem key={file.name}>
             <FileName>{file.name}</FileName>
-            <ProgressText>{uploadProgress[file.name] || 0}%</ProgressText>
+            {uploadProgress[file.name] === 100 ? (
+              <CheckIcon />
+            ) : (
+              <ProgressText>{uploadProgress[file.name] || 0}%</ProgressText>
+            )}
             <RemoveButton onClick={() => handleDeleteFile(file.name)}>
               <IoCloseOutline />
             </RemoveButton>
@@ -471,6 +475,15 @@ const ProgressText = styled.span`
 
   @media ${QUERIES.mobile} {
     font-size: 0.6rem;
+  }
+`;
+
+const CheckIcon = styled(IoCheckmarkCircle)`
+  color: #9ca3af;
+  font-size: 1.2rem;
+
+  @media ${QUERIES.mobile} {
+    font-size: 1rem;
   }
 `;
 
