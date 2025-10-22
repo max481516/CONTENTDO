@@ -6,11 +6,10 @@ import ClientGlobalStyles from "./ClientGlobalStyles";
 import StyledComponentsRegistry from "./StyledComponentsRegistry";
 import OverlayScrollbarsProvider from "./OverlayScrollbarsProvider";
 import { Inter, Manrope, Jura } from "next/font/google";
+import { siteMetadata } from "./metadata";
+import OrganizationSchema from "@/components/StructuredData/OrganizationSchema";
 
-export const metadata = {
-  title: "CONTENTDO",
-  description: "Next.js + TypeScript bootstrap",
-};
+export const metadata = siteMetadata;
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -24,7 +23,7 @@ const manrope = Manrope({
 });
 const jura = Jura({
   subsets: ["latin", "cyrillic"],
-  display: "block",
+  display: "swap",
   variable: "--font-jura",
 });
 
@@ -38,7 +37,9 @@ export default function RootLayout({
       lang="ru"
       className={`${inter.variable} ${manrope.variable} ${jura.variable}`}
     >
-      <head />
+      <head>
+        <OrganizationSchema />
+      </head>
       <body>
         <StyledComponentsRegistry>
           <ClientGlobalStyles />
