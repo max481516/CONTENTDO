@@ -70,10 +70,9 @@ export const siteMetadata: Metadata = {
   },
 
   // Verification tags (you'll add these later when you register with Yandex)
-  // verification: {
-  //   yandex: 'your_yandex_verification_code',
-  //   google: 'your_google_verification_code',
-  // },
+  verification: {
+    yandex: '9be8141f525d2eb2',
+  },
 
   // For better categorization
   category: "Video Production",

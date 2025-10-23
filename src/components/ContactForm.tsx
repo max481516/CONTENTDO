@@ -72,7 +72,7 @@ export default function ContactForm() {
           const response = await fetch("/netlify-forms.html", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
+            body: new URLSearchParams(Array.from(formData.entries()) as [string, string][]).toString(),
           });
 
           if (response.ok) {

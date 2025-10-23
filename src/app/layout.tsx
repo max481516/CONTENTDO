@@ -8,6 +8,7 @@ import OverlayScrollbarsProvider from "./OverlayScrollbarsProvider";
 import { Inter, Manrope, Jura } from "next/font/google";
 import { siteMetadata } from "./metadata";
 import OrganizationSchema from "@/components/StructuredData/OrganizationSchema";
+import YandexMetrika from "@/components/Analytics/YandexMetrika";
 
 export const metadata = siteMetadata;
 
@@ -41,6 +42,7 @@ export default function RootLayout({
         <OrganizationSchema />
       </head>
       <body>
+        <YandexMetrika />
         <StyledComponentsRegistry>
           <ClientGlobalStyles />
           <OverlayScrollbarsProvider />
