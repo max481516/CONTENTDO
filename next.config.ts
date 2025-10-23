@@ -8,9 +8,9 @@ const nextConfig: NextConfig = {
   compiler: {
     styledComponents: true,
   },
-  webpack: (config: any) => {
+    webpack: (config: any) => {
     // Grab the existing rule that handles SVG imports
-    const assetRule = config.module.rules.find((rule: any) => rule?.test?.test?.('.svg'));
+            const assetRule = config.module.rules.find((rule: any) => rule?.test?.test?.('.svg'));
 
     if (assetRule) {
       // Reapply the existing rule, but only for svg imports ending in ?url

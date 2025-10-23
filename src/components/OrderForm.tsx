@@ -50,9 +50,14 @@ export default function OrderForm() {
         console.log("Sending fileName to validateFile:", file.name);
         await validateFile({ fileName: file.name });
         validatedFiles.push(file);
-      } catch (error: any) {
-        console.error(`${file.name} is invalid:`, error.message);
-        alert(`File ${file.name} is not allowed: ${error.message}`);
+                  } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error(`${file.name} is invalid:`, error.message);
+          alert(`File ${file.name} is not allowed: ${error.message}`);
+        } else {
+          console.error(`${file.name} is invalid:`, error);
+          alert(`File ${file.name} is not allowed due to an unknown error.`);
+        }
       }
     }
 
@@ -166,7 +171,7 @@ export default function OrderForm() {
           const response = await fetch("/netlify-forms.html", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData as any).toString(),
+                        body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
           });
 
           if (response.ok) {

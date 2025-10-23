@@ -1,5 +1,5 @@
 export default function OrganizationSchema() {
-  const origin = process.env.NEXT_PUBLIC_SITE_URL || "https://contentdo.ru";
+  const origin = "https://contentdo.ru";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",

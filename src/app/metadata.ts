@@ -5,7 +5,7 @@ import { Metadata } from "next";
  * Targeting Russian market (Yandex priority)
  */
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://contentdo.ru";
+const siteUrl = "https://contentdo.ru";
 
 export const siteMetadata: Metadata = {
   // Basic metadata
