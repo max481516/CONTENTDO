@@ -12,6 +12,8 @@ export default function Header() {
       <VideoContainer>
         <BackgroundVideoElement
           id="background-video"
+          title="Фоновое видео CONTENTDO"
+          aria-label="Декоративное фоновое видео"
           autoPlay
           muted
           playsInline

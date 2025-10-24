@@ -9,7 +9,7 @@ export default function Hero() {
   const { isOpen, modalType, openModal, closeModal } = useModal();
   return (
     <HeroContainer>
-      <Title>
+      <Title aria-label="Видеопродакшн полного цикла в Москве: каскадеры, постановка трюков">
         <FirstWord>делаем </FirstWord>контент!
       </Title>
       <Description>

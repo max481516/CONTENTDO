@@ -101,6 +101,22 @@ function VideoSlide({ src, poster, title, description }: VideoSlideProps) {
   // TypeScript: Ref must specify it points to an HTMLVideoElement
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // VideoObject structured data for SEO
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": title,
+    "description": description,
+    "thumbnailUrl": poster,
+    "contentUrl": src,
+    "uploadDate": "2024-12-01", // Adjust per video if needed
+    "publisher": {
+      "@type": "Organization",
+      "name": "CONTENTDO",
+      "url": "https://contentdo.ru"
+    }
+  };
+
   const handlePlayClick = () => {
     const video = videoRef.current;
     if (video) {
@@ -131,9 +147,15 @@ function VideoSlide({ src, poster, title, description }: VideoSlideProps) {
 
   return (
     <SlideInner>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+      />
       <VideoWrapper>
         <Video
           ref={videoRef}
+          title={title}
+          aria-label={`Видео: ${title}`}
           playsInline
           muted
           preload="metadata"

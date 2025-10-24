@@ -26,6 +26,8 @@ export default function AboutUs() {
   return (
     <Wrapper>
       <VideoBackground
+        title="Фоновое видео о компании"
+        aria-label="Декоративное фоновое видео"
         autoPlay
         muted
         loop

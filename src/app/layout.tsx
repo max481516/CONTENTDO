@@ -9,6 +9,7 @@ import { Inter, Manrope, Jura } from "next/font/google";
 import { siteMetadata } from "./metadata";
 import OrganizationSchema from "@/components/StructuredData/OrganizationSchema";
 import YandexMetrika from "@/components/Analytics/YandexMetrika";
+import ServiceSchema from "@/components/StructuredData/ServiceSchema";
 
 export const metadata = siteMetadata;
 
@@ -40,6 +41,7 @@ export default function RootLayout({
     >
       <head>
         <OrganizationSchema />
+        <ServiceSchema />
       </head>
       <body>
         <YandexMetrika />

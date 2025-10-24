@@ -6,6 +6,25 @@ export default function OrganizationSchema() {
     name: "CONTENTDO",
     url: origin,
     logo: `${origin}/android-chrome-512x512.png`,
+    sameAs: [
+      "https://m.vk.com/contentdo",
+      "https://www.instagram.com/content_do",
+      "https://www.youtube.com/@SkillQuant"
+    ],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Москва",
+      addressCountry: "RU"
+    },
+    areaServed: "RU-MOW",
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        availableLanguage: ["ru"],
+        url: origin
+      }
+    ]
   };
 
   return (
