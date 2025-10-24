@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { FaBars } from "react-icons/fa6";
+import { HiMiniBars3 } from "react-icons/hi2";
+
 import { IoCloseOutline } from "react-icons/io5";
 import { QUERIES } from "@/constants";
 import LogoSmall from "@/assets/LogoSmall.svg";
@@ -47,7 +48,11 @@ function Navbar() {
         <StyledLogo />
       </LogoContainer>
       <MenuToggle onClick={toggleMobileMenu} aria-label="Toggle Menu">
-        {isMobileMenuOpen ? <StyledIoCloseOutline size={45} /> : <FaBars />}
+        {isMobileMenuOpen ? (
+          <StyledIoCloseOutline size={45} />
+        ) : (
+          <HiMiniBars3 size={40} />
+        )}
       </MenuToggle>
       <NavLinks $isMobileMenuOpen={isMobileMenuOpen} $isClosing={isClosing}>
         <NavLinksCenterWrapper>
@@ -129,7 +134,8 @@ const StyledIoCloseOutline = styled(IoCloseOutline)`
   margin: -4px -4px 0 0;
 `;
 
-const NavLinksCenterWrapper = styled.div`
+const NavLinksCenterWrapper = styled.ul`
+  list-style: none;
   display: flex;
   gap: 1.5rem;
   @media ${QUERIES.tabletAndDown} {
@@ -142,8 +148,10 @@ const NavLinksCenterWrapper = styled.div`
   }
 `;
 
-const NavLinks = styled.ul<{ $isMobileMenuOpen: boolean; $isClosing: boolean }>`
-  list-style: none;
+const NavLinks = styled.div<{
+  $isMobileMenuOpen: boolean;
+  $isClosing: boolean;
+}>`
   margin: 0;
   padding: 0;
 

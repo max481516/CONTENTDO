@@ -15,8 +15,8 @@ export default function Portfolio() {
     <PortfolioWrapper>
       <Title id="Portfolio">НАШИ ПРОЕКТЫ</Title>
       <RelativeWrapper>
-        <button className="swiper-button-prev" />
-        <button className="swiper-button-next" />
+        <button className="swiper-button-prev" aria-label="Предыдущий слайд" />
+        <button className="swiper-button-next" aria-label="Следующий слайд" />
 
         <CarouselContainer>
           <Swiper
@@ -170,7 +170,7 @@ function VideoSlide({ src, poster, title, description }: VideoSlideProps) {
         {showOverlay && (
           <Overlay>
             <ButtonCircle>
-              <PlayButton onClick={handlePlayClick}>
+              <PlayButton onClick={handlePlayClick} aria-label={`Воспроизвести видео: ${title}`}>
                 <IoMdPlay />
               </PlayButton>
             </ButtonCircle>
