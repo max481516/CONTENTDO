@@ -44,7 +44,7 @@ function Navbar() {
 
   return (
     <NavbarContainer aria-label="navigation">
-      <LogoContainer href="/">
+      <LogoContainer href="/" aria-label="CONTENTDO — На главную">
         <StyledLogo />
       </LogoContainer>
       <MenuToggle onClick={toggleMobileMenu} aria-label="Toggle Menu">
