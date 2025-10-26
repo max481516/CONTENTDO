@@ -18,7 +18,7 @@ export default function Header() {
           muted
           playsInline
           preload="auto"
-          poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_9,w_1920,h_1080,c_thumb,g_auto/v1738167667/output_pfqe7f.jpg"
+          poster="https://res.cloudinary.com/dqs3mkxnr/video/upload/so_9.5,w_1920,h_1080,c_thumb,g_auto/v1738167667/output_pfqe7f.jpg"
           loop
         >
           <source
