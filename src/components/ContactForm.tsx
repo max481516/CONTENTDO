@@ -5,6 +5,7 @@ import { buttonStyles, inputStyles, QUERIES } from "@/constants";
 import ContactIcons from "./ContactIcons";
 import SuccessMessage from "./SuccessMessage";
 import ErrorMessage from "./ErrorMessage";
+import ConsentCheckbox from "./ConsentCheckbox";
 import DOMPurify from "dompurify";
 import PhoneInput from "react-phone-number-input";
 import { useState } from "react";
@@ -55,6 +56,14 @@ export default function ContactForm() {
         }
 
         const form = e.currentTarget;
+
+        // 152-ФЗ: block submission without an explicit, unchecked-by-default consent
+        const consentInput = form.elements.namedItem("consent") as HTMLInputElement | null;
+        if (!consentInput?.checked) {
+          alert("Необходимо дать согласие на обработку персональных данных");
+          return;
+        }
+
         // Preprocess form data before sending
         const nameInput = form.elements.namedItem("name") as HTMLInputElement;
         if (nameInput) {
@@ -62,12 +71,6 @@ export default function ContactForm() {
         }
         try {
           const formData = new FormData(form);
-
-          // DEBUG: Log form data being sent
-          console.log("📤 Submitting contact form with data:");
-          for (let [key, value] of formData.entries()) {
-            console.log(`  ${key}: ${value}`);
-          }
 
           const response = await fetch("/netlify-forms.html", {
             method: "POST",
@@ -115,6 +118,8 @@ export default function ContactForm() {
         value={phone}
         onChange={setPhone}
       />
+
+      <ConsentCheckbox formName="contact" />
 
       <SubmitButton type="submit">ОТПРАВИТЬ</SubmitButton>
 

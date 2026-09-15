@@ -6,6 +6,7 @@ import { buttonStyles, inputStyles, QUERIES } from "@/constants";
 import { IoCloseOutline, IoCheckmarkCircle } from "react-icons/io5";
 import SuccessMessage from "./SuccessMessage";
 import ErrorMessage from "./ErrorMessage";
+import ConsentCheckbox from "./ConsentCheckbox";
 import { storage } from "@/lib/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getFunctions, httpsCallable } from "firebase/functions";
@@ -148,6 +149,14 @@ export default function OrderForm() {
         }
 
         const form = e.currentTarget;
+
+        // 152-ФЗ: block submission without an explicit, unchecked-by-default consent
+        const consentInput = form.elements.namedItem("consent") as HTMLInputElement | null;
+        if (!consentInput?.checked) {
+          alert("Необходимо дать согласие на обработку персональных данных");
+          return;
+        }
+
         // sanitize before submit
         const nameInput = form.elements.namedItem("name") as HTMLInputElement;
         const emailInput = form.elements.namedItem("email") as HTMLInputElement;
@@ -161,12 +170,6 @@ export default function OrderForm() {
 
         try {
           const formData = new FormData(form);
-
-          // DEBUG: Log form data being sent
-          console.log("📤 Submitting order form with data:");
-          for (let [key, value] of formData.entries()) {
-            console.log(`  ${key}: ${value}`);
-          }
 
           const response = await fetch("/netlify-forms.html", {
             method: "POST",
@@ -271,6 +274,8 @@ export default function OrderForm() {
           value={uploadedFileURLs.join("\n")}
         />
       )}
+
+      <ConsentCheckbox formName="order" />
 
       <SubmitButton
         type="submit"
