@@ -15,7 +15,8 @@ CONTENTDO is the website of a video production studio specializing in commercial
 - 🎥 Video project portfolio with an interactive player
 - 📝 Two contact forms (quick contact and project order)
 - 📤 Project file upload via Firebase Storage (up to 10 GB)
-- 📊 Yandex Metrika analytics integration
+- 📊 Yandex Metrika analytics integration (consent-gated, loads only after the cookie banner is accepted)
+- 🍪 152-ФЗ compliance: cookie banner, privacy policy, standalone consent document, consent checkbox on forms
 - 🔍 Full SEO optimization for the Russian market (Yandex priority)
 - ♿ Accessibility (WCAG AA)
 
@@ -62,8 +63,10 @@ CONTENTDO is the website of a video production studio specializing in commercial
 CONTENTDO/
 ├── src/
 │   ├── app/                          # Next.js App Router
-│   │   ├── layout.tsx               # Root layout, global styles, metrics
+│   │   ├── layout.tsx               # Root layout, global styles, ConsentProvider, gated Metrika
 │   │   ├── page.tsx                 # Home page (single-page site)
+│   │   ├── privacy/page.tsx         # Политика конфиденциальности (152-ФЗ ст. 18.1)
+│   │   ├── consent/page.tsx         # Согласие на обработку ПДн (standalone, 152-ФЗ ст. 9)
 │   │   ├── metadata.ts              # SEO metadata (title, OG, Twitter)
 │   │   ├── robots.ts                # Dynamic robots.txt
 │   │   ├── sitemap.ts               # Dynamic sitemap.xml
@@ -82,7 +85,8 @@ CONTENTDO/
 │   │   ├── ContactUs.tsx            # Contacts block
 │   │   ├── ContactForm.tsx          # Quick contact form
 │   │   ├── OrderForm.tsx            # Project order form with file upload
-│   │   ├── Footer.tsx               # Footer
+│   │   ├── ConsentCheckbox.tsx      # Required 152-ФЗ consent checkbox used by both forms
+│   │   ├── Footer.tsx               # Footer (legal links, «Настройки cookie», operator details)
 │   │   ├── Modal.tsx                # Modal window
 │   │   ├── SocialIcons.tsx          # Social icons (VK, Instagram, YouTube)
 │   │   ├── ContactIcons.tsx         # Contact icons (Email, WhatsApp, Telegram)
@@ -91,11 +95,22 @@ CONTENTDO/
 │   │   ├── LoadingSpinner.tsx       # Loading spinner
 │   │   │
 │   │   ├── Analytics/
-│   │   │   └── YandexMetrika.tsx    # Yandex Metrika counter
+│   │   │   └── YandexMetrika.tsx    # Yandex Metrika counter (renders only after consent)
+│   │   │
+│   │   ├── CookieConsent/
+│   │   │   ├── consentStorage.ts    # localStorage record, version check, _ym_* cleanup
+│   │   │   ├── ConsentProvider.tsx  # React context: consent state, accept/reject/openSettings
+│   │   │   └── CookieConsentBanner.tsx # Fixed bottom banner («Принять» / «Отклонить»)
+│   │   │
+│   │   ├── Legal/
+│   │   │   └── LegalPageLayout.tsx  # Shared shell for /privacy and /consent
 │   │   │
 │   │   └── StructuredData/          # JSON-LD schemas for SEO
 │   │       ├── OrganizationSchema.tsx  # Schema.org Organization
 │   │       └── ServiceSchema.tsx       # Schema.org Service (×3)
+│   │
+│   ├── legal/
+│   │   └── operator.ts              # Operator details (ИНН, ОГРН, address), document versions
 │   │
 │   ├── lib/
 │   │   └── firebase.ts              # Firebase configuration and init
@@ -219,6 +234,8 @@ npm run type-check
 - File validation via Firebase Cloud Function
 - All inputs sanitized via DOMPurify
 - Success/Error states with redirect
+- Required, unchecked-by-default consent checkbox (152-ФЗ) linking to `/consent` and `/privacy`; `consent=yes` and `consentVersion` are submitted with every form (also declared in `public/netlify-forms.html`)
+- No personal data is logged to the browser console
 
 ### 3. **Firebase Storage**
 
@@ -227,9 +244,9 @@ npm run type-check
 - Server-side file type validation
 - File size limit (10 GB)
 
-### 4. **Analytics**
+### 4. **Analytics (consent-gated)**
 
-- Yandex Metrika (ID: 104808419)
+- Yandex Metrika (ID: 104808419, override with `NEXT_PUBLIC_YANDEX_METRICA_ID`)
 
   - SSR mode
   - Webvisor
@@ -238,7 +255,15 @@ npm run type-check
   - Accurate bounce rate
   - Link tracking
 
-- Noscript fallback (pixel tracking)
+- The counter is injected **only after** the visitor clicks «Принять» in the cookie banner. Before that there is no request to `mc.yandex.ru` and no `_ym_*` cookie. The noscript pixel was removed because it cannot be gated.
+
+### 5. **Legal / 152-ФЗ compliance**
+
+- **Cookie banner** (`src/components/CookieConsent/`): shown on first visit, two equally weighted buttons «Принять» / «Отклонить», link to the policy, no pre-ticked options. Reopened via «Настройки cookie» in the footer; «Отклонить» after a prior accept purges `_ym_*` cookies/storage and reloads so Webvisor stops.
+- **Consent record**: `localStorage["contentdo.cookieConsent"]` = `{ version, timestamp (ISO), necessary: true, analytics }`. `version` equals `LEGAL_DOCS.privacy.version` in `src/legal/operator.ts`; bump it whenever the cookie/analytics section of the policy changes and every visitor is asked again.
+- **Legal pages**: `/privacy` (Политика в отношении обработки персональных данных, ст. 18.1) and `/consent` (standalone Согласие, ст. 9 as amended by 156-ФЗ from 1 Sept 2025). Both are in the sitemap and linked from the footer and from the forms.
+- **Operator details** (name, ИНН, ОГРН, address, e-mail) live in `src/legal/operator.ts` as `{{PLACEHOLDERS}}` — fill them in before going live; they are rendered in the footer and in both documents.
+- **Still required outside the code** (operator to-dos): notification to Roskomnadzor about processing (ст. 22) and about cross-border transfer to Netlify/Google in the USA (ст. 12); since 1 July 2025 (23-ФЗ) the primary store of Russian citizens' data must be a database in Russia — form data currently goes to Netlify Forms and Firebase, which needs an architectural decision (Russian form back-end or buffer).
 
 ---
 
@@ -349,6 +374,7 @@ export const QUERIES = {
 - ✅ **Server-side file validation** (Cloud Function `validateFile`)
 - ✅ **Type safety** via TypeScript
 - ✅ **CSP-ready** (Content Security Policy)
+- ✅ **Personal data hygiene**: analytics gated behind consent, consent checkbox on forms, no form data in the console
 
 ---
 
@@ -357,8 +383,9 @@ export const QUERIES = {
 ### Yandex Metrika
 
 - **Counter ID:** 104808419
+- **Consent gating:** the tag loads only after «Принять» in the cookie banner (`YandexMetrika.tsx` reads `useConsent()`); verify in DevTools → Network (filter `yandex`) that nothing is requested before consent
 - **Goals:** Configure in the Yandex Metrika UI
-- **Webvisor:** Enabled (session recording)
+- **Webvisor:** Enabled (session recording) — disclosed in `/privacy`, section 7
 - **Ecommerce:** dataLayer integration set up
 
 ### Yandex Webmaster
@@ -406,7 +433,11 @@ npm run lint
 - [ ] Modals: open, close, overlay
 - [ ] Responsive: mobile, tablet, desktop
 - [ ] SEO: structured data validation (Yandex/Google tools)
-- [ ] Analytics: Yandex Metrika events firing
+- [ ] Cookie banner: shown in a fresh incognito session, no `yandex` requests and no `_ym_*` cookies before «Принять»
+- [ ] Cookie banner: «Принять» loads Metrika without reload; «Настройки cookie» → «Отклонить» purges `_ym_*` and reloads
+- [ ] Forms: consent checkbox unchecked by default, submit blocked until checked, `consent`/`consentVersion` visible in Netlify Forms
+- [ ] Legal pages: `/privacy` and `/consent` render, canonical points to themselves, footer links work
+- [ ] Analytics: Yandex Metrika events firing (after consent)
 
 ---
 
