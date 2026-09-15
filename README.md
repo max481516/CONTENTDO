@@ -151,7 +151,7 @@ CONTENTDO/
 
 ### Prerequisites
 
-- Node.js 18+ and npm
+- Node.js 22+ and npm (see `.nvmrc`; Netlify builds use the same version via `netlify.toml`)
 - Firebase project (for Storage and Functions)
 - Netlify account (for forms and deployment)
 

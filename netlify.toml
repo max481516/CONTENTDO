@@ -19,7 +19,8 @@
   publish = ".next"  # Override UI setting - plugin will handle the rest
 
   [build.environment]
-    NODE_VERSION = "20.18.1"
+    # Netlify Agent Runners and Next.js 15 want Node 22+; keep in sync with .nvmrc
+    NODE_VERSION = "22"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
