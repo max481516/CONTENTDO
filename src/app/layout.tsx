@@ -8,8 +8,10 @@ import OverlayScrollbarsProvider from "./OverlayScrollbarsProvider";
 import { Inter, Manrope, Jura } from "next/font/google";
 import { siteMetadata } from "./metadata";
 import OrganizationSchema from "@/components/StructuredData/OrganizationSchema";
-import YandexMetrika from "@/components/Analytics/YandexMetrika";
 import ServiceSchema from "@/components/StructuredData/ServiceSchema";
+import YandexMetrika from "@/components/Analytics/YandexMetrika";
+import { ConsentProvider } from "@/components/CookieConsent/ConsentProvider";
+import CookieConsentBanner from "@/components/CookieConsent/CookieConsentBanner";
 
 export const metadata = siteMetadata;
 
@@ -44,11 +46,15 @@ export default function RootLayout({
         <ServiceSchema />
       </head>
       <body>
-        <YandexMetrika />
         <StyledComponentsRegistry>
           <ClientGlobalStyles />
           <OverlayScrollbarsProvider />
-          {children}
+          <ConsentProvider>
+            {children}
+            <CookieConsentBanner />
+            {/* Consent-gated: renders nothing until analytics cookies are accepted */}
+            <YandexMetrika />
+          </ConsentProvider>
           <div id="modal-root" />
         </StyledComponentsRegistry>
       </body>

@@ -87,7 +87,8 @@ const NavbarContainer = styled.nav`
   color: white;
   position: relative;
   top: 0;
-  z-index: 10;
+  /* Above the cookie banner (50) so the mobile menu covers it; Modal stays at 1000 */
+  z-index: 100;
   //ios height fix
   height: calc(64px + env(safe-area-inset-top));
 
