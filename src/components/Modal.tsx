@@ -2,8 +2,14 @@
 
 import styled from "styled-components";
 import ReactDOM from "react-dom";
-import ContactForm from "./ContactForm";
-import OrderForm from "./OrderForm";
+import dynamic from "next/dynamic";
+import ContactFallback from "./ContactFallback";
+import { FORMS_ENABLED } from "@/legal/operator";
+
+// Loaded on demand so the Netlify/Firebase form code never ships or runs
+// while the forms are disabled.
+const ContactForm = dynamic(() => import("./ContactForm"));
+const OrderForm = dynamic(() => import("./OrderForm"));
 import { useEffect, useRef, useCallback } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { QUERIES } from "@/constants";
@@ -69,12 +75,11 @@ export default function Modal({ isOpen, modalType, onClose }: ModalProps) {
 
   if (!isOpen) return null;
 
-  const renderContent = () =>
-    modalType === "contact" ? (
-      <ContactForm />
-    ) : modalType === "order" ? (
-      <OrderForm />
-    ) : null;
+  const renderContent = () => {
+    if (!modalType) return null;
+    if (!FORMS_ENABLED) return <ContactFallback variant={modalType} />;
+    return modalType === "contact" ? <ContactForm /> : <OrderForm />;
+  };
 
   return ReactDOM.createPortal(
     <Overlay onClick={handleClose}>

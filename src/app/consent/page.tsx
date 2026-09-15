@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import LegalPageLayout from "@/components/Legal/LegalPageLayout";
-import { LEGAL_DOCS, OPERATOR } from "@/legal/operator";
+import { FORMS_ENABLED, LEGAL_DOCS, OPERATOR } from "@/legal/operator";
 
 const { privacy, consent } = LEGAL_DOCS;
 
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: `${consent.title} | ${OPERATOR.siteName}`,
     description,
   },
-  robots: { index: true, follow: true },
+  robots: { index: FORMS_ENABLED, follow: true },
 };
 
 /*
@@ -35,6 +35,13 @@ export default function ConsentPage() {
       version={consent.version}
       updatedAt={consent.updatedAt}
     >
+      {!FORMS_ENABLED && (
+        <p>
+          <strong>Формы на Сайте в настоящее время отключены</strong>, и
+          согласие через них не запрашивается. Текст ниже описывает условия,
+          которые будут применяться после включения форм.
+        </p>
+      )}
       <p>
         Я, субъект персональных данных, заполняя и отправляя форму «Связаться
         с нами» или «Заказать проект» на сайте {OPERATOR.siteUrl} (далее —

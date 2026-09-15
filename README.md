@@ -224,7 +224,9 @@ npm run type-check
 - Auto-pause when switching slides
 - Responsive layout for mobile
 
-### 2. **Contact Forms**
+### 2. **Contact Forms** (currently disabled)
+
+> ⚠️ `FORMS_ENABLED = false` in `src/legal/operator.ts`: both forms are switched off because they store personal data in Netlify Forms and Firebase (USA), which 152-ФЗ ст. 18 ч. 5 forbids for the primary collection of Russian citizens' data since 1 July 2025. The modal shows the contacts from `CONTACTS` (phone, e-mail, Telegram — placeholders to fill in) instead, the form components are loaded lazily so no Netlify/Firebase code runs, and the policy, `/consent`, its footer link and the sitemap adapt automatically. Flip the flag back once the form back end lives in Russia.
 
 - **ContactForm** — quick form (name + phone)
 - **OrderForm** — extended form (name + email + phone + description + files)

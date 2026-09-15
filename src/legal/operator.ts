@@ -66,3 +66,27 @@ export function formatLegalDate(isoDate: string): string {
   if (!year || !month || !day || month < 1 || month > 12) return isoDate;
   return `${day} ${RU_MONTHS_GENITIVE[month - 1]} ${year} г.`;
 }
+
+/**
+ * Формы «Связаться с нами» и «Заказать проект» отправляют данные в Netlify
+ * Forms и Firebase (США). С 1 июля 2025 г. первичный сбор персональных данных
+ * граждан РФ в иностранных базах данных запрещён (152-ФЗ, ст. 18 ч. 5),
+ * поэтому формы отключены до переноса бэкенда в Россию. Вместо них модальное
+ * окно показывает контакты из CONTACTS. Флаг также управляет текстом
+ * Политики, страницей /consent, её ссылкой в подвале и sitemap.
+ */
+export const FORMS_ENABLED: boolean = false;
+
+/** Контакты, которые показываются вместо форм, пока FORMS_ENABLED = false */
+export const CONTACTS = {
+  /** В международном формате, например «+7 900 000-00-00» */
+  phone: "{{PHONE}}",
+  email: OPERATOR.email,
+  /** Имя пользователя Telegram без @ */
+  telegram: "{{TELEGRAM}}",
+} as const;
+
+/** "+7 (900) 000-00-00" → "tel:+79000000000" */
+export function telHref(phone: string): string {
+  return `tel:${phone.replace(/[^\d+]/g, "")}`;
+}

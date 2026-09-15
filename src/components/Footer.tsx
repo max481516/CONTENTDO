@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import { QUERIES } from "@/constants";
 import SocialIcons from "./SocialIcons";
 import { useConsent } from "./CookieConsent/ConsentProvider";
-import { LEGAL_DOCS, OPERATOR } from "@/legal/operator";
+import { FORMS_ENABLED, LEGAL_DOCS, OPERATOR } from "@/legal/operator";
 
 export default function Footer() {
   const { openSettings } = useConsent();
@@ -39,11 +39,13 @@ export default function Footer() {
                   Политика конфиденциальности
                 </LegalLink>
               </li>
-              <li>
-                <LegalLink href={LEGAL_DOCS.consent.path}>
-                  Согласие на обработку персональных данных
-                </LegalLink>
-              </li>
+              {FORMS_ENABLED && (
+                <li>
+                  <LegalLink href={LEGAL_DOCS.consent.path}>
+                    Согласие на обработку персональных данных
+                  </LegalLink>
+                </li>
+              )}
               <li>
                 <LegalButton type="button" onClick={openSettings}>
                   Настройки cookie
